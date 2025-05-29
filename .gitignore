@@ -4,3 +4,5 @@ __pycache__/
 .DS_Store 
 figma_to_jira.log
 figma_screens/
+create_final_tests/artifacts/tests_from_figma_runid_*.txt
+create_final_tests/artifacts/final_tests.txt

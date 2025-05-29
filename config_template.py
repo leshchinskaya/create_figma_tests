@@ -16,10 +16,28 @@ FIGMA_SCALE = 1  # Adjust as needed, usually 1 or 2 for retina
 # These settings help filter which frames are processed from Figma.
 # Adjust these based on how your Figma files are structured.
 FRAME_LIMIT = 10  # Max number of top-level frames to process, adjust as needed
-FRAME_BANNED = ("frame", "form", "icon")  # Names of frames to skip
-FRAME_INCLUDE = ("screen",)  # Only include frames whose names start with these
+FRAME_BANNED = ("frame", "form", "icon")  # Names of frames to skip (substring match, case-insensitive)
+FRAME_INCLUDE = ("screen",)  # Only include frames whose names start with these (prefix match, case-insensitive)
 
 # Element filters
 # These settings help filter which elements within a frame are considered.
-ELEMENT_BANNED  = ("icon", "decoration")  # Names of elements to ignore
-ELEMENT_INCLUDE = ("section",) # Only include elements whose names contain these strings 
+ELEMENT_BANNED  = ("icon", "decoration")  # Names of elements to ignore (substring match, case-insensitive)
+ELEMENT_INCLUDE = ("section",) # Only include elements whose names contain these strings (substring match, case-insensitive)
+
+# Operational Mode
+OPERATIONAL_MODE = "FILE_EXPORT"  # "JIRA_EXPORT" or "FILE_EXPORT"
+# --- Settings for FILE_EXPORT mode ---
+# Path where the TXT test case file will be saved.
+TEXT_EXPORT_PATH = "create_final_tests/artifacts"
+# Filename template for the exported TXT file. {RUN_ID} will be replaced.
+TEXT_EXPORT_FILENAME_TEMPLATE = "tests_from_figma_runid_{RUN_ID}.txt"
+# Template/prefix for TestCaseIdentifier in FILE_EXPORT mode.
+# If you set this to "Test-01", identifiers will look like "Test-01_screenname_layout".
+# Set to "" (empty string) if no prefix is desired (this is the default).
+TEXT_EXPORT_TESTCASEIDENTIFIER_TEMPLATE = "Test"
+# Default priority for test cases in the TXT file.
+TEXT_EXPORT_DEFAULT_PRIORITY = "Normal"
+# Default board/category for test cases in the TXT file.
+TEXT_EXPORT_DEFAULT_BOARD = "QA"
+# Delimiter for the TXT/CSV file.
+TEXT_EXPORT_CSV_DELIMITER = ";"
