@@ -1,0 +1,14 @@
+{
+  "prompt_template_path": "artifacts/promt.txt",
+  "output_prompt_path": "final_promt.txt",
+  "artifacts": {
+    "req_showcase": "artifacts/req_showcase.md",
+    "swagger": "artifacts/swagger.yaml",
+    "tests_from_figma": "artifacts/tests_from_figma.csv"
+  },
+  "placeholders": {
+    "req_showcase": "{{REQ_SHOWCASE_CONTENT}}",
+    "swagger": "{{SWAGGER_CONTENT}}",
+    "tests_from_figma": "{{TESTS_FROM_FIGMA_CONTENT}}"
+  }
+} 
