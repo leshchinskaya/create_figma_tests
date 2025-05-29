@@ -5,4 +5,4 @@ __pycache__/
 figma_to_jira.log
 figma_screens/
 create_final_tests/artifacts/tests_from_figma_runid_*.txt
-create_final_tests/artifacts/final_tests.txt
+send_final_tests.log

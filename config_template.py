@@ -34,7 +34,7 @@ TEXT_EXPORT_FILENAME_TEMPLATE = "tests_from_figma_runid_{RUN_ID}.txt"
 # Template/prefix for TestCaseIdentifier in FILE_EXPORT mode.
 # If you set this to "Test-01", identifiers will look like "Test-01_screenname_layout".
 # Set to "" (empty string) if no prefix is desired (this is the default).
-TEXT_EXPORT_TESTCASEIDENTIFIER_TEMPLATE = "Test"
+TEXT_EXPORT_TESTCASEIDENTIFIER_TEMPLATE = ""
 # Default priority for test cases in the TXT file.
 TEXT_EXPORT_DEFAULT_PRIORITY = "Normal"
 # Default board/category for test cases in the TXT file.

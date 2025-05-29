@@ -20,6 +20,9 @@
 ```csv
 {{TESTS_FROM_FIGMA_CONTENT}}
 ```
+Правила:
+- Обязательно сохрани наименования файлов, которые прикреплены к тестам
+- Обязательно сохрани ссылки на figma, которые прикрпелены к тестам
 
 Сгенерируй единый CSV (UTF-8, разделитель ‘;’) со следующими колонками:
 TestCaseIdentifier;Summary;Description;Priority;Labels;Action;Data;ExpectedResult;Board
@@ -27,7 +30,7 @@ TestCaseIdentifier;Summary;Description;Priority;Labels;Action;Data;ExpectedResul
 Общие правила:
 - Ровно 9 колонок на каждую строку.
 - Summary ≤100 символов, императивно.
-- Description: контекст, ID требований, часть требований, которые покрываются данной проверкой, ссылка на Figma
+- Description: контекст, ID требований, часть требований, которые покрываются данной проверкой, ссылка на Figma, наименование файла из tests_from_figma
 - Priority: Blocker|Critical|Normal|Minor.
 - Labels: (Functional, Regression, Performance, StatePath, Boundary, DecisionTable, ErrorGuessing и т.д.).
 - Action: пошаговые инструкции (1–7 шагов), актор первым.
