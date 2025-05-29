@@ -22,5 +22,7 @@ pip3 install urllib3==1.26.17
 
 # Make the main script executable
 chmod +x send_figma_tests_all_tests.py
+chmod +x create_final_tests/create_final_promt.py
+chmod +x send_final_tests.py
 
-echo "✅ Dependencies installed successfully! Script send_figma_tests_all_tests.py is now executable." 
+echo "✅ Dependencies installed successfully! Scripts send_figma_tests_all_tests.py, create_final_tests/create_final_promt.py, and send_final_tests.py are now executable." 

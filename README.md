@@ -1,78 +1,81 @@
 # Project Automation Scripts
 
-This project provides a suite of Python scripts designed to automate various tasks, primarily focusing on interactions with Figma and Jira.
+Этот проект предоставляет набор скриптов на Python, предназначенных для автоматизации различных задач, в основном ориентированных на взаимодействие с Figma и Jira.
 
-## Initial Setup (Required for most scripts)
+## Первоначальная Настройка (Обязательно для большинства скриптов)
 
-1.  **Create Configuration File**:
-    Copy the template to create your local configuration:
+1.  **Создайте Файл Конфигурации**:
+    Скопируйте шаблон для создания вашего локального файла конфигурации:
     ```bash
     cp config_template.py config.py
     ```
-    Then, edit `config.py` and fill in all required values (API keys, Jira URL, project keys, etc.). Refer to `config_template.py` for details on the variables needed for each script.
+    Затем отредактируйте `config.py` и заполните все необходимые значения (API-ключи, URL Jira, ключи проектов и т.д.). Обратитесь к `config_template.py` за подробной информацией о переменных, необходимых для каждого скрипта.
 
-2.  **Install Dependencies and Set Permissions**:
-    Run the setup script. This will install necessary Python packages (like `requests`, `urllib3`) and make the main Python scripts executable.
+2.  **Установите Зависимости и Настройте Права Доступа**:
+    Запустите скрипт установки. Это установит необходимые пакеты Python (такие как `requests`, `urllib3`) и сделает основные скрипты Python исполняемыми.
     ```bash
     ./setup.sh
     ```
 
-## Available Scripts and Workflows
+## Доступные Скрипты и Рабочие Процессы
 
-### 1. Figma Designs to Jira Test Cases (`send_figma_tests_all_tests.py`)
+### 1. Дизайны Figma в Тест-кейсы Jira (`send_figma_tests_all_tests.py`)
 
-This script processes a Figma file, extracts information about screens and elements, and automatically creates corresponding Test issues in Jira.
+Этот скрипт обрабатывает файл Figma, извлекает информацию об экранах и элементах и автоматически создает соответствующие задачи типа "Тест" в Jira.
 
-**Key Configuration (in `config.py`):**
-*   `FIGMA_FILE_URL`: The URL of your Figma file.
-*   `FIGMA_TOKEN`: Your Figma personal access token.
-*   `JIRA_URL`, `JIRA_PROJECT_KEY`, `JIRA_USERNAME`, `JIRA_PASSWORD`: Your Jira instance details.
-*   `ISSUE_TYPE`: The Jira issue type for the tests (e.g., "Test").
-*   `XRAY_STEPS_FIELD`: Custom field ID for Xray test steps if you use Xray.
-*   `OPERATIONAL_MODE`: Determines the script's output.
-    *   `"JIRA_EXPORT"` (Default): Creates issues directly in Jira and attaches images.
-    *   `"FILE_EXPORT"`: Does not create Jira issues. Instead, it generates a semicolon-delimited text file with test case data (summary, description, steps, etc.). Images are still downloaded.
-        *   `TEXT_EXPORT_PATH`: Directory where the text file will be saved (default: `create_final_tests/artifacts`).
-        *   `TEXT_EXPORT_FILENAME_TEMPLATE`: Filename pattern for the exported text file (default: `tests_from_figma_runid_{RUN_ID}.txt`).
-*   `JIRA_LABELS`: Optional list of global labels to add to Jira issues.
-*   Filtering options like `FRAME_LIMIT`, `ELEMENT_BANNED`, `FRAME_BANNED`, etc., to control which Figma items are processed.
+**Ключевая Конфигурация (в `config.py`):**
+*   `FIGMA_FILE_URL`: URL вашего файла Figma.
+*   `FIGMA_TOKEN`: Ваш персональный токен доступа Figma.
+*   `JIRA_URL`, `JIRA_PROJECT_KEY`, `JIRA_USERNAME`, `JIRA_PASSWORD`: Данные вашего экземпляра Jira.
+*   `ISSUE_TYPE`: Тип задачи Jira для тестов (например, "Test").
+*   `XRAY_STEPS_FIELD`: ID пользовательского поля для шагов теста Xray, если вы используете Xray.
+*   `OPERATIONAL_MODE`: Определяет вывод скрипта.
+    *   `"JIRA_EXPORT"` (По умолчанию): Создает задачи непосредственно в Jira и прикрепляет изображения.
+    *   `"FILE_EXPORT"`: Не создает задачи Jira. Вместо этого генерирует текстовый файл с данными тест-кейсов (название, описание, шаги и т.д.), разделенными точкой с запятой. Изображения все равно загружаются.
+        *   `TEXT_EXPORT_PATH`: Директория, в которую будет сохранен текстовый файл (по умолчанию: `create_final_tests/artifacts`).
+        *   `TEXT_EXPORT_FILENAME_TEMPLATE`: Шаблон имени файла для экспортированного текстового файла (по умолчанию: `tests_from_figma_runid_{RUN_ID}.txt`).
+        *   **Важно для режима `"FILE_EXPORT"`**: После генерации основного файла с тест-кейсами, скрипт автоматически запускает `create_final_tests/create_final_promt.py` и пытается открыть сгенерированный им файл `final_promt.txt` (ожидается в директории, указанной `TEXT_EXPORT_PATH`). **Убедитесь, что все необходимые артефакты для `create_final_promt.py` (например, шаблоны, исходные текстовые файлы) находятся в правильных местах (обычно в `create_final_tests/artifacts/` или согласно конфигурации `create_final_promt.py`), и что все конфигурационные файлы (`config.py`, `config_artifacts.json`) обновлены для корректной работы всего процесса.**
+*   `JIRA_LABELS`: Необязательный список глобальных меток для добавления к задачам Jira.
+*   Опции фильтрации, такие как `FRAME_LIMIT`, `ELEMENT_BANNED`, `FRAME_BANNED` и т.д., для контроля над тем, какие элементы Figma обрабатываются.
 
-**How to Run:**
-After completing the initial setup and configuring `config.py` with your Figma token and Jira details:
+**Как Запустить:**
+После завершения первоначальной настройки и конфигурации `config.py` с вашим токеном Figma и данными Jira:
 ```bash
 ./send_figma_tests_all_tests.py
 ```
-or
+или
 ```bash
 python3 send_figma_tests_all_tests.py
 ```
 
-**Outputs:**
-*   **If `OPERATIONAL_MODE` is `"JIRA_EXPORT"`:**
-    *   Test issues created in your Jira project.
-    *   A text file (`figma_screens/<RUN_ID>/jira_issues_run_<RUN_ID>.txt`) containing direct links to the created Jira issues.
-*   **If `OPERATIONAL_MODE` is `"FILE_EXPORT"`:**
-    *   A semicolon-delimited text file containing test case data, saved to the path defined by `TEXT_EXPORT_PATH` and `TEXT_EXPORT_FILENAME_TEMPLATE`.
-*   **Common to both modes:**
-    *   Images of Figma screens/elements saved in the `figma_screens/<RUN_ID>/` directory.
-    *   Execution logs are written to `figma_to_jira.log` and also printed to the console.
+**Результаты Выполнения:**
+*   **Если `OPERATIONAL_MODE` равен `"JIRA_EXPORT"`:**
+    *   Тестовые задачи, созданные в вашем проекте Jira.
+    *   Текстовый файл (`figma_screens/<RUN_ID>/jira_issues_run_<RUN_ID>.txt`), содержащий прямые ссылки на созданные задачи Jira.
+*   **Если `OPERATIONAL_MODE` равен `"FILE_EXPORT"`:**
+    *   Текстовый файл с данными тест-кейсов, разделенными точкой с запятой, сохраненный по пути, определенному `TEXT_EXPORT_PATH` и `TEXT_EXPORT_FILENAME_TEMPLATE`.
+    *   Автоматически запускается скрипт `create_final_tests/create_final_promt.py`.
+    *   Предпринимается попытка открыть сгенерированный файл `final_promt.txt` (путь к файлу зависит от `TEXT_EXPORT_PATH`, по умолчанию `create_final_tests/artifacts/final_promt.txt`).
+*   **Общее для обоих режимов:**
+    *   Изображения экранов/элементов Figma, сохраненные в директории `figma_screens/<RUN_ID>/`.
+    *   Логи выполнения записываются в `figma_to_jira.log`, а также выводятся в консоль.
 
-### 2. Prompt Generation from Artifacts (`create_final_tests/create_final_promt.py`)
+### 2. Генерация Промтов из Артефактов (`create_final_tests/create_final_promt.py`)
 
-This utility script generates a text file (e.g., a detailed prompt for an LLM or a complex configuration) by populating a template file with content from various specified artifact files.
+Этот вспомогательный скрипт генерирует текстовый файл (например, подробный промт для LLM или сложную конфигурацию), заполняя файл-шаблон содержимым из различных указанных файлов-артефактов.
 
-**Configuration (`config_artifacts.json`):**
-This script requires a separate JSON configuration file, typically named `config_artifacts.json`, placed in the project's root directory. This file defines:
-    *   `prompt_template_path`: Path to the template file.
-    *   `output_prompt_path`: Path where the generated file will be saved.
-    *   `artifacts`: A dictionary mapping keys to paths of content files (artifacts).
-    *   `placeholders`: A dictionary mapping the same keys (from `artifacts`) to placeholder strings within the template file that will be replaced by the content of the corresponding artifact.
+**Конфигурация (`config_artifacts.json`):**
+Этот скрипт требует отдельного конфигурационного файла JSON, обычно называемого `config_artifacts.json`, размещенного в корневой директории проекта. Этот файл определяет:
+    *   `prompt_template_path`: Путь к файлу-шаблону.
+    *   `output_prompt_path`: Путь, по которому будет сохранен сгенерированный файл (например, `create_final_tests/artifacts/final_promt.txt`).
+    *   `artifacts`: Словарь, сопоставляющий ключи с путями к файлам содержимого (артефактам).
+    *   `placeholders`: Словарь, сопоставляющий те же ключи (из `artifacts`) со строками-заполнителями в файле-шаблоне, которые будут заменены содержимым соответствующего артефакта.
 
-    *Example `config_artifacts.json` structure:*
+    *Пример структуры `config_artifacts.json`:*
     ```json
     {
         "prompt_template_path": "create_final_tests/templates/my_template.txt",
-        "output_prompt_path": "create_final_tests/generated_output/final_document.txt",
+        "output_prompt_path": "create_final_tests/artifacts/final_promt.txt",
         "artifacts": {
             "section_one_content": "create_final_tests/source_material/section1_data.txt",
             "section_two_content": "create_final_tests/source_material/section2_data.md"
@@ -83,66 +86,66 @@ This script requires a separate JSON configuration file, typically named `config
         }
     }
     ```
-    *(Ensure the paths and placeholder names match your actual files and template.)*
+    *(Убедитесь, что пути и имена заполнителей соответствуют вашим фактическим файлам и шаблону.)*
 
-**How to Run:**
-1.  Create and configure your `config_artifacts.json`.
-2.  Ensure your template file and all artifact files exist at the specified paths.
-3.  Execute the script:
+**Как Запустить:**
+1.  Создайте и настройте ваш `config_artifacts.json`.
+2.  Убедитесь, что ваш файл-шаблон и все файлы-артефакты существуют по указанным путям.
+3.  Выполните скрипт:
     ```bash
     python3 create_final_tests/create_final_promt.py
     ```
 
-**Outputs:**
-*   The generated text file at the path specified by `output_prompt_path` in `config_artifacts.json`.
-*   Informative messages (success or error) printed to the console.
+**Результаты Выполнения:**
+*   Сгенерированный текстовый файл по пути, указанному `output_prompt_path` в `config_artifacts.json`.
+*   Информационные сообщения (об успехе или ошибке), выведенные в консоль.
 
-### 3. Sending Test Cases to Jira from File (`send_final_tests.py`)
+### 3. Отправка Тест-кейсов в Jira из Файла (`send_final_tests.py`)
 
-This script reads test cases from a structured text file (CSV-like, using semicolons as delimiters) and creates corresponding issues in Jira. It is designed to integrate with Xray Test Management by populating test steps if the relevant Xray custom field is configured in `config.py`.
+Этот скрипт читает тест-кейсы из структурированного текстового файла (похожего на CSV, с использованием точки с запятой в качестве разделителя) и создает соответствующие задачи в Jira. Он предназначен для интеграции с Xray Test Management путем заполнения шагов теста, если соответствующее пользовательское поле Xray настроено в `config.py`.
 
-**Configuration (in `config.py`):**
-Ensure the following are correctly set in your `config.py` for this script:
+**Конфигурация (в `config.py`):**
+Убедитесь, что следующие параметры правильно установлены в вашем `config.py` для этого скрипта:
 *   `JIRA_URL`
 *   `JIRA_PROJECT_KEY`
 *   `JIRA_USERNAME`
 *   `JIRA_PASSWORD`
-*   `ISSUE_TYPE` (e.g., "Test", or your Xray Test issue type)
-*   `XRAY_STEPS_FIELD` (The custom field ID for Xray test steps, e.g., `customfield_10001`. This is crucial for Xray integration.)
-*   Optionally, `JIRA_LABELS`: A list of default labels to be added to every created issue (e.g., `["q3-release", "smoke-test"]`).
+*   `ISSUE_TYPE` (например, "Test" или ваш тип задачи Xray Test)
+*   `XRAY_STEPS_FIELD` (ID пользовательского поля для шагов теста Xray, например, `customfield_10001`. Это крайне важно для интеграции с Xray.)
+*   Необязательно, `JIRA_LABELS`: Список меток по умолчанию, которые будут добавлены к каждой созданной задаче (например, `["q3-release", "smoke-test"]`).
 
-**Input File Format (`create_final_tests/artifacts/final_tests.txt`):**
-The script expects a text file at `create_final_tests/artifacts/final_tests.txt`. This file should:
-*   Be semicolon-delimited (`;`).
-*   Include a header row as the first line.
-*   Contain the following columns (column names are case-sensitive as used in the script):
-    *   `TestCaseIdentifier`: A unique identifier for the test case (e.g., "TC-001").
-    *   `Summary`: The title of the Jira issue (Mandatory for each test case).
-    *   `Description`: Detailed description for the Jira issue.
-    *   `Priority`: Test priority (e.g., "High", "Medium"). This will be converted into a label (e.g., `Priority_High`).
-    *   `Labels`: Comma-separated list of additional custom labels.
-    *   `Action`: The "Action" or "Step" description for an Xray test step.
-    *   `Data`: The "Data" for an Xray test step.
-    *   `ExpectedResult`: The "Expected Result" for an Xray test step.
-    *   `Board`: A value that will be used as an additional label (e.g., a sprint or team board name).
+**Формат Входного Файла (`create_final_tests/artifacts/final_tests.txt`):**
+Скрипт ожидает текстовый файл по пути `create_final_tests/artifacts/final_tests.txt`. Этот файл должен:
+*   Быть разделен точкой с запятой (`;`).
+*   Включать строку заголовка в качестве первой строки.
+*   Содержать следующие столбцы (имена столбцов чувствительны к регистру, как они используются в скрипте):
+    *   `TestCaseIdentifier`: Уникальный идентификатор тест-кейса (например, "TC-001").
+    *   `Summary`: Заголовок задачи Jira (Обязательно для каждого тест-кейса).
+    *   `Description`: Подробное описание для задачи Jira.
+    *   `Priority`: Приоритет теста (например, "High", "Medium"). Будет преобразован в метку (например, `Priority_High`).
+    *   `Labels`: Список дополнительных пользовательских меток, разделенных запятыми.
+    *   `Action`: Описание "Действия" или "Шага" для шага теста Xray.
+    *   `Data`: "Данные" для шага теста Xray.
+    *   `ExpectedResult`: "Ожидаемый результат" для шага теста Xray.
+    *   `Board`: Значение, которое будет использоваться в качестве дополнительной метки (например, название спринта или командной доски).
 
-**How to Run:**
-After completing the initial setup and configuring `config.py` appropriately:
+**Как Запустить:**
+После завершения первоначальной настройки и соответствующей конфигурации `config.py`:
 ```bash
 ./send_final_tests.py
 ```
-or
+или
 ```bash
 python3 send_final_tests.py
 ```
-*(Ensure `send_final_tests.py` is executable if using the `./` method; `setup.sh` should handle this.)*
+*(Убедитесь, что `send_final_tests.py` является исполняемым, если используете метод `./`; `setup.sh` должен это обеспечить.)*
 
-**Outputs:**
-*   Jira issues created in the project specified in `config.py`.
-*   A JQL query link to all successfully created issues is logged to the console and also written to `send_final_tests.log`. This allows for easy viewing of the created issues in Jira.
-*   Detailed execution logs are written to `send_final_tests.log` and also printed to the console.
+**Результаты Выполнения:**
+*   Задачи Jira, созданные в проекте, указанном в `config.py`.
+*   Ссылка с JQL-запросом на все успешно созданные задачи выводится в консоль, а также записывается в `send_final_tests.log`. Это позволяет легко просматривать созданные задачи в Jira.
+*   Подробные логи выполнения записываются в `send_final_tests.log`, а также выводятся в консоль.
 
-## Frameworks and Libraries Used
+## Используемые Фреймворки и Библиотеки
 * Python 3.9+
 * requests 2.31+
 * urllib3 1.26.17+

@@ -7,6 +7,8 @@ import urllib.parse
 import datetime # Add this import
 import uuid # Add this import
 import csv # Add this import
+import subprocess # Add this import
+import os # Add this import
 
 from logger_setup import setup_logger # Import the setup function
 import config # Assuming config.py is in the same directory or PYTHONPATH
@@ -390,6 +392,68 @@ def main():
                 logger.error(f"❌ Failed to write TXT file to {file_path}: {e}")
         else:
             logger.info("ℹ️ No test data was generated for the TXT file in this run.")
+
+        # --- Added logic to run secondary script and open its output ---
+        logger.info(f"⚙️ Proceeding to run secondary script for FILE_EXPORT mode...")
+        
+        secondary_script_relative_path = "create_final_tests/create_final_promt.py"
+        # Assuming send_figma_tests_all_tests.py runs from workspace root
+        secondary_script_full_path = pathlib.Path(secondary_script_relative_path)
+        secondary_script_dir = secondary_script_full_path.parent
+
+        # Define the expected generated file path using TEXT_EXPORT_PATH
+        # TEXT_EXPORT_PATH defaults to "create_final_tests/artifacts"
+        generated_file_to_open = pathlib.Path(TEXT_EXPORT_PATH) / "final_promt.txt"
+
+        try:
+            if not secondary_script_full_path.is_file():
+                logger.error(f"❌ Secondary script {secondary_script_full_path} not found. Skipping execution.")
+            else:
+                logger.info(f"🐍 Executing Python script: python3 {secondary_script_full_path.name} (from {secondary_script_dir})")
+                
+                # Prepare environment variables for the secondary script
+                script_env = os.environ.copy()
+                script_env["FIGMA_RUN_ID"] = RUN_ID
+                script_env["FIGMA_TEXT_EXPORT_PATH"] = TEXT_EXPORT_PATH # TEXT_EXPORT_PATH is relative to workspace root
+
+                result = subprocess.run(
+                    ["python3", secondary_script_full_path.name], # Run script by name, from its directory
+                    capture_output=True, 
+                    text=True, 
+                    check=False, # Manually check returncode to log details
+                    cwd=secondary_script_dir, # Run from the script's own directory
+                    env=script_env
+                )
+
+                if result.stdout:
+                    logger.info(f"Output from {secondary_script_full_path.name}:\n{result.stdout}")
+                if result.stderr: # Log stderr as warning as it might contain non-fatal errors or verbose logs
+                    logger.warning(f"Stderr from {secondary_script_full_path.name}:\n{result.stderr}")
+
+                if result.returncode == 0:
+                    logger.success(f"✅ Successfully executed {secondary_script_full_path.name}.")
+                    
+                    # Attempt to open the generated file
+                    if generated_file_to_open.exists():
+                        logger.info(f"📂 Attempting to open generated file: {generated_file_to_open.resolve()}")
+                        try:
+                            # For macOS (user's OS is darwin), 'open' command.
+                            subprocess.run(["open", str(generated_file_to_open.resolve())], check=True)
+                            logger.success(f"✅ Successfully requested to open {generated_file_to_open.resolve()}.")
+                        except subprocess.CalledProcessError as e_open:
+                            logger.error(f"❌ Failed to open {generated_file_to_open.resolve()}: {e_open}")
+                        except FileNotFoundError: # If 'open' command itself is not found
+                            logger.error(f"❌ 'open' command not found. Cannot open {generated_file_to_open.resolve()}.")
+                    else:
+                        logger.error(f"❌ Expected generated file {generated_file_to_open.resolve()} not found after running {secondary_script_full_path.name}.")
+                else:
+                    logger.error(f"❌ Failed to execute {secondary_script_full_path.name}. Return code: {result.returncode}.")
+
+        except FileNotFoundError: # This handles if python3 or the script itself (if full path used in Popen) is not found
+            logger.error(f"❌ Script {secondary_script_full_path} or python3 interpreter not found. Please ensure it exists and python3 is in PATH.")
+        except Exception as e_script_run_exc: 
+            logger.error(f"❌ An unexpected error occurred while trying to run {secondary_script_full_path.name} or open its file: {e_script_run_exc}")
+        # --- End of added logic ---
 
 if __name__ == "__main__":
     main()
