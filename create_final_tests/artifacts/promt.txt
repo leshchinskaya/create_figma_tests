@@ -37,7 +37,7 @@ TestCaseIdentifier;Summary;Description;Priority;Labels;Action;Data;ExpectedResul
 - Data: предусловия + реальные значения.
 - ExpectedResult: наблюдаемое поведение.
 - Board: QA.
-- testRepositoryPath: "название фичи"
+- testRepositoryPath: "название фичи" (с маленькой буквы)
 - testCaseType: component
 
 1. Отправка запроса:

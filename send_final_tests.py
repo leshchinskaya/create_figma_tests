@@ -5,6 +5,7 @@ import pathlib
 import sys
 import logging # For type hinting
 import urllib.parse # Added for JQL link generation
+import uuid # Add this import
 
 # Attempt to import config and handle if not found
 try:
@@ -22,6 +23,9 @@ from logger_setup import setup_logger # Assuming logger_setup.py is available
 
 # Setup logger for this script
 logger = setup_logger(__name__, log_file="send_final_tests.log")
+
+# Generate a unique ID for this run, similar to send_figma_tests_all_tests.py
+RUN_ID = uuid.uuid4().hex[:8]
 
 # --- Constants for column names from final_tests.txt ---
 COL_TEST_CASE_IDENTIFIER = "TestCaseIdentifier"
@@ -159,6 +163,7 @@ def create_jira_issues_from_final_tests():
             all_labels_set.add(board_label) # Add board as a label
         if priority_label:
             all_labels_set.add(priority_label) # Add priority as a label
+        all_labels_set.add(f"runid_{RUN_ID}") # Add runid label
         
         final_labels = [str(lbl) for lbl in all_labels_set if lbl] # Ensure all are non-empty strings
 
