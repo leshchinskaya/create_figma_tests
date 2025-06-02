@@ -25,7 +25,7 @@
 - Обязательно сохрани ссылки на figma, которые прикрпелены к тестам
 
 Сгенерируй единый CSV (UTF-8, разделитель ‘;’) со следующими колонками:
-TestCaseIdentifier;Summary;Description;Priority;Labels;Action;Data;ExpectedResult;Board
+TestCaseIdentifier;Summary;Description;Priority;Labels;Action;Data;ExpectedResult;Board;testRepositoryPath;testCaseType
 
 Общие правила:
 - Ровно 9 колонок на каждую строку.
@@ -37,6 +37,8 @@ TestCaseIdentifier;Summary;Description;Priority;Labels;Action;Data;ExpectedResul
 - Data: предусловия + реальные значения.
 - ExpectedResult: наблюдаемое поведение.
 - Board: QA.
+- testRepositoryPath: "название фичи"
+- testCaseType: component
 
 1. Отправка запроса:
    - Позитивные проверки (корректный запрос - успешный ответ - отображение данных согласно TЗ).

@@ -33,7 +33,12 @@ class JiraClient:
                 logger.error(f"Jira response: {e.response.status_code} - {e.response.text}")
             raise
 
-    def create_issue(self, project_key: str, summary: str, description: str, issue_type: str, xray_steps_field: str, steps_data: list, labels: list[str]) -> dict:
+    def create_issue(self, project_key: str, summary: str, description: str, 
+                     issue_type: str, xray_steps_field: str, steps_data: list, labels: list[str],
+                     custom_field_test_repository_path_id: str | None = None, 
+                     test_repository_path_value: str | None = None,
+                     custom_field_test_case_type_id: str | None = None, 
+                     test_case_type_value: str | None = None) -> dict:
         fields = {
             "project": {"key": project_key},
             "summary": summary,
@@ -42,6 +47,13 @@ class JiraClient:
             "labels": labels,
             xray_steps_field: {"steps": steps_data}
         }
+
+        if custom_field_test_repository_path_id and test_repository_path_value is not None:
+            fields[custom_field_test_repository_path_id] = test_repository_path_value
+        
+        if custom_field_test_case_type_id and test_case_type_value is not None:
+            fields[custom_field_test_case_type_id] = {"value": test_case_type_value}
+            
         response = self._request("POST", "/rest/api/2/issue", json_data={"fields": fields})
         return response.json()
 

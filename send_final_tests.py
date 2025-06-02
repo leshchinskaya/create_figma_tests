@@ -33,9 +33,15 @@ COL_ACTION = "Action"
 COL_DATA = "Data"
 COL_EXPECTED_RESULT = "ExpectedResult"
 COL_BOARD = "Board"
+COL_TEST_REPOSITORY_PATH = "testRepositoryPath"
+COL_TEST_CASE_TYPE = "testCaseType"
 
 # Path to the input file
 FINAL_TESTS_FILE_PATH = pathlib.Path("create_final_tests/artifacts/final_tests.txt")
+
+# Custom Field IDs from config (optional, will be None if not set)
+CUSTOMFIELD_TEST_REPOSITORY_PATH = getattr(config, "CUSTOMFIELD_TEST_REPOSITORY_PATH", None)
+CUSTOMFIELD_TEST_CASE_TYPE = getattr(config, "CUSTOMFIELD_TEST_CASE_TYPE", None)
 
 def check_core_config_settings() -> bool:
     """Validates that essential Jira connection settings are present in config.py."""
@@ -136,6 +142,9 @@ def create_jira_issues_from_final_tests():
         tc_identifier_from_file = tc_data.get(COL_TEST_CASE_IDENTIFIER, "N/A").strip()
         description_final = f"{description_original}\n\n--- Source Test Case Details ---\n{COL_TEST_CASE_IDENTIFIER}: {tc_identifier_from_file}"
 
+        test_repo_path_val = tc_data.get(COL_TEST_REPOSITORY_PATH, "").strip()
+        test_case_type_val = tc_data.get(COL_TEST_CASE_TYPE, "").strip()
+
         labels_from_file_str = tc_data.get(COL_LABELS_FILE, "").strip()
         labels_from_file_list = [label.strip() for label in labels_from_file_str.split(',') if label.strip()]
         
@@ -170,7 +179,11 @@ def create_jira_issues_from_final_tests():
                 issue_type=config.ISSUE_TYPE,
                 xray_steps_field=config.XRAY_STEPS_FIELD,
                 steps_data=steps_data,
-                labels=final_labels
+                labels=final_labels,
+                custom_field_test_repository_path_id=CUSTOMFIELD_TEST_REPOSITORY_PATH,
+                test_repository_path_value=test_repo_path_val,
+                custom_field_test_case_type_id=CUSTOMFIELD_TEST_CASE_TYPE,
+                test_case_type_value=test_case_type_val
             )
             logger.success(f"✅ Successfully created Jira issue {issue.get('key', 'UNKNOWN_KEY')} for: '{summary}'")
             created_issue_count += 1

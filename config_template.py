@@ -6,6 +6,8 @@ JIRA_PASSWORD = "YOUR_JIRA_PASSWORD_OR_API_TOKEN"
 JIRA_LABELS = []  # Пользовательские метки для задач Jira, например, ["frontend", "release-feature"]
 ISSUE_TYPE = "Test"
 XRAY_STEPS_FIELD = "customfield_10204"
+CUSTOMFIELD_TEST_REPOSITORY_PATH = "customfield_10211"
+CUSTOMFIELD_TEST_CASE_TYPE = "customfield_12501"
 
 # Настройки Figma
 FIGMA_TOKEN = "YOUR_FIGMA_PERSONAL_ACCESS_TOKEN"

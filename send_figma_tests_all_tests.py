@@ -32,6 +32,10 @@ JIRA_LABELS = getattr(config, "JIRA_LABELS", []) # User-defined labels, default 
 ISSUE_TYPE = config.ISSUE_TYPE # Or keep as "Test" if not in config
 XRAY_STEPS_FIELD = config.XRAY_STEPS_FIELD
 
+# Custom Field IDs from config
+CUSTOMFIELD_TEST_REPOSITORY_PATH = getattr(config, "CUSTOMFIELD_TEST_REPOSITORY_PATH", None)
+CUSTOMFIELD_TEST_CASE_TYPE = getattr(config, "CUSTOMFIELD_TEST_CASE_TYPE", None)
+
 # ---------- Filtering Configuration ---------------------------------------- #
 FRAME_LIMIT = config.FRAME_LIMIT # Default to 1 if not in config, or set here
 ELEMENT_BANNED = config.ELEMENT_BANNED
@@ -173,7 +177,9 @@ def _download_png(figma_client: FigmaClient, file_key: str, node_id: str, name: 
 # --------------------------------------------------------------------------- #
 def _create_test_issue(jira_client: JiraClient, summary: str, description: str,
                        png_path: pathlib.Path, project_key: str, issue_type_name: str, xray_custom_field: str,
-                       labels: list[str]) -> str | None:
+                       labels: list[str],
+                       test_repository_path: str | None = None,
+                       test_case_type: str | None = None) -> str | None:
     steps = [{
         "fields": {
             "Action": summary, 
@@ -191,7 +197,11 @@ def _create_test_issue(jira_client: JiraClient, summary: str, description: str,
             issue_type=issue_type_name,
             xray_steps_field=xray_custom_field,
             steps_data=steps,
-            labels=labels
+            labels=labels,
+            custom_field_test_repository_path_id=CUSTOMFIELD_TEST_REPOSITORY_PATH,
+            test_repository_path_value=test_repository_path,
+            custom_field_test_case_type_id=CUSTOMFIELD_TEST_CASE_TYPE,
+            test_case_type_value=test_case_type
         )
         issue_key = created_issue["key"]
         logger.info(f"✅ Successfully created Jira issue {issue_key}: {summary}")
@@ -214,9 +224,13 @@ def _create_screen_test_issue(jira_client: JiraClient, screen_raw_name: str, nod
     description = f"*Figma:* [{screen_raw_name}|{figma_link}]"
     final_labels = list(JIRA_LABELS) + [f"runid_{RUN_ID}"]
     
+    test_repo_path_val = screen_raw_name
+    test_case_type_val = "component"
+    
     return _create_test_issue(
         jira_client, summary, description, png_path,
-        JIRA_PROJECT_KEY, ISSUE_TYPE, XRAY_STEPS_FIELD, final_labels
+        JIRA_PROJECT_KEY, ISSUE_TYPE, XRAY_STEPS_FIELD, final_labels,
+        test_repository_path=test_repo_path_val, test_case_type=test_case_type_val
     )
 
 def _create_element_test_issue(jira_client: JiraClient, screen_raw_name: str, elem_raw_name: str,
@@ -226,9 +240,13 @@ def _create_element_test_issue(jira_client: JiraClient, screen_raw_name: str, el
     description = f"*Figma:* [{elem_raw_name}|{figma_link}]"
     final_labels = list(JIRA_LABELS) + [f"runid_{RUN_ID}"]
 
+    test_repo_path_val = f"{screen_raw_name}/{elem_raw_name}"
+    test_case_type_val = "component"
+
     return _create_test_issue(
         jira_client, summary, description, png_path,
-        JIRA_PROJECT_KEY, ISSUE_TYPE, XRAY_STEPS_FIELD, final_labels
+        JIRA_PROJECT_KEY, ISSUE_TYPE, XRAY_STEPS_FIELD, final_labels,
+        test_repository_path=test_repo_path_val, test_case_type=test_case_type_val
     )
 
 # --------------------------------------------------------------------------- #
@@ -263,7 +281,8 @@ def main():
     txt_export_data = []
     txt_export_header = [
         "TestCaseIdentifier", "Summary", "Description", "Priority", "Labels",
-        "Action", "Data", "ExpectedResult", "Board"
+        "Action", "Data", "ExpectedResult", "Board",
+        "testRepositoryPath", "testCaseType"
     ]
 
     # Common labels for both modes
@@ -301,9 +320,13 @@ def main():
             expected_result = f"!{png_screen_path.name}|width=600!" # PNGs are in OUT_DIR
             board = TEXT_EXPORT_DEFAULT_BOARD
             
+            test_repo_path_val_file = screen_raw_name
+            test_case_type_val_file = "component"
+            
             txt_export_data.append([
                 test_case_id, summary, description, priority, labels_str,
-                action, data_field, expected_result, board
+                action, data_field, expected_result, board,
+                test_repo_path_val_file, test_case_type_val_file
             ])
         
         elements = _collect_elements(figma_client, FILE_KEY, screen_id)
@@ -349,9 +372,13 @@ def main():
                 expected_result = f"!{png_elem_path.name}|width=600!" # PNGs are in OUT_DIR
                 board = TEXT_EXPORT_DEFAULT_BOARD
 
+                test_repo_path_val_file = f"{screen_raw_name}/{elem_raw_name}"
+                test_case_type_val_file = "component"
+
                 txt_export_data.append([
                     test_case_id, summary, description, priority, labels_str,
-                    action, data_field, expected_result, board
+                    action, data_field, expected_result, board,
+                    test_repo_path_val_file, test_case_type_val_file
                 ])
 
     # --- Finalizing based on OPERATIONAL_MODE ---
