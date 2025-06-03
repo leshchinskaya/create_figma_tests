@@ -6,6 +6,7 @@ import sys
 import logging # For type hinting
 import urllib.parse # Added for JQL link generation
 import uuid # Add this import
+import json # Added for parsing ManualTestSteps
 
 # Attempt to import config and handle if not found
 try:
@@ -33,9 +34,7 @@ COL_SUMMARY = "Summary"
 COL_DESCRIPTION = "Description"
 COL_PRIORITY = "Priority"
 COL_LABELS_FILE = "Labels" # Renamed to avoid conflict with 'labels' variable
-COL_ACTION = "Action"
-COL_DATA = "Data"
-COL_EXPECTED_RESULT = "ExpectedResult"
+COL_MANUAL_TEST_STEPS = "ManualTestSteps" # New field for test steps
 COL_BOARD = "Board"
 COL_TEST_REPOSITORY_PATH = "testRepositoryPath"
 COL_TEST_CASE_TYPE = "testCaseType"
@@ -167,13 +166,45 @@ def create_jira_issues_from_final_tests():
         
         final_labels = [str(lbl) for lbl in all_labels_set if lbl] # Ensure all are non-empty strings
 
-        steps_data = [{
-            "fields": {
-                "Action": tc_data.get(COL_ACTION, "N/A").strip(),
-                "Data": tc_data.get(COL_DATA, "N/A").strip(),
-                "Expected Result": tc_data.get(COL_EXPECTED_RESULT, "N/A").strip()
-            }
-        }]
+        # --- Updated logic for processing ManualTestSteps ---
+        manual_test_steps_str = tc_data.get(COL_MANUAL_TEST_STEPS, "").strip()
+        steps_data = []
+
+        if manual_test_steps_str:
+            try:
+                parsed_json_list = json.loads(manual_test_steps_str)
+                if isinstance(parsed_json_list, list):
+                    for item in parsed_json_list:
+                        if isinstance(item, dict) and "fields" in item and isinstance(item["fields"], dict):
+                            action = str(item["fields"].get("Action", "N/A")).strip()
+                            data_val = str(item["fields"].get("Data", "N/A")).strip()
+                            expected_result = str(item["fields"].get("Expected Result", "N/A")).strip()
+                            steps_data.append({
+                                "fields": {
+                                    "Action": action,
+                                    "Data": data_val,
+                                    "Expected Result": expected_result
+                                }
+                            })
+                        else:
+                            logger.warning(f"Skipping malformed step item in ManualTestSteps for '{summary}': {item}")
+                    
+                    if not steps_data and parsed_json_list: # JSON was a list but all items were malformed
+                        logger.warning(f"ManualTestSteps for '{summary}' contained a list but no valid step structures. Raw: '{manual_test_steps_str}'. Creating a placeholder step.")
+                        steps_data = [{"fields": {"Action": "Malformed steps data in list", "Data": "Review ManualTestSteps field", "Expected Result": "No valid steps extracted"}}]
+                
+                else: # Parsed JSON is not a list
+                    logger.warning(f"ManualTestSteps for '{summary}' is not a JSON list. Raw: '{manual_test_steps_str}'. Creating a placeholder step.")
+                    steps_data = [{"fields": {"Action": "ManualTestSteps not a JSON list", "Data": "Review ManualTestSteps field", "Expected Result": "Format error"}}]
+            
+            except json.JSONDecodeError as e:
+                logger.error(f"Failed to parse ManualTestSteps JSON for '{summary}': {e}. Raw data: '{manual_test_steps_str}'. Creating a placeholder step.")
+                steps_data = [{"fields": {"Action": "Invalid JSON in ManualTestSteps", "Data": "Review ManualTestSteps field", "Expected Result": "JSON parse error"}}]
+        
+        if not steps_data: # If ManualTestSteps was empty, or parsing failed to produce any steps
+            logger.info(f"No ManualTestSteps provided or parsed for '{summary}'. Creating with a default placeholder step.")
+            steps_data = [{"fields": {"Action": "No steps defined", "Data": "", "Expected Result": ""}}]
+        # --- End of updated logic for processing ManualTestSteps ---
 
         logger.info(f"Attempting to create Jira issue for: '{summary}' (ID from file: {tc_identifier_from_file})")
         try:
