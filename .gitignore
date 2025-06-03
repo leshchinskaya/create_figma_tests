@@ -2,7 +2,7 @@ config.py
 *.pyc
 __pycache__/
 .DS_Store 
-figma_to_jira.log
-figma_screens/
-create_final_tests/artifacts/tests_from_figma_runid_*.txt
-send_final_tests.log
+# figma_to_jira.log
+# figma_screens/
+# create_final_tests/artifacts/tests_from_figma_runid_*.txt
+# send_final_tests.log

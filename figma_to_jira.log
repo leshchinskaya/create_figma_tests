@@ -1,0 +1,950 @@
+2025-05-29 18:43:28,874 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process..., {FILE_KEY[:8]}
+2025-05-29 18:43:28,874 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 18:43:28,874 - INFO - ℹ️ ℹ️ 🖼️ Frame limit set to: 1
+2025-05-29 18:43:37,607 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 18:43:37,607 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 18:43:40,372 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/screen_showcase.png
+2025-05-29 18:43:40,372 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase - компоновка' and labels: ['design', 'ui', 'figmatests+nLDpIUh4', 'runid_45150740']
+2025-05-29 18:43:41,870 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2795: screen: Showcase - компоновка
+2025-05-29 18:43:42,611 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase.png to SURFQA-2795
+2025-05-29 18:43:43,570 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 18:43:43,570 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 18:43:45,349 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/screen_showcase__section__my_purchases.png
+2025-05-29 18:43:45,349 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__my-purchases - логика работы' and labels: ['design', 'ui', 'figmatests+nLDpIUh4', 'runid_45150740']
+2025-05-29 18:43:46,195 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2796: screen: Showcase. section__my-purchases - логика работы
+2025-05-29 18:43:46,559 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__my_purchases.png to SURFQA-2796
+2025-05-29 18:43:46,559 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 18:43:48,343 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/screen_showcase__section__ads_banners.png
+2025-05-29 18:43:48,344 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__ads-banners - логика работы' and labels: ['design', 'ui', 'figmatests+nLDpIUh4', 'runid_45150740']
+2025-05-29 18:43:48,839 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2797: screen: Showcase. section__ads-banners - логика работы
+2025-05-29 18:43:49,231 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__ads_banners.png to SURFQA-2797
+2025-05-29 18:43:49,232 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 18:43:50,624 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/screen_showcase__section__catalog.png
+2025-05-29 18:43:50,624 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__catalog - логика работы' and labels: ['design', 'ui', 'figmatests+nLDpIUh4', 'runid_45150740']
+2025-05-29 18:43:51,088 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2798: screen: Showcase. section__catalog - логика работы
+2025-05-29 18:43:51,476 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__catalog.png to SURFQA-2798
+2025-05-29 18:43:51,476 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 18:46:04,993 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 18:46:04,993 - INFO - ℹ️ ℹ️ 📄 runid_840fe279
+2025-05-29 18:46:04,993 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 18:46:04,993 - INFO - ℹ️ ℹ️ 🖼️ Frame limit set to: 1
+2025-05-29 18:46:17,605 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 18:46:17,605 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 18:46:20,909 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/screen_showcase.png
+2025-05-29 18:46:20,909 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase - компоновка' and labels: ['design', 'ui', 'runid_840fe279']
+2025-05-29 18:46:22,089 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2799: screen: Showcase - компоновка
+2025-05-29 18:46:22,705 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase.png to SURFQA-2799
+2025-05-29 18:46:24,120 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 18:46:24,120 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 18:46:25,594 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/screen_showcase__section__my_purchases.png
+2025-05-29 18:46:25,594 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__my-purchases - логика работы' and labels: ['design', 'ui', 'runid_840fe279']
+2025-05-29 18:46:26,144 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2800: screen: Showcase. section__my-purchases - логика работы
+2025-05-29 18:46:26,544 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__my_purchases.png to SURFQA-2800
+2025-05-29 18:46:26,545 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 18:46:28,282 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/screen_showcase__section__ads_banners.png
+2025-05-29 18:46:28,282 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__ads-banners - логика работы' and labels: ['design', 'ui', 'runid_840fe279']
+2025-05-29 18:46:28,817 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2801: screen: Showcase. section__ads-banners - логика работы
+2025-05-29 18:46:29,190 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__ads_banners.png to SURFQA-2801
+2025-05-29 18:46:29,190 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 18:46:30,465 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/screen_showcase__section__catalog.png
+2025-05-29 18:46:30,465 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__catalog - логика работы' and labels: ['design', 'ui', 'runid_840fe279']
+2025-05-29 18:46:30,975 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2802: screen: Showcase. section__catalog - логика работы
+2025-05-29 18:46:31,382 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__catalog.png to SURFQA-2802
+2025-05-29 18:46:31,382 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 18:46:33,238 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/screen_showcase__section__link_banner.png
+2025-05-29 18:46:33,238 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__link-banner - логика работы' and labels: ['design', 'ui', 'runid_840fe279']
+2025-05-29 18:46:33,784 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2803: screen: Showcase. section__link-banner - логика работы
+2025-05-29 18:46:34,336 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__link_banner.png to SURFQA-2803
+2025-05-29 18:46:34,336 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 18:46:38,399 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/screen_showcase__02_section__catalog.png
+2025-05-29 18:46:38,399 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__catalog - логика работы' and labels: ['design', 'ui', 'runid_840fe279']
+2025-05-29 18:46:39,048 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2804: screen: Showcase. section__catalog - логика работы
+2025-05-29 18:46:39,663 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__02_section__catalog.png to SURFQA-2804
+2025-05-29 18:46:39,664 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 18:46:44,159 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/screen_showcase__03_section__catalog.png
+2025-05-29 18:46:44,160 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__catalog - логика работы' and labels: ['design', 'ui', 'runid_840fe279']
+2025-05-29 18:46:44,781 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2805: screen: Showcase. section__catalog - логика работы
+2025-05-29 18:46:45,397 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__03_section__catalog.png to SURFQA-2805
+2025-05-29 18:46:45,397 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 18:46:48,630 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/screen_showcase__section__tab_bar.png
+2025-05-29 18:46:48,631 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__tab-bar - логика работы' and labels: ['design', 'ui', 'runid_840fe279']
+2025-05-29 18:46:49,185 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2806: screen: Showcase. section__tab-bar - логика работы
+2025-05-29 18:46:49,585 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__tab_bar.png to SURFQA-2806
+2025-05-29 18:46:49,586 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 18:46:49,586 - INFO - ℹ️ ℹ️ 🔗 Link to created Jira issues:
+2025-05-29 18:46:49,586 - INFO - ℹ️ ℹ️ https://jira.surf.dev/issues/?jql=issuekey%20in%20(%22SURFQA-2799%22,%20%22SURFQA-2800%22,%20%22SURFQA-2801%22,%20%22SURFQA-2802%22,%20%22SURFQA-2803%22,%20%22SURFQA-2804%22,%20%22SURFQA-2805%22,%20%22SURFQA-2806%22)
+2025-05-29 18:50:13,333 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 18:50:13,333 - INFO - ℹ️ ℹ️ 📄 runid_d6f4a10d
+2025-05-29 18:50:13,333 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 18:50:13,333 - INFO - ℹ️ ℹ️ 🖼️ Frame limit set to: 1
+2025-05-29 18:50:18,009 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 18:50:18,010 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 18:50:19,940 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/screen_showcase.png
+2025-05-29 18:50:19,941 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase - компоновка' and labels: ['ai_boost_ui_tests', 'runid_d6f4a10d']
+2025-05-29 18:50:21,105 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2807: screen: Showcase - компоновка
+2025-05-29 18:50:21,910 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase.png to SURFQA-2807
+2025-05-29 18:50:22,747 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 18:50:22,747 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 18:50:24,326 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/screen_showcase__section__my_purchases.png
+2025-05-29 18:50:24,326 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__my-purchases - логика работы' and labels: ['ai_boost_ui_tests', 'runid_d6f4a10d']
+2025-05-29 18:50:25,046 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2808: screen: Showcase. section__my-purchases - логика работы
+2025-05-29 18:50:25,472 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__my_purchases.png to SURFQA-2808
+2025-05-29 18:50:25,473 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 18:50:27,471 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/screen_showcase__section__ads_banners.png
+2025-05-29 18:50:27,472 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__ads-banners - логика работы' and labels: ['ai_boost_ui_tests', 'runid_d6f4a10d']
+2025-05-29 18:50:27,993 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2809: screen: Showcase. section__ads-banners - логика работы
+2025-05-29 18:50:28,397 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__ads_banners.png to SURFQA-2809
+2025-05-29 18:50:28,397 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 18:50:29,912 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/screen_showcase__section__catalog.png
+2025-05-29 18:50:29,913 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__catalog - логика работы' and labels: ['ai_boost_ui_tests', 'runid_d6f4a10d']
+2025-05-29 18:50:30,516 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2810: screen: Showcase. section__catalog - логика работы
+2025-05-29 18:50:30,964 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__catalog.png to SURFQA-2810
+2025-05-29 18:50:30,965 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 18:50:32,393 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/screen_showcase__section__link_banner.png
+2025-05-29 18:50:32,393 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__link-banner - логика работы' and labels: ['ai_boost_ui_tests', 'runid_d6f4a10d']
+2025-05-29 18:50:32,930 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2811: screen: Showcase. section__link-banner - логика работы
+2025-05-29 18:50:33,430 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__link_banner.png to SURFQA-2811
+2025-05-29 18:50:33,430 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 18:50:35,240 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/screen_showcase__02_section__catalog.png
+2025-05-29 18:50:35,240 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__catalog - логика работы' and labels: ['ai_boost_ui_tests', 'runid_d6f4a10d']
+2025-05-29 18:50:35,776 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2812: screen: Showcase. section__catalog - логика работы
+2025-05-29 18:50:36,208 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__02_section__catalog.png to SURFQA-2812
+2025-05-29 18:50:36,208 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 18:50:37,980 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/screen_showcase__03_section__catalog.png
+2025-05-29 18:50:37,981 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__catalog - логика работы' and labels: ['ai_boost_ui_tests', 'runid_d6f4a10d']
+2025-05-29 18:50:38,482 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2813: screen: Showcase. section__catalog - логика работы
+2025-05-29 18:50:38,974 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__03_section__catalog.png to SURFQA-2813
+2025-05-29 18:50:38,975 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 18:50:40,898 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/screen_showcase__section__tab_bar.png
+2025-05-29 18:50:40,899 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__tab-bar - логика работы' and labels: ['ai_boost_ui_tests', 'runid_d6f4a10d']
+2025-05-29 18:50:41,462 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2814: screen: Showcase. section__tab-bar - логика работы
+2025-05-29 18:50:41,859 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__tab_bar.png to SURFQA-2814
+2025-05-29 18:50:41,862 - INFO - ℹ️ ℹ️ 🔗 Jira link saved to: /Users/leshchinskaya/create_figma_tests/figma_screens/jira_issues_run_d6f4a10d.txt
+2025-05-29 18:50:41,862 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 18:50:41,863 - INFO - ℹ️ ℹ️ 🔗 Link to created Jira issues:
+2025-05-29 18:50:41,863 - INFO - ℹ️ ℹ️ https://jira.surf.dev/issues/?jql=issuekey%20in%20(%22SURFQA-2807%22,%20%22SURFQA-2808%22,%20%22SURFQA-2809%22,%20%22SURFQA-2810%22,%20%22SURFQA-2811%22,%20%22SURFQA-2812%22,%20%22SURFQA-2813%22,%20%22SURFQA-2814%22)
+2025-05-29 19:47:36,416 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 19:47:36,416 - INFO - ℹ️ ℹ️ 📄 runid_311b243e
+2025-05-29 19:47:36,416 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 19:47:36,416 - INFO - ℹ️ ℹ️ 🖼️ Frame limit set to: 1
+2025-05-29 20:01:19,013 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 20:01:19,013 - INFO - ℹ️ ℹ️ 📄 runid_dff6598c
+2025-05-29 20:01:19,014 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 20:01:19,014 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 20:01:23,477 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 20:01:23,477 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 20:01:26,242 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/screen_showcase.png
+2025-05-29 20:01:27,970 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 20:01:27,970 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 20:01:29,411 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/screen_showcase__section__my_purchases.png
+2025-05-29 20:01:29,411 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 20:01:31,110 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/screen_showcase__section__ads_banners.png
+2025-05-29 20:01:31,111 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 20:01:32,828 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/screen_showcase__section__catalog.png
+2025-05-29 20:01:32,829 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 20:01:34,142 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/screen_showcase__section__link_banner.png
+2025-05-29 20:01:34,142 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 20:01:35,784 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/screen_showcase__02_section__catalog.png
+2025-05-29 20:01:35,785 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 20:01:37,344 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/screen_showcase__03_section__catalog.png
+2025-05-29 20:01:37,344 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 20:01:39,172 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/screen_showcase__section__tab_bar.png
+2025-05-29 20:01:39,173 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 20:02:13,255 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 20:02:13,256 - INFO - ℹ️ ℹ️ 📄 runid_dcd5c832
+2025-05-29 20:02:13,256 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 20:02:13,256 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 20:02:19,251 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 20:02:19,251 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 20:02:21,517 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/screen_showcase.png
+2025-05-29 20:02:22,276 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 20:02:22,276 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 20:02:24,143 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/screen_showcase__section__my_purchases.png
+2025-05-29 20:02:24,143 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 20:02:25,650 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/screen_showcase__section__ads_banners.png
+2025-05-29 20:02:25,650 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 20:02:27,417 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/screen_showcase__section__catalog.png
+2025-05-29 20:02:27,418 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 20:02:29,143 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/screen_showcase__section__link_banner.png
+2025-05-29 20:02:29,143 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 20:02:30,828 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/screen_showcase__02_section__catalog.png
+2025-05-29 20:02:30,829 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 20:02:32,854 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/screen_showcase__03_section__catalog.png
+2025-05-29 20:02:32,855 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 20:02:34,630 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/screen_showcase__section__tab_bar.png
+2025-05-29 20:02:34,630 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 20:02:34,632 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_dcd5c832.txt
+2025-05-29 20:02:34,632 - INFO - ℹ️ ℹ️ 📄 TXT file contains 8 test cases.
+2025-05-29 20:09:29,915 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 20:09:29,915 - INFO - ℹ️ ℹ️ 📄 runid_a44642b8
+2025-05-29 20:09:29,915 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 20:09:29,915 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 20:09:37,685 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 20:09:37,685 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 20:09:40,022 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/screen_showcase.png
+2025-05-29 20:09:41,623 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 20:09:41,623 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 20:09:43,072 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/screen_showcase__section__my_purchases.png
+2025-05-29 20:09:43,072 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 20:09:44,844 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/screen_showcase__section__ads_banners.png
+2025-05-29 20:09:44,844 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 20:09:46,470 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/screen_showcase__section__catalog.png
+2025-05-29 20:09:46,471 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 20:09:48,448 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/screen_showcase__section__link_banner.png
+2025-05-29 20:09:48,449 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 20:09:50,023 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/screen_showcase__02_section__catalog.png
+2025-05-29 20:09:50,023 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 20:09:52,154 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/screen_showcase__03_section__catalog.png
+2025-05-29 20:09:52,154 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 20:09:53,829 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/screen_showcase__section__tab_bar.png
+2025-05-29 20:09:53,829 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 20:09:53,831 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_a44642b8.txt
+2025-05-29 20:09:53,832 - INFO - ℹ️ ℹ️ 📄 TXT file contains 8 test cases.
+2025-05-29 20:42:46,148 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 20:42:46,149 - INFO - ℹ️ ℹ️ 📄 runid_77c86928
+2025-05-29 20:42:46,149 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 20:42:46,149 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 20:42:54,236 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 20:42:54,236 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 20:42:56,831 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/77c86928/screen_showcase.png
+2025-05-29 20:42:57,612 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 20:42:57,612 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 20:42:58,804 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/77c86928/screen_showcase__section__my_purchases.png
+2025-05-29 20:42:58,804 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 20:43:00,144 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/77c86928/screen_showcase__section__ads_banners.png
+2025-05-29 20:43:00,144 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 20:43:02,174 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/77c86928/screen_showcase__section__catalog.png
+2025-05-29 20:43:02,174 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 20:43:03,964 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/77c86928/screen_showcase__section__link_banner.png
+2025-05-29 20:43:03,965 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 20:43:05,609 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/77c86928/screen_showcase__02_section__catalog.png
+2025-05-29 20:43:05,609 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 20:43:07,471 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/77c86928/screen_showcase__03_section__catalog.png
+2025-05-29 20:43:07,471 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 20:43:08,846 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/77c86928/screen_showcase__section__tab_bar.png
+2025-05-29 20:43:08,846 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 20:43:08,848 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_77c86928.txt
+2025-05-29 20:43:08,849 - INFO - ℹ️ ℹ️ 📄 TXT file contains 8 test cases.
+2025-05-29 20:59:45,157 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 20:59:45,157 - INFO - ℹ️ ℹ️ 📄 runid_65c7604a
+2025-05-29 20:59:45,157 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 20:59:45,157 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 20:59:54,948 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 20:59:54,948 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 20:59:57,144 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/65c7604a/screen_showcase.png
+2025-05-29 20:59:59,556 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 20:59:59,557 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 21:00:01,257 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/65c7604a/screen_showcase__section__my_purchases.png
+2025-05-29 21:00:01,258 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 21:00:03,053 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/65c7604a/screen_showcase__section__ads_banners.png
+2025-05-29 21:00:03,053 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 21:00:04,891 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/65c7604a/screen_showcase__section__catalog.png
+2025-05-29 21:00:04,891 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 21:00:06,561 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/65c7604a/screen_showcase__section__link_banner.png
+2025-05-29 21:00:06,562 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 21:00:09,005 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/65c7604a/screen_showcase__02_section__catalog.png
+2025-05-29 21:00:09,007 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 21:00:10,983 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/65c7604a/screen_showcase__03_section__catalog.png
+2025-05-29 21:00:10,984 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 21:00:12,634 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/65c7604a/screen_showcase__section__tab_bar.png
+2025-05-29 21:00:12,635 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 21:00:12,637 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_65c7604a.txt
+2025-05-29 21:00:12,637 - INFO - ℹ️ ℹ️ 📄 TXT file contains 8 test cases.
+2025-05-29 21:18:58,779 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 21:18:58,779 - INFO - ℹ️ ℹ️ 📄 runid_e6c96ad8
+2025-05-29 21:18:58,779 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 21:18:58,779 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 21:19:05,417 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 21:19:05,417 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 21:19:08,103 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/e6c96ad8/screen_showcase.png
+2025-05-29 21:19:10,295 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 21:19:10,295 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 21:19:11,632 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/e6c96ad8/screen_showcase__section__my_purchases.png
+2025-05-29 21:19:11,632 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 21:19:13,005 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/e6c96ad8/screen_showcase__section__ads_banners.png
+2025-05-29 21:19:13,005 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 21:19:14,528 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/e6c96ad8/screen_showcase__section__catalog.png
+2025-05-29 21:19:14,528 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 21:19:16,063 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/e6c96ad8/screen_showcase__section__link_banner.png
+2025-05-29 21:19:16,063 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 21:19:17,452 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/e6c96ad8/screen_showcase__02_section__catalog.png
+2025-05-29 21:19:17,452 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 21:19:19,252 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/e6c96ad8/screen_showcase__03_section__catalog.png
+2025-05-29 21:19:19,253 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 21:19:20,672 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/e6c96ad8/screen_showcase__section__tab_bar.png
+2025-05-29 21:19:20,673 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 21:19:20,675 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_e6c96ad8.txt
+2025-05-29 21:19:20,676 - INFO - ℹ️ ℹ️ 📄 TXT file contains 8 test cases.
+2025-05-29 21:25:06,151 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 21:25:06,152 - INFO - ℹ️ ℹ️ 📄 runid_d7f2ed24
+2025-05-29 21:25:06,152 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 21:25:06,152 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 21:25:11,958 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 21:25:11,959 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 21:25:14,272 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/d7f2ed24/screen_showcase.png
+2025-05-29 21:25:15,980 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 21:25:15,981 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 21:25:17,162 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/d7f2ed24/screen_showcase__section__my_purchases.png
+2025-05-29 21:25:17,163 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 21:25:18,672 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/d7f2ed24/screen_showcase__section__ads_banners.png
+2025-05-29 21:25:18,673 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 21:25:20,065 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/d7f2ed24/screen_showcase__section__catalog.png
+2025-05-29 21:25:20,066 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 21:25:21,484 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/d7f2ed24/screen_showcase__section__link_banner.png
+2025-05-29 21:25:21,485 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 21:25:22,820 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/d7f2ed24/screen_showcase__02_section__catalog.png
+2025-05-29 21:25:22,820 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 21:25:24,393 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/d7f2ed24/screen_showcase__03_section__catalog.png
+2025-05-29 21:25:24,394 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 21:25:25,844 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/d7f2ed24/screen_showcase__section__tab_bar.png
+2025-05-29 21:25:25,844 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 21:25:25,846 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_d7f2ed24.txt
+2025-05-29 21:25:25,846 - INFO - ℹ️ ℹ️ 📄 TXT file contains 8 test cases.
+2025-05-29 21:25:25,846 - INFO - ℹ️ ℹ️ ⚙️ Proceeding to run secondary script for FILE_EXPORT mode...
+2025-05-29 21:25:25,846 - INFO - ℹ️ ℹ️ 🐍 Executing Python script: python3 create_final_promt.py (from create_final_tests)
+2025-05-29 21:25:25,891 - INFO - ℹ️ ℹ️ Output from create_final_promt.py:
+❌ Ошибка: Конфигурационный файл './create_final_tests/config_artifacts.json' не найден.
+
+2025-05-29 21:25:25,891 - SUCCESS - ✅ ✅ ✅ Successfully executed create_final_promt.py.
+2025-05-29 21:25:25,891 - ERROR - ❌ ❌ ❌ Expected generated file /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt_txt not found after running create_final_promt.py.
+2025-05-29 21:26:08,332 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 21:26:08,333 - INFO - ℹ️ ℹ️ 📄 runid_40e27950
+2025-05-29 21:26:08,333 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 21:26:08,333 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 21:26:14,822 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 21:26:14,822 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 21:26:17,417 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/40e27950/screen_showcase.png
+2025-05-29 21:26:18,640 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 21:26:18,641 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 21:26:20,020 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/40e27950/screen_showcase__section__my_purchases.png
+2025-05-29 21:26:20,021 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 21:26:21,520 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/40e27950/screen_showcase__section__ads_banners.png
+2025-05-29 21:26:21,520 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 21:26:22,758 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/40e27950/screen_showcase__section__catalog.png
+2025-05-29 21:26:22,758 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 21:26:24,178 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/40e27950/screen_showcase__section__link_banner.png
+2025-05-29 21:26:24,178 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 21:26:25,772 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/40e27950/screen_showcase__02_section__catalog.png
+2025-05-29 21:26:25,772 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 21:26:27,317 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/40e27950/screen_showcase__03_section__catalog.png
+2025-05-29 21:26:27,317 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 21:26:28,414 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/40e27950/screen_showcase__section__tab_bar.png
+2025-05-29 21:26:28,414 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 21:26:28,416 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_40e27950.txt
+2025-05-29 21:26:28,417 - INFO - ℹ️ ℹ️ 📄 TXT file contains 8 test cases.
+2025-05-29 21:26:28,417 - INFO - ℹ️ ℹ️ ⚙️ Proceeding to run secondary script for FILE_EXPORT mode...
+2025-05-29 21:26:28,417 - INFO - ℹ️ ℹ️ 🐍 Executing Python script: python3 create_final_promt.py (from create_final_tests)
+2025-05-29 21:26:28,481 - INFO - ℹ️ ℹ️ Output from create_final_promt.py:
+❌ Ошибка: Конфигурационный файл './create_final_tests/config_artifacts.json' не найден.
+
+2025-05-29 21:26:28,482 - SUCCESS - ✅ ✅ ✅ Successfully executed create_final_promt.py.
+2025-05-29 21:26:28,482 - INFO - ℹ️ ℹ️ 📂 Attempting to open generated file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt
+2025-05-29 21:26:28,569 - SUCCESS - ✅ ✅ ✅ Successfully requested to open /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt.
+2025-05-29 22:00:59,514 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 22:00:59,514 - INFO - ℹ️ ℹ️ 📄 runid_7f03ec15
+2025-05-29 22:00:59,514 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 22:00:59,514 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 22:01:03,844 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 22:01:03,844 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 22:01:06,340 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/7f03ec15/screen_showcase.png
+2025-05-29 22:01:07,190 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 22:01:07,190 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 22:01:08,397 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/7f03ec15/screen_showcase__section__my_purchases.png
+2025-05-29 22:01:08,397 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 22:01:09,709 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/7f03ec15/screen_showcase__section__ads_banners.png
+2025-05-29 22:01:09,710 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 22:01:11,418 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/7f03ec15/screen_showcase__section__catalog.png
+2025-05-29 22:01:11,419 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 22:01:12,760 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/7f03ec15/screen_showcase__section__link_banner.png
+2025-05-29 22:01:12,761 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 22:01:14,294 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/7f03ec15/screen_showcase__02_section__catalog.png
+2025-05-29 22:01:14,294 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 22:01:16,674 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/7f03ec15/screen_showcase__03_section__catalog.png
+2025-05-29 22:01:16,675 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 22:01:18,008 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/7f03ec15/screen_showcase__section__tab_bar.png
+2025-05-29 22:01:18,009 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 22:01:18,011 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_7f03ec15.txt
+2025-05-29 22:01:18,011 - INFO - ℹ️ ℹ️ 📄 TXT file contains 8 test cases.
+2025-05-29 22:01:18,011 - INFO - ℹ️ ℹ️ ⚙️ Proceeding to run secondary script for FILE_EXPORT mode...
+2025-05-29 22:01:18,012 - INFO - ℹ️ ℹ️ 🐍 Executing Python script: python3 create_final_promt.py (from create_final_tests)
+2025-05-29 22:01:18,054 - INFO - ℹ️ ℹ️ Output from create_final_promt.py:
+❌ Ошибка: Конфигурационный файл './create_final_tests/config_artifacts.json' не найден.
+
+2025-05-29 22:01:18,054 - SUCCESS - ✅ ✅ ✅ Successfully executed create_final_promt.py.
+2025-05-29 22:01:18,054 - INFO - ℹ️ ℹ️ 📂 Attempting to open generated file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt
+2025-05-29 22:01:18,149 - SUCCESS - ✅ ✅ ✅ Successfully requested to open /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt.
+2025-05-29 22:02:11,529 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 22:02:11,529 - INFO - ℹ️ ℹ️ 📄 runid_83412827
+2025-05-29 22:02:11,529 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 22:02:11,529 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 22:02:14,921 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 22:02:14,921 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 22:02:16,985 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/83412827/screen_showcase.png
+2025-05-29 22:02:18,236 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 22:02:18,236 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 22:02:19,782 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/83412827/screen_showcase__section__my_purchases.png
+2025-05-29 22:02:19,783 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 22:02:21,408 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/83412827/screen_showcase__section__ads_banners.png
+2025-05-29 22:02:21,409 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 22:02:22,672 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/83412827/screen_showcase__section__catalog.png
+2025-05-29 22:02:22,672 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 22:02:24,310 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/83412827/screen_showcase__section__link_banner.png
+2025-05-29 22:02:24,310 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 22:02:26,033 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/83412827/screen_showcase__02_section__catalog.png
+2025-05-29 22:02:26,033 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 22:02:28,012 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/83412827/screen_showcase__03_section__catalog.png
+2025-05-29 22:02:28,013 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 22:02:29,603 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/83412827/screen_showcase__section__tab_bar.png
+2025-05-29 22:02:29,603 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 22:02:29,605 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_83412827.txt
+2025-05-29 22:02:29,605 - INFO - ℹ️ ℹ️ 📄 TXT file contains 8 test cases.
+2025-05-29 22:02:29,606 - INFO - ℹ️ ℹ️ ⚙️ Proceeding to run secondary script for FILE_EXPORT mode...
+2025-05-29 22:02:29,606 - INFO - ℹ️ ℹ️ 🐍 Executing Python script: python3 create_final_promt.py (from create_final_tests)
+2025-05-29 22:02:29,646 - INFO - ℹ️ ℹ️ Output from create_final_promt.py:
+❌ Ошибка: Конфигурационный файл 'create_final_tests/config_artifacts.json' не найден.
+
+2025-05-29 22:02:29,646 - SUCCESS - ✅ ✅ ✅ Successfully executed create_final_promt.py.
+2025-05-29 22:02:29,646 - INFO - ℹ️ ℹ️ 📂 Attempting to open generated file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt
+2025-05-29 22:02:29,726 - SUCCESS - ✅ ✅ ✅ Successfully requested to open /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt.
+2025-05-29 22:03:01,137 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 22:03:01,137 - INFO - ℹ️ ℹ️ 📄 runid_6891da94
+2025-05-29 22:03:01,138 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 22:03:01,138 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 22:03:08,235 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 22:03:08,236 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 22:03:10,978 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/6891da94/screen_showcase.png
+2025-05-29 22:03:11,791 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 22:03:11,791 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 22:03:13,242 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/6891da94/screen_showcase__section__my_purchases.png
+2025-05-29 22:03:13,242 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 22:03:14,950 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/6891da94/screen_showcase__section__ads_banners.png
+2025-05-29 22:03:14,951 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 22:03:16,715 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/6891da94/screen_showcase__section__catalog.png
+2025-05-29 22:03:16,716 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 22:03:18,420 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/6891da94/screen_showcase__section__link_banner.png
+2025-05-29 22:03:18,420 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 22:03:20,702 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/6891da94/screen_showcase__02_section__catalog.png
+2025-05-29 22:03:20,702 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 22:03:22,831 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/6891da94/screen_showcase__03_section__catalog.png
+2025-05-29 22:03:22,832 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 22:03:24,204 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/6891da94/screen_showcase__section__tab_bar.png
+2025-05-29 22:03:24,205 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 22:03:24,206 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_6891da94.txt
+2025-05-29 22:03:24,207 - INFO - ℹ️ ℹ️ 📄 TXT file contains 8 test cases.
+2025-05-29 22:03:24,207 - INFO - ℹ️ ℹ️ ⚙️ Proceeding to run secondary script for FILE_EXPORT mode...
+2025-05-29 22:03:24,207 - INFO - ℹ️ ℹ️ 🐍 Executing Python script: python3 create_final_promt.py (from create_final_tests)
+2025-05-29 22:03:24,253 - INFO - ℹ️ ℹ️ Output from create_final_promt.py:
+❌ Ошибка: Конфигурационный файл '/create_final_tests/config_artifacts.json' не найден.
+
+2025-05-29 22:03:24,253 - SUCCESS - ✅ ✅ ✅ Successfully executed create_final_promt.py.
+2025-05-29 22:03:24,253 - INFO - ℹ️ ℹ️ 📂 Attempting to open generated file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt
+2025-05-29 22:03:24,319 - SUCCESS - ✅ ✅ ✅ Successfully requested to open /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt.
+2025-05-29 22:06:11,748 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 22:06:11,749 - INFO - ℹ️ ℹ️ 📄 runid_aa196bc0
+2025-05-29 22:06:11,749 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 22:06:11,749 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 22:06:15,694 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 22:06:15,694 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 22:06:17,724 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/aa196bc0/screen_showcase.png
+2025-05-29 22:06:18,661 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 22:06:18,661 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 22:06:19,787 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/aa196bc0/screen_showcase__section__my_purchases.png
+2025-05-29 22:06:19,787 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 22:06:21,376 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/aa196bc0/screen_showcase__section__ads_banners.png
+2025-05-29 22:06:21,377 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 22:06:22,687 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/aa196bc0/screen_showcase__section__catalog.png
+2025-05-29 22:06:22,687 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 22:06:24,547 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/aa196bc0/screen_showcase__section__link_banner.png
+2025-05-29 22:06:24,548 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 22:06:26,328 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/aa196bc0/screen_showcase__02_section__catalog.png
+2025-05-29 22:06:26,328 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 22:06:28,159 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/aa196bc0/screen_showcase__03_section__catalog.png
+2025-05-29 22:06:28,159 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 22:06:29,359 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/aa196bc0/screen_showcase__section__tab_bar.png
+2025-05-29 22:06:29,359 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 22:06:29,361 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_aa196bc0.txt
+2025-05-29 22:06:29,361 - INFO - ℹ️ ℹ️ 📄 TXT file contains 8 test cases.
+2025-05-29 22:06:29,361 - INFO - ℹ️ ℹ️ ⚙️ Proceeding to run secondary script for FILE_EXPORT mode...
+2025-05-29 22:06:29,361 - INFO - ℹ️ ℹ️ 🐍 Executing Python script: python3 create_final_promt.py (from create_final_tests)
+2025-05-29 22:06:29,402 - INFO - ℹ️ ℹ️ Output from create_final_promt.py:
+❌ Ошибка: Файл шаблона './create_final_tests/artifacts/promt.txt' не найден.
+
+2025-05-29 22:06:29,402 - SUCCESS - ✅ ✅ ✅ Successfully executed create_final_promt.py.
+2025-05-29 22:06:29,402 - INFO - ℹ️ ℹ️ 📂 Attempting to open generated file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt
+2025-05-29 22:06:29,463 - SUCCESS - ✅ ✅ ✅ Successfully requested to open /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt.
+2025-05-29 22:06:55,259 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 22:06:55,259 - INFO - ℹ️ ℹ️ 📄 runid_08442afa
+2025-05-29 22:06:55,259 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-05-29 22:06:55,259 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 22:07:08,930 - INFO - ℹ️ ℹ️ ✅ Selected 1 screens for processing.
+2025-05-29 22:07:08,930 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 22:07:11,510 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/08442afa/screen_showcase.png
+2025-05-29 22:07:13,132 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 22:07:13,133 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 22:07:14,435 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/08442afa/screen_showcase__section__my_purchases.png
+2025-05-29 22:07:14,435 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 22:07:16,053 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/08442afa/screen_showcase__section__ads_banners.png
+2025-05-29 22:07:16,053 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 22:07:17,541 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/08442afa/screen_showcase__section__catalog.png
+2025-05-29 22:07:17,542 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 22:07:19,247 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/08442afa/screen_showcase__section__link_banner.png
+2025-05-29 22:07:19,247 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 22:07:20,851 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/08442afa/screen_showcase__02_section__catalog.png
+2025-05-29 22:07:20,852 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 22:07:22,403 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/08442afa/screen_showcase__03_section__catalog.png
+2025-05-29 22:07:22,403 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 22:07:23,778 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/08442afa/screen_showcase__section__tab_bar.png
+2025-05-29 22:07:23,778 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 22:07:23,780 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_08442afa.txt
+2025-05-29 22:07:23,780 - INFO - ℹ️ ℹ️ 📄 TXT file contains 8 test cases.
+2025-05-29 22:07:23,780 - INFO - ℹ️ ℹ️ ⚙️ Proceeding to run secondary script for FILE_EXPORT mode...
+2025-05-29 22:07:23,780 - INFO - ℹ️ ℹ️ 🐍 Executing Python script: python3 create_final_promt.py (from create_final_tests)
+2025-05-29 22:07:23,833 - INFO - ℹ️ ℹ️ Output from create_final_promt.py:
+✅ Файл './artifacts/final_promt.txt' успешно сгенерирован.
+
+2025-05-29 22:07:23,833 - SUCCESS - ✅ ✅ ✅ Successfully executed create_final_promt.py.
+2025-05-29 22:07:23,833 - INFO - ℹ️ ℹ️ 📂 Attempting to open generated file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt
+2025-05-29 22:07:23,909 - SUCCESS - ✅ ✅ ✅ Successfully requested to open /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt.
+2025-05-29 22:10:30,062 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-29 22:10:30,062 - INFO - ℹ️ ℹ️ 📄 runid_37a93177
+2025-05-29 22:10:30,062 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: JIRA_EXPORT. Connecting to Jira instance: https://jira.surf.dev
+2025-05-29 22:10:30,062 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-29 22:10:33,971 - INFO - ℹ️ ℹ️ ✅ Selected 7 screens for processing.
+2025-05-29 22:10:33,972 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-29 22:10:36,184 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/37a93177/screen_showcase.png
+2025-05-29 22:10:36,185 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase - компоновка' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:10:38,113 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2964: screen: Showcase - компоновка
+2025-05-29 22:10:38,958 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase.png to SURFQA-2964
+2025-05-29 22:10:40,566 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-29 22:10:40,567 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-29 22:10:41,963 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/37a93177/screen_showcase__section__my_purchases.png
+2025-05-29 22:10:41,964 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__my-purchases - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:10:42,663 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2965: screen: Showcase. section__my-purchases - логика работы
+2025-05-29 22:10:43,073 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__my_purchases.png to SURFQA-2965
+2025-05-29 22:10:43,074 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-29 22:10:44,618 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/37a93177/screen_showcase__section__ads_banners.png
+2025-05-29 22:10:44,619 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__ads-banners - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:10:45,306 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2966: screen: Showcase. section__ads-banners - логика работы
+2025-05-29 22:10:45,757 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__ads_banners.png to SURFQA-2966
+2025-05-29 22:10:45,757 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-29 22:10:47,396 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/37a93177/screen_showcase__section__catalog.png
+2025-05-29 22:10:47,396 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__catalog - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:10:48,064 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2967: screen: Showcase. section__catalog - логика работы
+2025-05-29 22:10:48,583 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__catalog.png to SURFQA-2967
+2025-05-29 22:10:48,584 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-05-29 22:10:50,378 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/37a93177/screen_showcase__section__link_banner.png
+2025-05-29 22:10:50,379 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__link-banner - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:10:51,040 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2968: screen: Showcase. section__link-banner - логика работы
+2025-05-29 22:10:51,655 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__link_banner.png to SURFQA-2968
+2025-05-29 22:10:51,656 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:18984) on screen «screen: Showcase»
+2025-05-29 22:10:53,045 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/37a93177/screen_showcase__02_section__catalog.png
+2025-05-29 22:10:53,046 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__catalog - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:10:53,656 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2969: screen: Showcase. section__catalog - логика работы
+2025-05-29 22:10:54,248 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__02_section__catalog.png to SURFQA-2969
+2025-05-29 22:10:54,249 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-05-29 22:10:56,374 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/37a93177/screen_showcase__03_section__catalog.png
+2025-05-29 22:10:56,375 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__catalog - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:10:56,989 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2970: screen: Showcase. section__catalog - логика работы
+2025-05-29 22:10:57,594 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__03_section__catalog.png to SURFQA-2970
+2025-05-29 22:10:57,595 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-05-29 22:10:58,977 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/37a93177/screen_showcase__section__tab_bar.png
+2025-05-29 22:10:58,977 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__tab-bar - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:10:59,542 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2971: screen: Showcase. section__tab-bar - логика работы
+2025-05-29 22:10:59,949 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__tab_bar.png to SURFQA-2971
+2025-05-29 22:10:59,949 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Main» (ID: 11:3647)
+2025-05-29 22:11:01,712 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main' to figma_screens/37a93177/screen_main.png
+2025-05-29 22:11:01,713 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Main - компоновка' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:02,306 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2972: screen: Main - компоновка
+2025-05-29 22:11:02,904 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_main.png to SURFQA-2972
+2025-05-29 22:11:05,346 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Main».
+2025-05-29 22:11:05,346 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header» (ID: 11:3649) on screen «screen: Main»
+2025-05-29 22:11:08,119 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__header' to figma_screens/37a93177/screen_main__section__header.png
+2025-05-29 22:11:08,119 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Main. section__header - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:08,756 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2973: screen: Main. section__header - логика работы
+2025-05-29 22:11:09,165 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_main__section__header.png to SURFQA-2973
+2025-05-29 22:11:09,166 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__bonuses» (ID: 11:3650) on screen «screen: Main»
+2025-05-29 22:11:12,445 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__bonuses' to figma_screens/37a93177/screen_main__section__bonuses.png
+2025-05-29 22:11:12,446 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Main. section__bonuses - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:13,159 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2974: screen: Main. section__bonuses - логика работы
+2025-05-29 22:11:13,569 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_main__section__bonuses.png to SURFQA-2974
+2025-05-29 22:11:13,569 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__search-btn» (ID: 11:3651) on screen «screen: Main»
+2025-05-29 22:11:16,537 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__search_btn' to figma_screens/37a93177/screen_main__section__search_btn.png
+2025-05-29 22:11:16,537 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Main. section__search-btn - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:17,044 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2975: screen: Main. section__search-btn - логика работы
+2025-05-29 22:11:17,460 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_main__section__search_btn.png to SURFQA-2975
+2025-05-29 22:11:17,460 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__symptoms» (ID: 11:3652) on screen «screen: Main»
+2025-05-29 22:11:20,821 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__symptoms' to figma_screens/37a93177/screen_main__section__symptoms.png
+2025-05-29 22:11:20,822 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Main. section__symptoms - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:21,351 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2976: screen: Main. section__symptoms - логика работы
+2025-05-29 22:11:21,667 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_main__section__symptoms.png to SURFQA-2976
+2025-05-29 22:11:21,668 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 11:3653) on screen «screen: Main»
+2025-05-29 22:11:25,972 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__ads_banners' to figma_screens/37a93177/screen_main__section__ads_banners.png
+2025-05-29 22:11:25,973 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Main. section__ads-banners - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:26,442 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2977: screen: Main. section__ads-banners - логика работы
+2025-05-29 22:11:26,881 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_main__section__ads_banners.png to SURFQA-2977
+2025-05-29 22:11:26,881 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__collection» (ID: 11:3654) on screen «screen: Main»
+2025-05-29 22:11:31,340 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__collection' to figma_screens/37a93177/screen_main__section__collection.png
+2025-05-29 22:11:31,341 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Main. section__collection - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:31,815 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2978: screen: Main. section__collection - логика работы
+2025-05-29 22:11:32,615 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_main__section__collection.png to SURFQA-2978
+2025-05-29 22:11:32,616 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 11:3655) on screen «screen: Main»
+2025-05-29 22:11:35,568 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__tab_bar' to figma_screens/37a93177/screen_main__section__tab_bar.png
+2025-05-29 22:11:35,569 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Main. section__tab-bar - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:36,014 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2979: screen: Main. section__tab-bar - логика работы
+2025-05-29 22:11:36,404 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_main__section__tab_bar.png to SURFQA-2979
+2025-05-29 22:11:36,404 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Search» (ID: 171:5895)
+2025-05-29 22:11:38,769 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search' to figma_screens/37a93177/screen_search.png
+2025-05-29 22:11:38,770 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search - компоновка' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:39,273 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2980: screen: Search - компоновка
+2025-05-29 22:11:39,736 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search.png to SURFQA-2980
+2025-05-29 22:11:42,305 - INFO - ℹ️ ℹ️   🔍 Found 5 element(s) for screen «screen: Search».
+2025-05-29 22:11:42,305 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header-search» (ID: 249:8914) on screen «screen: Search»
+2025-05-29 22:11:44,807 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search__section__header_search' to figma_screens/37a93177/screen_search__section__header_search.png
+2025-05-29 22:11:44,807 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search. section__header-search - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:45,313 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2981: screen: Search. section__header-search - логика работы
+2025-05-29 22:11:45,620 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search__section__header_search.png to SURFQA-2981
+2025-05-29 22:11:45,620 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ hints» (ID: 179:4207) on screen «screen: Search»
+2025-05-29 22:11:48,831 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search__section___hints' to figma_screens/37a93177/screen_search__section___hints.png
+2025-05-29 22:11:48,831 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search. section__ hints - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:49,292 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2982: screen: Search. section__ hints - логика работы
+2025-05-29 22:11:49,556 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search__section___hints.png to SURFQA-2982
+2025-05-29 22:11:49,556 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__radio-list» (ID: 179:4277) on screen «screen: Search»
+2025-05-29 22:11:52,334 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search__section__radio_list' to figma_screens/37a93177/screen_search__section__radio_list.png
+2025-05-29 22:11:52,334 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search. section__radio-list - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:52,891 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2983: screen: Search. section__radio-list - логика работы
+2025-05-29 22:11:53,300 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search__section__radio_list.png to SURFQA-2983
+2025-05-29 22:11:53,301 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7501) on screen «screen: Search»
+2025-05-29 22:11:56,758 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search__section__my_purchases' to figma_screens/37a93177/screen_search__section__my_purchases.png
+2025-05-29 22:11:56,759 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search. section__my-purchases - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:11:57,189 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2984: screen: Search. section__my-purchases - логика работы
+2025-05-29 22:11:57,705 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search__section__my_purchases.png to SURFQA-2984
+2025-05-29 22:11:57,705 - INFO - ℹ️ ℹ️   ✨ Processing element: «Component / Home Indicator Section» (ID: I171:3940;352:410) on screen «screen: Search»
+2025-05-29 22:12:01,050 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search__component_home_indicator_section' to figma_screens/37a93177/screen_search__component_home_indicator_section.png
+2025-05-29 22:12:01,050 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search. Component / Home Indicator Section - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:01,912 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2985: screen: Search. Component / Home Indicator Section - логика работы
+2025-05-29 22:12:02,222 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search__component_home_indicator_section.png to SURFQA-2985
+2025-05-29 22:12:02,223 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Search first session» (ID: 191:4262)
+2025-05-29 22:12:03,731 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_first_session' to figma_screens/37a93177/screen_search_first_session.png
+2025-05-29 22:12:03,731 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search first session - компоновка' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:04,200 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2986: screen: Search first session - компоновка
+2025-05-29 22:12:04,650 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_first_session.png to SURFQA-2986
+2025-05-29 22:12:06,735 - INFO - ℹ️ ℹ️   🔍 Found 3 element(s) for screen «screen: Search first session».
+2025-05-29 22:12:06,736 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header-search» (ID: 249:8939) on screen «screen: Search first session»
+2025-05-29 22:12:09,269 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_first_session__section__header_search' to figma_screens/37a93177/screen_search_first_session__section__header_search.png
+2025-05-29 22:12:09,269 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search first session. section__header-search - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:09,889 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2987: screen: Search first session. section__header-search - логика работы
+2025-05-29 22:12:10,185 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_first_session__section__header_search.png to SURFQA-2987
+2025-05-29 22:12:10,186 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__symptoms» (ID: 193:19608) on screen «screen: Search first session»
+2025-05-29 22:12:13,863 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_first_session__section__symptoms' to figma_screens/37a93177/screen_search_first_session__section__symptoms.png
+2025-05-29 22:12:13,863 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search first session. section__symptoms - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:14,346 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2988: screen: Search first session. section__symptoms - логика работы
+2025-05-29 22:12:14,792 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_first_session__section__symptoms.png to SURFQA-2988
+2025-05-29 22:12:14,792 - INFO - ℹ️ ℹ️   ✨ Processing element: «Component / Home Indicator Section» (ID: I191:4269;352:410) on screen «screen: Search first session»
+2025-05-29 22:12:17,839 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_first_session__component_home_indicator_section' to figma_screens/37a93177/screen_search_first_session__component_home_indicator_section.png
+2025-05-29 22:12:17,839 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search first session. Component / Home Indicator Section - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:18,311 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2989: screen: Search first session. Component / Home Indicator Section - логика работы
+2025-05-29 22:12:18,630 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_first_session__component_home_indicator_section.png to SURFQA-2989
+2025-05-29 22:12:18,631 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Search categories» (ID: 191:4657)
+2025-05-29 22:12:22,297 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories' to figma_screens/37a93177/screen_search_categories.png
+2025-05-29 22:12:22,297 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search categories - компоновка' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:22,714 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2990: screen: Search categories - компоновка
+2025-05-29 22:12:23,179 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_categories.png to SURFQA-2990
+2025-05-29 22:12:24,748 - INFO - ℹ️ ℹ️   🔍 Found 3 element(s) for screen «screen: Search categories».
+2025-05-29 22:12:24,748 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header-search» (ID: 249:8953) on screen «screen: Search categories»
+2025-05-29 22:12:27,234 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories__section__header_search' to figma_screens/37a93177/screen_search_categories__section__header_search.png
+2025-05-29 22:12:27,234 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search categories. section__header-search - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:27,688 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2991: screen: Search categories. section__header-search - логика работы
+2025-05-29 22:12:27,981 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_categories__section__header_search.png to SURFQA-2991
+2025-05-29 22:12:27,981 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19854) on screen «screen: Search categories»
+2025-05-29 22:12:31,740 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories__section__catalog' to figma_screens/37a93177/screen_search_categories__section__catalog.png
+2025-05-29 22:12:31,741 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search categories. section__catalog - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:32,211 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2992: screen: Search categories. section__catalog - логика работы
+2025-05-29 22:12:32,622 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_categories__section__catalog.png to SURFQA-2992
+2025-05-29 22:12:32,622 - INFO - ℹ️ ℹ️   ✨ Processing element: «Component / Home Indicator Section» (ID: I191:4661;352:410) on screen «screen: Search categories»
+2025-05-29 22:12:35,525 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories__component_home_indicator_section' to figma_screens/37a93177/screen_search_categories__component_home_indicator_section.png
+2025-05-29 22:12:35,526 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search categories. Component / Home Indicator Section - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:36,001 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2993: screen: Search categories. Component / Home Indicator Section - логика работы
+2025-05-29 22:12:36,287 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_categories__component_home_indicator_section.png to SURFQA-2993
+2025-05-29 22:12:36,287 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Search categories and substance» (ID: 191:20820)
+2025-05-29 22:12:38,304 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories_and_substance' to figma_screens/37a93177/screen_search_categories_and_substance.png
+2025-05-29 22:12:38,304 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search categories and substance - компоновка' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:38,867 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2994: screen: Search categories and substance - компоновка
+2025-05-29 22:12:39,380 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_categories_and_substance.png to SURFQA-2994
+2025-05-29 22:12:41,333 - INFO - ℹ️ ℹ️   🔍 Found 4 element(s) for screen «screen: Search categories and substance».
+2025-05-29 22:12:41,333 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header-search» (ID: 249:9180) on screen «screen: Search categories and substance»
+2025-05-29 22:12:45,274 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories_and_substance__section__header_search' to figma_screens/37a93177/screen_search_categories_and_substance__section__header_search.png
+2025-05-29 22:12:45,275 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search categories and substance. section__header-search - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:45,787 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2995: screen: Search categories and substance. section__header-search - логика работы
+2025-05-29 22:12:46,086 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_categories_and_substance__section__header_search.png to SURFQA-2995
+2025-05-29 22:12:46,087 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ hints» (ID: 191:21027) on screen «screen: Search categories and substance»
+2025-05-29 22:12:48,804 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories_and_substance__section___hints' to figma_screens/37a93177/screen_search_categories_and_substance__section___hints.png
+2025-05-29 22:12:48,805 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search categories and substance. section__ hints - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:49,313 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2996: screen: Search categories and substance. section__ hints - логика работы
+2025-05-29 22:12:49,603 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_categories_and_substance__section___hints.png to SURFQA-2996
+2025-05-29 22:12:49,603 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 191:20824) on screen «screen: Search categories and substance»
+2025-05-29 22:12:52,546 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories_and_substance__section__catalog' to figma_screens/37a93177/screen_search_categories_and_substance__section__catalog.png
+2025-05-29 22:12:52,546 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search categories and substance. section__catalog - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:52,989 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2997: screen: Search categories and substance. section__catalog - логика работы
+2025-05-29 22:12:53,409 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_categories_and_substance__section__catalog.png to SURFQA-2997
+2025-05-29 22:12:53,410 - INFO - ℹ️ ℹ️   ✨ Processing element: «Component / Home Indicator Section» (ID: I191:20825;352:410) on screen «screen: Search categories and substance»
+2025-05-29 22:12:56,390 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories_and_substance__component_home_indicator_section' to figma_screens/37a93177/screen_search_categories_and_substance__component_home_indicator_section.png
+2025-05-29 22:12:56,390 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search categories and substance. Component / Home Indicator Section - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:56,853 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2998: screen: Search categories and substance. Component / Home Indicator Section - логика работы
+2025-05-29 22:12:57,114 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_categories_and_substance__component_home_indicator_section.png to SURFQA-2998
+2025-05-29 22:12:57,115 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Search done» (ID: 191:18871)
+2025-05-29 22:12:59,104 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_done' to figma_screens/37a93177/screen_search_done.png
+2025-05-29 22:12:59,105 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search done - компоновка' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:12:59,656 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-2999: screen: Search done - компоновка
+2025-05-29 22:13:00,119 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_done.png to SURFQA-2999
+2025-05-29 22:13:02,112 - INFO - ℹ️ ℹ️   🔍 Found 3 element(s) for screen «screen: Search done».
+2025-05-29 22:13:02,112 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header-search» (ID: 249:8996) on screen «screen: Search done»
+2025-05-29 22:13:04,984 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_done__section__header_search' to figma_screens/37a93177/screen_search_done__section__header_search.png
+2025-05-29 22:13:04,985 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search done. section__header-search - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:13:05,482 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-3000: screen: Search done. section__header-search - логика работы
+2025-05-29 22:13:05,844 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_done__section__header_search.png to SURFQA-3000
+2025-05-29 22:13:05,844 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 191:19257) on screen «screen: Search done»
+2025-05-29 22:13:09,494 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_done__section__catalog' to figma_screens/37a93177/screen_search_done__section__catalog.png
+2025-05-29 22:13:09,494 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search done. section__catalog - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:13:09,998 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-3001: screen: Search done. section__catalog - логика работы
+2025-05-29 22:13:10,612 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_done__section__catalog.png to SURFQA-3001
+2025-05-29 22:13:10,613 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 191:19697) on screen «screen: Search done»
+2025-05-29 22:13:13,444 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_done__section__tab_bar' to figma_screens/37a93177/screen_search_done__section__tab_bar.png
+2025-05-29 22:13:13,445 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Search done. section__tab-bar - логика работы' and labels: ['ai_boost_ui_tests', 'runid_37a93177']
+2025-05-29 22:13:14,094 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-3002: screen: Search done. section__tab-bar - логика работы
+2025-05-29 22:13:14,416 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_search_done__section__tab_bar.png to SURFQA-3002
+2025-05-29 22:13:14,417 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-05-29 22:13:14,419 - INFO - ℹ️ ℹ️ 🔗 Jira link saved to: /Users/leshchinskaya/create_figma_tests/figma_screens/37a93177/jira_issues_run_37a93177.txt
+2025-05-29 22:13:14,419 - INFO - ℹ️ ℹ️ 🔗 Link to created Jira issues:
+2025-05-29 22:13:14,419 - INFO - ℹ️ ℹ️ https://jira.surf.dev/issues/?jql=issuekey%20in%20(%22SURFQA-2964%22,%20%22SURFQA-2965%22,%20%22SURFQA-2966%22,%20%22SURFQA-2967%22,%20%22SURFQA-2968%22,%20%22SURFQA-2969%22,%20%22SURFQA-2970%22,%20%22SURFQA-2971%22,%20%22SURFQA-2972%22,%20%22SURFQA-2973%22,%20%22SURFQA-2974%22,%20%22SURFQA-2975%22,%20%22SURFQA-2976%22,%20%22SURFQA-2977%22,%20%22SURFQA-2978%22,%20%22SURFQA-2979%22,%20%22SURFQA-2980%22,%20%22SURFQA-2981%22,%20%22SURFQA-2982%22,%20%22SURFQA-2983%22,%20%22SURFQA-2984%22,%20%22SURFQA-2985%22,%20%22SURFQA-2986%22,%20%22SURFQA-2987%22,%20%22SURFQA-2988%22,%20%22SURFQA-2989%22,%20%22SURFQA-2990%22,%20%22SURFQA-2991%22,%20%22SURFQA-2992%22,%20%22SURFQA-2993%22,%20%22SURFQA-2994%22,%20%22SURFQA-2995%22,%20%22SURFQA-2996%22,%20%22SURFQA-2997%22,%20%22SURFQA-2998%22,%20%22SURFQA-2999%22,%20%22SURFQA-3000%22,%20%22SURFQA-3001%22,%20%22SURFQA-3002%22)
+2025-05-30 14:19:00,049 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-30 14:19:00,049 - INFO - ℹ️ ℹ️ 📄 runid_8d8b00b7
+2025-05-30 14:19:00,049 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: JIRA_EXPORT. Connecting to Jira instance: https://jira.surf.dev
+2025-05-30 14:19:00,050 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-30 14:19:05,325 - INFO - ℹ️ ℹ️ ✅ Selected 7 screens for processing.
+2025-05-30 14:19:05,326 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-30 14:19:12,148 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/8d8b00b7/screen_showcase.png
+2025-05-30 14:19:12,149 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase - компоновка' and labels: ['ai_boost_ui_tests', 'runid_8d8b00b7']
+2025-05-30 14:19:14,202 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-3006: screen: Showcase - компоновка
+2025-05-30 14:19:16,243 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase.png to SURFQA-3006
+2025-05-30 14:22:13,338 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-30 14:22:13,338 - INFO - ℹ️ ℹ️ 📄 runid_0df98970
+2025-05-30 14:22:13,338 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: JIRA_EXPORT. Connecting to Jira instance: https://jira.surf.dev
+2025-05-30 14:22:13,338 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-30 14:22:16,526 - INFO - ℹ️ ℹ️ ✅ Selected 7 screens for processing.
+2025-05-30 14:22:16,526 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-30 14:22:21,465 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/0df98970/screen_showcase.png
+2025-05-30 14:22:21,465 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase - компоновка' and labels: ['ai_boost_ui_tests', 'runid_0df98970']
+2025-05-30 14:22:21,731 - ERROR - ❌ ❌ Jira API request POST https://jira.surf.dev/rest/api/2/issue failed: 400 Client Error:  for url: https://jira.surf.dev/rest/api/2/issue
+2025-05-30 14:22:21,731 - ERROR - ❌ ❌ Jira response: 400 - {"errorMessages":[],"errors":{"customfield_12501":"Could not find valid 'id' or 'value' in the Parent Option object."}}
+2025-05-30 14:22:21,732 - ERROR - ❌ ❌ ❌ Failed to create Jira issue or attach file for summary 'screen: Showcase - компоновка': 400 Client Error:  for url: https://jira.surf.dev/rest/api/2/issue
+2025-05-30 14:22:21,732 - ERROR - ❌ ❌ ❌ Failed to create Jira issue for screen «screen: Showcase».
+2025-05-30 14:22:22,164 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-30 14:22:22,165 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-30 14:24:11,169 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-30 14:24:11,169 - INFO - ℹ️ ℹ️ 📄 runid_fab676b7
+2025-05-30 14:24:11,170 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: JIRA_EXPORT. Connecting to Jira instance: https://jira.surf.dev
+2025-05-30 14:24:11,170 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-30 14:24:13,324 - INFO - ℹ️ ℹ️ ✅ Selected 7 screens for processing.
+2025-05-30 14:24:13,324 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-30 14:24:15,438 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/fab676b7/screen_showcase.png
+2025-05-30 14:24:15,438 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase - компоновка' and labels: ['ai_boost_ui_tests', 'runid_fab676b7']
+2025-05-30 14:24:16,234 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-3007: screen: Showcase - компоновка
+2025-05-30 14:24:17,815 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase.png to SURFQA-3007
+2025-05-30 14:24:18,289 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-30 14:24:18,290 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-30 14:24:42,853 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-05-30 14:24:42,853 - INFO - ℹ️ ℹ️ 📄 runid_619880db
+2025-05-30 14:24:42,853 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: JIRA_EXPORT. Connecting to Jira instance: https://jira.surf.dev
+2025-05-30 14:24:42,853 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-05-30 14:24:44,827 - INFO - ℹ️ ℹ️ ✅ Selected 7 screens for processing.
+2025-05-30 14:24:44,827 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-05-30 14:24:49,967 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/619880db/screen_showcase.png
+2025-05-30 14:24:49,967 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase - компоновка' and labels: ['ai_boost_ui_tests', 'runid_619880db']
+2025-05-30 14:24:50,677 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-3008: screen: Showcase - компоновка
+2025-05-30 14:24:52,172 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase.png to SURFQA-3008
+2025-05-30 14:24:53,579 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-05-30 14:24:53,579 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-05-30 14:24:55,116 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/619880db/screen_showcase__section__my_purchases.png
+2025-05-30 14:24:55,117 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__my-purchases - логика работы' and labels: ['ai_boost_ui_tests', 'runid_619880db']
+2025-05-30 14:24:55,883 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-3009: screen: Showcase. section__my-purchases - логика работы
+2025-05-30 14:24:56,370 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__my_purchases.png to SURFQA-3009
+2025-05-30 14:24:56,370 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-05-30 14:24:59,387 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/619880db/screen_showcase__section__ads_banners.png
+2025-05-30 14:24:59,387 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__ads-banners - логика работы' and labels: ['ai_boost_ui_tests', 'runid_619880db']
+2025-05-30 14:25:00,243 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-3010: screen: Showcase. section__ads-banners - логика работы
+2025-05-30 14:25:00,779 - INFO - ℹ️ ℹ️ 📎 Successfully attached screen_showcase__section__ads_banners.png to SURFQA-3010
+2025-05-30 14:25:00,780 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-05-30 14:25:04,164 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/619880db/screen_showcase__section__catalog.png
+2025-05-30 14:25:04,165 - INFO - ℹ️ ℹ️ 📝 Attempting to create Jira issue with summary 'screen: Showcase. section__catalog - логика работы' and labels: ['ai_boost_ui_tests', 'runid_619880db']
+2025-05-30 14:25:04,728 - INFO - ℹ️ ℹ️ ✅ Successfully created Jira issue SURFQA-3011: screen: Showcase. section__catalog - логика работы
+2025-06-02 10:05:26,215 - INFO - ℹ️ ℹ️ 🚀 Starting Figma to Jira test case generation process...
+2025-06-02 10:05:26,215 - INFO - ℹ️ ℹ️ 📄 runid_7e49aab1
+2025-06-02 10:05:26,215 - INFO - ℹ️ ℹ️ ⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.
+2025-06-02 10:05:26,215 - INFO - ℹ️ ℹ️ 📄 Processing Figma file: https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4 (Key: nLDpIUh4gksHkJxWpdx5Jq)
+2025-06-02 10:05:30,385 - INFO - ℹ️ ℹ️ ✅ Selected 9 screens for processing.
+2025-06-02 10:05:30,385 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Product card» (ID: 203:5199)
+2025-06-02 10:05:36,143 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card' to figma_screens/7e49aab1/screen_product_card.png
+2025-06-02 10:05:37,420 - INFO - ℹ️ ℹ️   🔍 Found 16 element(s) for screen «screen: Product card».
+2025-06-02 10:05:37,420 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__photo-card» (ID: 248:5934) on screen «screen: Product card»
+2025-06-02 10:05:41,145 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section__photo_card' to figma_screens/7e49aab1/screen_product_card__section__photo_card.png
+2025-06-02 10:05:41,145 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ anchors» (ID: 207:6445) on screen «screen: Product card»
+2025-06-02 10:05:43,651 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section___anchors' to figma_screens/7e49aab1/screen_product_card__section___anchors.png
+2025-06-02 10:05:43,651 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__name» (ID: 207:5186) on screen «screen: Product card»
+2025-06-02 10:05:46,468 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section__name' to figma_screens/7e49aab1/screen_product_card__section__name.png
+2025-06-02 10:05:46,468 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__priсe» (ID: 207:5187) on screen «screen: Product card»
+2025-06-02 10:05:49,071 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section__pri_e' to figma_screens/7e49aab1/screen_product_card__section__pri_e.png
+2025-06-02 10:05:49,071 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__radio-list» (ID: 207:6459) on screen «screen: Product card»
+2025-06-02 10:05:51,594 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section__radio_list' to figma_screens/7e49aab1/screen_product_card__section__radio_list.png
+2025-06-02 10:05:51,594 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__radio-list» (ID: 207:6460) on screen «screen: Product card»
+2025-06-02 10:05:54,098 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__02_section__radio_list' to figma_screens/7e49aab1/screen_product_card__02_section__radio_list.png
+2025-06-02 10:05:54,098 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__availability» (ID: 207:5188) on screen «screen: Product card»
+2025-06-02 10:05:56,765 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section__availability' to figma_screens/7e49aab1/screen_product_card__section__availability.png
+2025-06-02 10:05:56,765 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 203:5584) on screen «screen: Product card»
+2025-06-02 10:06:00,531 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section__catalog' to figma_screens/7e49aab1/screen_product_card__section__catalog.png
+2025-06-02 10:06:00,532 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 207:5941) on screen «screen: Product card»
+2025-06-02 10:06:03,654 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__02_section__catalog' to figma_screens/7e49aab1/screen_product_card__02_section__catalog.png
+2025-06-02 10:06:03,654 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__cell-list» (ID: 203:5404) on screen «screen: Product card»
+2025-06-02 10:06:06,183 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section__cell_list' to figma_screens/7e49aab1/screen_product_card__section__cell_list.png
+2025-06-02 10:06:06,184 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__dropdown-list» (ID: 203:5405) on screen «screen: Product card»
+2025-06-02 10:06:09,064 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section__dropdown_list' to figma_screens/7e49aab1/screen_product_card__section__dropdown_list.png
+2025-06-02 10:06:09,065 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__review-list» (ID: 203:5406) on screen «screen: Product card»
+2025-06-02 10:06:12,337 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section__review_list' to figma_screens/7e49aab1/screen_product_card__section__review_list.png
+2025-06-02 10:06:12,337 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__radio-list» (ID: I203:5406;203:5163) on screen «screen: Product card»
+2025-06-02 10:06:15,355 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__03_section__radio_list' to figma_screens/7e49aab1/screen_product_card__03_section__radio_list.png
+2025-06-02 10:06:15,356 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header» (ID: 235:5470) on screen «screen: Product card»
+2025-06-02 10:06:17,698 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section__header' to figma_screens/7e49aab1/screen_product_card__section__header.png
+2025-06-02 10:06:17,698 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__CTA» (ID: 235:5752) on screen «screen: Product card»
+2025-06-02 10:06:20,118 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section__cta' to figma_screens/7e49aab1/screen_product_card__section__cta.png
+2025-06-02 10:06:20,118 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 203:5207) on screen «screen: Product card»
+2025-06-02 10:06:22,939 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card__section__tab_bar' to figma_screens/7e49aab1/screen_product_card__section__tab_bar.png
+2025-06-02 10:06:22,939 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Showcase» (ID: 1:20695)
+2025-06-02 10:06:29,304 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase' to figma_screens/7e49aab1/screen_showcase.png
+2025-06-02 10:06:31,977 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Showcase».
+2025-06-02 10:06:31,977 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7440) on screen «screen: Showcase»
+2025-06-02 10:06:34,705 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__my_purchases' to figma_screens/7e49aab1/screen_showcase__section__my_purchases.png
+2025-06-02 10:06:34,706 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 5:3286) on screen «screen: Showcase»
+2025-06-02 10:06:37,500 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__ads_banners' to figma_screens/7e49aab1/screen_showcase__section__ads_banners.png
+2025-06-02 10:06:37,501 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:17254) on screen «screen: Showcase»
+2025-06-02 10:06:40,521 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__catalog' to figma_screens/7e49aab1/screen_showcase__section__catalog.png
+2025-06-02 10:06:40,523 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__link-banner» (ID: 5:3564) on screen «screen: Showcase»
+2025-06-02 10:06:44,332 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__link_banner' to figma_screens/7e49aab1/screen_showcase__section__link_banner.png
+2025-06-02 10:06:44,333 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19130) on screen «screen: Showcase»
+2025-06-02 10:06:47,306 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__02_section__catalog' to figma_screens/7e49aab1/screen_showcase__02_section__catalog.png
+2025-06-02 10:06:47,307 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 327:5914) on screen «screen: Showcase»
+2025-06-02 10:06:51,101 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__03_section__catalog' to figma_screens/7e49aab1/screen_showcase__03_section__catalog.png
+2025-06-02 10:06:51,101 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 1:20696) on screen «screen: Showcase»
+2025-06-02 10:06:53,859 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_showcase__section__tab_bar' to figma_screens/7e49aab1/screen_showcase__section__tab_bar.png
+2025-06-02 10:06:53,860 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Main» (ID: 11:3647)
+2025-06-02 10:06:59,755 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main' to figma_screens/7e49aab1/screen_main.png
+2025-06-02 10:07:02,321 - INFO - ℹ️ ℹ️   🔍 Found 7 element(s) for screen «screen: Main».
+2025-06-02 10:07:02,321 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header» (ID: 11:3649) on screen «screen: Main»
+2025-06-02 10:07:05,386 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__header' to figma_screens/7e49aab1/screen_main__section__header.png
+2025-06-02 10:07:05,387 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__bonuses» (ID: 11:3650) on screen «screen: Main»
+2025-06-02 10:07:07,945 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__bonuses' to figma_screens/7e49aab1/screen_main__section__bonuses.png
+2025-06-02 10:07:07,946 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__search-btn» (ID: 11:3651) on screen «screen: Main»
+2025-06-02 10:07:10,294 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__search_btn' to figma_screens/7e49aab1/screen_main__section__search_btn.png
+2025-06-02 10:07:10,294 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__symptoms» (ID: 11:3652) on screen «screen: Main»
+2025-06-02 10:07:13,078 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__symptoms' to figma_screens/7e49aab1/screen_main__section__symptoms.png
+2025-06-02 10:07:13,079 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ads-banners» (ID: 11:3653) on screen «screen: Main»
+2025-06-02 10:07:16,037 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__ads_banners' to figma_screens/7e49aab1/screen_main__section__ads_banners.png
+2025-06-02 10:07:16,037 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__collection» (ID: 11:3654) on screen «screen: Main»
+2025-06-02 10:07:20,341 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__collection' to figma_screens/7e49aab1/screen_main__section__collection.png
+2025-06-02 10:07:20,342 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 11:3655) on screen «screen: Main»
+2025-06-02 10:07:23,094 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_main__section__tab_bar' to figma_screens/7e49aab1/screen_main__section__tab_bar.png
+2025-06-02 10:07:23,094 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Product card scroll» (ID: 235:6367)
+2025-06-02 10:07:27,513 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll' to figma_screens/7e49aab1/screen_product_card_scroll.png
+2025-06-02 10:07:29,576 - INFO - ℹ️ ℹ️   🔍 Found 16 element(s) for screen «screen: Product card scroll».
+2025-06-02 10:07:29,576 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ anchors» (ID: 235:6371) on screen «screen: Product card scroll»
+2025-06-02 10:07:32,040 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__section___anchors' to figma_screens/7e49aab1/screen_product_card_scroll__section___anchors.png
+2025-06-02 10:07:32,040 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__name» (ID: 235:6372) on screen «screen: Product card scroll»
+2025-06-02 10:07:34,772 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__section__name' to figma_screens/7e49aab1/screen_product_card_scroll__section__name.png
+2025-06-02 10:07:34,773 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__priсe» (ID: 235:6373) on screen «screen: Product card scroll»
+2025-06-02 10:07:37,567 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__section__pri_e' to figma_screens/7e49aab1/screen_product_card_scroll__section__pri_e.png
+2025-06-02 10:07:37,567 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__radio-list» (ID: 235:6374) on screen «screen: Product card scroll»
+2025-06-02 10:07:40,174 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__section__radio_list' to figma_screens/7e49aab1/screen_product_card_scroll__section__radio_list.png
+2025-06-02 10:07:40,175 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__radio-list» (ID: 235:6375) on screen «screen: Product card scroll»
+2025-06-02 10:07:42,718 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__02_section__radio_list' to figma_screens/7e49aab1/screen_product_card_scroll__02_section__radio_list.png
+2025-06-02 10:07:42,719 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__availability» (ID: 235:6376) on screen «screen: Product card scroll»
+2025-06-02 10:07:45,311 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__section__availability' to figma_screens/7e49aab1/screen_product_card_scroll__section__availability.png
+2025-06-02 10:07:45,311 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 235:6378) on screen «screen: Product card scroll»
+2025-06-02 10:07:48,419 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__section__catalog' to figma_screens/7e49aab1/screen_product_card_scroll__section__catalog.png
+2025-06-02 10:07:48,419 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 235:6379) on screen «screen: Product card scroll»
+2025-06-02 10:07:51,523 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__02_section__catalog' to figma_screens/7e49aab1/screen_product_card_scroll__02_section__catalog.png
+2025-06-02 10:07:51,523 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__cell-list» (ID: 235:6380) on screen «screen: Product card scroll»
+2025-06-02 10:07:54,018 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__section__cell_list' to figma_screens/7e49aab1/screen_product_card_scroll__section__cell_list.png
+2025-06-02 10:07:54,018 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__dropdown-list» (ID: 235:6381) on screen «screen: Product card scroll»
+2025-06-02 10:07:56,367 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__section__dropdown_list' to figma_screens/7e49aab1/screen_product_card_scroll__section__dropdown_list.png
+2025-06-02 10:07:56,368 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__review-list» (ID: 235:6382) on screen «screen: Product card scroll»
+2025-06-02 10:07:59,351 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__section__review_list' to figma_screens/7e49aab1/screen_product_card_scroll__section__review_list.png
+2025-06-02 10:07:59,352 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__radio-list» (ID: I235:6382;203:5163) on screen «screen: Product card scroll»
+2025-06-02 10:08:02,136 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__03_section__radio_list' to figma_screens/7e49aab1/screen_product_card_scroll__03_section__radio_list.png
+2025-06-02 10:08:02,137 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header» (ID: 235:6384) on screen «screen: Product card scroll»
+2025-06-02 10:08:04,820 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__section__header' to figma_screens/7e49aab1/screen_product_card_scroll__section__header.png
+2025-06-02 10:08:04,822 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ anchors» (ID: 235:7007) on screen «screen: Product card scroll»
+2025-06-02 10:08:07,603 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__02_section___anchors' to figma_screens/7e49aab1/screen_product_card_scroll__02_section___anchors.png
+2025-06-02 10:08:07,603 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__CTA» (ID: 235:6386) on screen «screen: Product card scroll»
+2025-06-02 10:08:10,022 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__section__cta' to figma_screens/7e49aab1/screen_product_card_scroll__section__cta.png
+2025-06-02 10:08:10,022 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 235:6387) on screen «screen: Product card scroll»
+2025-06-02 10:08:12,741 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_product_card_scroll__section__tab_bar' to figma_screens/7e49aab1/screen_product_card_scroll__section__tab_bar.png
+2025-06-02 10:08:12,742 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Search» (ID: 171:5895)
+2025-06-02 10:08:16,962 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search' to figma_screens/7e49aab1/screen_search.png
+2025-06-02 10:08:18,742 - INFO - ℹ️ ℹ️   🔍 Found 5 element(s) for screen «screen: Search».
+2025-06-02 10:08:18,743 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header-search» (ID: 249:8914) on screen «screen: Search»
+2025-06-02 10:08:21,527 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search__section__header_search' to figma_screens/7e49aab1/screen_search__section__header_search.png
+2025-06-02 10:08:21,528 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ hints» (ID: 179:4207) on screen «screen: Search»
+2025-06-02 10:08:24,131 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search__section___hints' to figma_screens/7e49aab1/screen_search__section___hints.png
+2025-06-02 10:08:24,132 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__radio-list» (ID: 179:4277) on screen «screen: Search»
+2025-06-02 10:08:27,138 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search__section__radio_list' to figma_screens/7e49aab1/screen_search__section__radio_list.png
+2025-06-02 10:08:27,138 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__my-purchases» (ID: 193:7501) on screen «screen: Search»
+2025-06-02 10:08:30,396 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search__section__my_purchases' to figma_screens/7e49aab1/screen_search__section__my_purchases.png
+2025-06-02 10:08:30,397 - INFO - ℹ️ ℹ️   ✨ Processing element: «Component / Home Indicator Section» (ID: I171:3940;352:410) on screen «screen: Search»
+2025-06-02 10:08:32,927 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search__component_home_indicator_section' to figma_screens/7e49aab1/screen_search__component_home_indicator_section.png
+2025-06-02 10:08:32,927 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Search first session» (ID: 191:4262)
+2025-06-02 10:08:37,804 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_first_session' to figma_screens/7e49aab1/screen_search_first_session.png
+2025-06-02 10:08:40,011 - INFO - ℹ️ ℹ️   🔍 Found 3 element(s) for screen «screen: Search first session».
+2025-06-02 10:08:40,012 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header-search» (ID: 249:8939) on screen «screen: Search first session»
+2025-06-02 10:08:42,239 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_first_session__section__header_search' to figma_screens/7e49aab1/screen_search_first_session__section__header_search.png
+2025-06-02 10:08:42,239 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__symptoms» (ID: 193:19608) on screen «screen: Search first session»
+2025-06-02 10:08:45,868 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_first_session__section__symptoms' to figma_screens/7e49aab1/screen_search_first_session__section__symptoms.png
+2025-06-02 10:08:45,868 - INFO - ℹ️ ℹ️   ✨ Processing element: «Component / Home Indicator Section» (ID: I191:4269;352:410) on screen «screen: Search first session»
+2025-06-02 10:08:48,487 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_first_session__component_home_indicator_section' to figma_screens/7e49aab1/screen_search_first_session__component_home_indicator_section.png
+2025-06-02 10:08:48,487 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Search categories» (ID: 191:4657)
+2025-06-02 10:08:53,353 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories' to figma_screens/7e49aab1/screen_search_categories.png
+2025-06-02 10:08:54,644 - INFO - ℹ️ ℹ️   🔍 Found 3 element(s) for screen «screen: Search categories».
+2025-06-02 10:08:54,645 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header-search» (ID: 249:8953) on screen «screen: Search categories»
+2025-06-02 10:08:57,175 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories__section__header_search' to figma_screens/7e49aab1/screen_search_categories__section__header_search.png
+2025-06-02 10:08:57,175 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 193:19854) on screen «screen: Search categories»
+2025-06-02 10:09:00,256 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories__section__catalog' to figma_screens/7e49aab1/screen_search_categories__section__catalog.png
+2025-06-02 10:09:00,256 - INFO - ℹ️ ℹ️   ✨ Processing element: «Component / Home Indicator Section» (ID: I191:4661;352:410) on screen «screen: Search categories»
+2025-06-02 10:09:02,965 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories__component_home_indicator_section' to figma_screens/7e49aab1/screen_search_categories__component_home_indicator_section.png
+2025-06-02 10:09:02,966 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Search categories and substance» (ID: 191:20820)
+2025-06-02 10:09:06,969 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories_and_substance' to figma_screens/7e49aab1/screen_search_categories_and_substance.png
+2025-06-02 10:09:08,767 - INFO - ℹ️ ℹ️   🔍 Found 4 element(s) for screen «screen: Search categories and substance».
+2025-06-02 10:09:08,767 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header-search» (ID: 249:9180) on screen «screen: Search categories and substance»
+2025-06-02 10:09:12,079 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories_and_substance__section__header_search' to figma_screens/7e49aab1/screen_search_categories_and_substance__section__header_search.png
+2025-06-02 10:09:12,080 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__ hints» (ID: 191:21027) on screen «screen: Search categories and substance»
+2025-06-02 10:09:14,747 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories_and_substance__section___hints' to figma_screens/7e49aab1/screen_search_categories_and_substance__section___hints.png
+2025-06-02 10:09:14,748 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 191:20824) on screen «screen: Search categories and substance»
+2025-06-02 10:09:17,715 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories_and_substance__section__catalog' to figma_screens/7e49aab1/screen_search_categories_and_substance__section__catalog.png
+2025-06-02 10:09:17,715 - INFO - ℹ️ ℹ️   ✨ Processing element: «Component / Home Indicator Section» (ID: I191:20825;352:410) on screen «screen: Search categories and substance»
+2025-06-02 10:09:20,871 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_categories_and_substance__component_home_indicator_section' to figma_screens/7e49aab1/screen_search_categories_and_substance__component_home_indicator_section.png
+2025-06-02 10:09:20,872 - INFO - ℹ️ ℹ️ 🖥️ Processing screen: «screen: Search done» (ID: 191:18871)
+2025-06-02 10:09:24,957 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_done' to figma_screens/7e49aab1/screen_search_done.png
+2025-06-02 10:09:27,044 - INFO - ℹ️ ℹ️   🔍 Found 3 element(s) for screen «screen: Search done».
+2025-06-02 10:09:27,044 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__header-search» (ID: 249:8996) on screen «screen: Search done»
+2025-06-02 10:09:29,605 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_done__section__header_search' to figma_screens/7e49aab1/screen_search_done__section__header_search.png
+2025-06-02 10:09:29,605 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__catalog» (ID: 191:19257) on screen «screen: Search done»
+2025-06-02 10:09:33,198 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_done__section__catalog' to figma_screens/7e49aab1/screen_search_done__section__catalog.png
+2025-06-02 10:09:33,198 - INFO - ℹ️ ℹ️   ✨ Processing element: «section__tab-bar» (ID: 191:19697) on screen «screen: Search done»
+2025-06-02 10:09:36,008 - INFO - ℹ️ ℹ️ ✅ Successfully downloaded PNG for 'screen_search_done__section__tab_bar' to figma_screens/7e49aab1/screen_search_done__section__tab_bar.png
+2025-06-02 10:09:36,009 - INFO - ℹ️ ℹ️ 🏁 --- Process Completed ---
+2025-06-02 10:09:36,012 - SUCCESS - ✅ ✅ ✅ Successfully generated TXT file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/tests_from_figma_runid_7e49aab1.txt
+2025-06-02 10:09:36,012 - INFO - ℹ️ ℹ️ 📄 TXT file contains 73 test cases.
+2025-06-02 10:09:36,012 - INFO - ℹ️ ℹ️ ⚙️ Proceeding to run secondary script for FILE_EXPORT mode...
+2025-06-02 10:09:36,013 - INFO - ℹ️ ℹ️ 🐍 Executing Python script: python3 create_final_promt.py (from create_final_tests)
+2025-06-02 10:09:36,059 - INFO - ℹ️ ℹ️ Output from create_final_promt.py:
+✅ Файл './artifacts/final_promt.txt' успешно сгенерирован.
+
+2025-06-02 10:09:36,059 - SUCCESS - ✅ ✅ ✅ Successfully executed create_final_promt.py.
+2025-06-02 10:09:36,059 - INFO - ℹ️ ℹ️ 📂 Attempting to open generated file: /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt
+2025-06-02 10:09:36,153 - SUCCESS - ✅ ✅ ✅ Successfully requested to open /Users/leshchinskaya/create_figma_tests/create_final_tests/artifacts/final_promt.txt.
