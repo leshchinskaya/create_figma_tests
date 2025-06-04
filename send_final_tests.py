@@ -235,7 +235,7 @@ def create_jira_issues_from_final_tests():
 
     if created_issue_keys:
         jql = "issuekey in (" + ", ".join(f'"{key}"' for key in created_issue_keys) + ")"
-        encoded_jql = urllib.parse.quote(jql, safe='(),')
+        encoded_jql = urllib.parse.quote(jql)
         jira_url_base = config.JIRA_URL.rstrip('/')
         jira_link = f"{jira_url_base}/issues/?jql={encoded_jql}"
         logger.info("🔗 Link to created Jira issues:")
