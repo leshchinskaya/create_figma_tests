@@ -1,28 +1,36 @@
 #!/bin/bash
 
-# Check if Homebrew is installed
-if ! command -v brew &> /dev/null
-then
-    echo "❌ Homebrew not found. Please install Homebrew first."
-    echo "🔗 You can install it by running:"
-    echo '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
-    exit 1
+set -e
+
+# Determine project root
+ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Check if python3 is available
+if command -v python3 > /dev/null 2>&1; then
+    PYTHON=python3
+else
+    # Install Homebrew if missing
+    if ! command -v brew > /dev/null 2>&1; then
+        echo "Homebrew not found. Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+
+    echo "Installing Python via Homebrew..."
+    brew install python
+    PYTHON=python3
 fi
 
-# Install Python using Homebrew
-echo "ℹ️ Installing Python..."
-brew install python
-echo "✅ Python installation complete."
+VENV_DIR="$ROOT_DIR/venv"
+if [ ! -d "$VENV_DIR" ]; then
+    "$PYTHON" -m venv "$VENV_DIR"
+fi
 
-# Install dependencies
-echo "ℹ️Installing other dependencies..."
-pip3 install requests==2.31
-pip3 install pathlib==1.0.1
-pip3 install urllib3==1.26.17
+PIP="$VENV_DIR/bin/pip"
+"$PIP" install -r "$ROOT_DIR/requirements.txt"
 
-# Make the main script executable
-chmod +x send_figma_tests_all_tests.py
-chmod +x create_final_tests/create_final_promt.py
-chmod +x send_final_tests.py
+# Make the main scripts executable
+chmod +x "$ROOT_DIR/send_figma_tests_all_tests.py" \
+        "$ROOT_DIR/create_final_tests/create_final_promt.py" \
+        "$ROOT_DIR/send_final_tests.py"
 
-echo "✅ Dependencies installed successfully! Scripts send_figma_tests_all_tests.py, create_final_tests/create_final_promt.py, and send_final_tests.py are now executable." 
+echo "✅ Environment setup complete."

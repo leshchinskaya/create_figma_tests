@@ -4,11 +4,13 @@
   "artifacts": {
     "req_showcase": "./artifacts/req_showcase.md",
     "swagger": "./artifacts/swagger.yaml",
-    "tests_from_figma": "./artifacts/tests_from_figma.csv"
+    "tests_from_figma": "./artifacts/tests_from_figma.csv",
+    "json_scheme": "./artifacts/json_scheme.yml"
   },
   "placeholders": {
     "req_showcase": "{{REQ_SHOWCASE_CONTENT}}",
     "swagger": "{{SWAGGER_CONTENT}}",
-    "tests_from_figma": "{{TESTS_FROM_FIGMA_CONTENT}}"
+    "tests_from_figma": "{{TESTS_FROM_FIGMA_CONTENT}}",
+    "json_scheme": "{{JSON_SCHEME_CONTENT}}"
   }
-} 
+}
