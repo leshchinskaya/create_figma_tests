@@ -1,0 +1,295 @@
+[
+  {
+    "testCaseIdentifier": "SURFQA-2807",
+    "labels": [
+      "Functional",
+      "Regression"
+    ],
+    "summary": "Проверить компоновку экрана Showcase.",
+    "description": "Покрытие требований: Главная форма, структура секций: section_header, section_bonuses, section_search-btn, section_symptoms, section_ads-banners, section_collection, section_tab-bar. Проверяется соответствие компоновки и порядок расположения секций согласно Figma. Ссылка: [https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-20695](https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-20695). Визуальный эталон: screen_showcase.png.",
+    "estimate": 5,
+    "testRepositoryPath": "vladTest/4_1/showcase",
+    "testCaseType": "component",
+    "steps": [
+      {
+        "action": "Открыть главную форму приложения.",
+        "data": "",
+        "result": "Экран отображает секции в следующем порядке: section_header, section_bonuses (если авторизован), section_search-btn, section_symptoms, section_ads-banners, section_collection, section_tab-bar. Внешний вид совпадает с макетом screen_showcase.png."
+      }
+    ]
+  },
+  {
+    "testCaseIdentifier": "SURFQA-2809",
+    "labels": [
+      "Functional",
+      "Regression"
+    ],
+    "summary": "Проверить работу секции section_ads-banners.",
+    "description": "Требование: section_ads-banners (Главная форма). Сценарий работы с баннерами: загрузка, автоскролл, переход по ссылке, отображение/скрытие при ошибке. Ссылка: [https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=5-3286](https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=5-3286). Эталон: screen_showcase__section__ads_banners.png.",
+    "estimate": 5,
+    "testRepositoryPath": "vladTest/4_1/section_ads-banners",
+    "testCaseType": "component",
+    "steps": [
+      {
+        "action": "Загрузить главную форму. Дождаться загрузки баннеров через GET /banners (модель Banner).",
+        "data": "",
+        "result": "Секция отображает баннеры из ответа. Реализован горизонтальный скроллинг и автопрокрутка, внешний вид соответствует screen_showcase__section__ads_banners.png."
+      },
+      {
+        "action": "Тапнуть по баннеру.",
+        "data": "",
+        "result": "Открывается ссылка, указанная в поле targetUrl баннера."
+      },
+      {
+        "action": "Вызвать ошибку загрузки баннеров (network error/offline).",
+        "data": "",
+        "result": "Секция баннеров не отображается на экране."
+      }
+    ]
+  },
+  {
+    "testCaseIdentifier": "SURFQA-2814",
+    "labels": [
+      "Functional",
+      "Regression"
+    ],
+    "summary": "Проверить логику работы section_tab-bar.",
+    "description": "Требование: section_tab-bar (Главная форма). Проверка навигации по табам: Каталог, Избранное, Корзина, Главная. Визуализация активного таба, отображение бейджа cartCount, работа в авторизованном/неавторизованном состоянии. Ссылка: [https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-20696](https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-20696). Эталон: screen_showcase__section__tab_bar.png.",
+    "estimate": 5,
+    "testRepositoryPath": "vladTest/4_1/section_tab-bar",
+    "testCaseType": "component",
+    "steps": [
+      {
+        "action": "Открыть главную форму. Просмотреть отображение таб-бара.",
+        "data": "",
+        "result": "Отображаются 4 кнопки: 'Каталог', 'Избранное', 'Корзина', 'Главная'. Активный таб выделен."
+      },
+      {
+        "action": "Нажать на кнопку 'Корзина'.",
+        "data": "",
+        "result": "Происходит переход в корзину."
+      },
+      {
+        "action": "Выполнить вход, убедиться, что при ненулевом cartCount отображается бейдж.",
+        "data": "",
+        "result": "Бейдж с количеством отображается при cartCount > 0."
+      },
+      {
+        "action": "Выключить сеть, проверить реакцию на ошибку получения cartCount.",
+        "data": "",
+        "result": "Бейдж cartCount скрыт."
+      }
+    ]
+  },
+  {
+    "testCaseIdentifier": null,
+    "labels": [
+      "Functional",
+      "Regression",
+      "ErrorGuessing"
+    ],
+    "summary": "Проверить работу секции section_header с ошибкой авторизации.",
+    "description": "Требование: section_header (Главная форма). Проверка перехода в состояние 'Не авторизован' при ошибке авторизации. Отображение CTA 'Войти / Зарегистрироваться'. Ошибка сети: общий error state главного экрана.",
+    "estimate": 4,
+    "testRepositoryPath": "vladTest/4_1/section_header",
+    "testCaseType": "component",
+    "steps": [
+      {
+        "action": "Попробовать получить профиль пользователя через GET /user/profile (модель UserProfile), вызвать ошибку (401 или network error).",
+        "data": "",
+        "result": "Секция переходит в состояние 'Не авторизован', отображается CTA 'Войти / Зарегистрироваться'."
+      },
+      {
+        "action": "Имитировать ошибку сети.",
+        "data": "",
+        "result": "Главный экран отображает общий error state."
+      }
+    ]
+  },
+  {
+    "testCaseIdentifier": null,
+    "labels": [
+      "Functional",
+      "Regression"
+    ],
+    "summary": "Проверить отображение секции section_bonuses для авторизованного пользователя.",
+    "description": "Требование: section_bonuses (Главная форма). Загрузка и отображение бонусов пользователя и QR-кода через GET /user/bonuses (модель Bonuses). Состояние с бонусами, с нулем бонусов, сгорающими бонусами.",
+    "estimate": 4,
+    "testRepositoryPath": "vladTest/4_1/section_bonuses",
+    "testCaseType": "component",
+    "steps": [
+      {
+        "action": "Выполнить авторизацию, загрузить бонусы через GET /user/bonuses.",
+        "data": "",
+        "result": "Отображается количество бонусов и QR-код."
+      },
+      {
+        "action": "Передать expiring и expiresAt в ответе.",
+        "data": "",
+        "result": "Отображается информация о сгорающих бонусах и дате сгорания."
+      },
+      {
+        "action": "Передать total = 0.",
+        "data": "",
+        "result": "Отображается 0 бонусов, QR-код скрыт."
+      }
+    ]
+  },
+  {
+    "testCaseIdentifier": null,
+    "labels": [
+      "Functional",
+      "Regression",
+      "ErrorGuessing"
+    ],
+    "summary": "Проверить работу секции section_bonuses при ошибке получения бонусов.",
+    "description": "Требование: section_bonuses (Главная форма). Ошибка получения бонусов или QR-кода через GET /user/bonuses (модель Bonuses). Ошибка сети: отображение информационного блока без бонусов и QR.",
+    "estimate": 3,
+    "testRepositoryPath": "vladTest/4_1/section_bonuses",
+    "testCaseType": "component",
+    "steps": [
+      {
+        "action": "Выполнить авторизацию, вызвать ошибку при получении бонусов (network error, 500).",
+        "data": "",
+        "result": "Отображается информационный блок без бонусов и QR-кода."
+      }
+    ]
+  },
+  {
+    "testCaseIdentifier": null,
+    "labels": [
+      "Functional",
+      "Regression"
+    ],
+    "summary": "Проверить работу section_search-btn, успешный поиск.",
+    "description": "Требование: section_search-btn (Главная форма). Проверка открытия модального окна поиска при нажатии, успешный запрос.",
+    "estimate": 3,
+    "testRepositoryPath": "vladTest/4_1/section_search-btn",
+    "testCaseType": "component",
+    "steps": [
+      {
+        "action": "Тапнуть по строке поиска.",
+        "data": "",
+        "result": "Открывается модальный экран с активной строкой и клавиатурой."
+      },
+      {
+        "action": "Выполнить успешный поиск.",
+        "data": "",
+        "result": "Поиск работает корректно, отображаются результаты."
+      }
+    ]
+  },
+  {
+    "testCaseIdentifier": null,
+    "labels": [
+      "Functional",
+      "Regression",
+      "ErrorGuessing"
+    ],
+    "summary": "Проверить обработку ошибки поиска в section_search-btn.",
+    "description": "Требование: section_search-btn (Главная форма). Ошибка отправки поискового запроса — отображается сообщение об ошибке поиска.",
+    "estimate": 2,
+    "testRepositoryPath": "vladTest/4_1/section_search-btn",
+    "testCaseType": "component",
+    "steps": [
+      {
+        "action": "Выполнить поиск с отключённой сетью/ошибкой на бэкенде.",
+        "data": "",
+        "result": "Отображается сообщение об ошибке поиска."
+      }
+    ]
+  },
+  {
+    "testCaseIdentifier": null,
+    "labels": [
+      "Functional",
+      "Regression"
+    ],
+    "summary": "Проверить отображение секции section_symptoms, позитивные проверки.",
+    "description": "Требование: section_symptoms (Главная форма). Загрузка массива тэгов через GET /recommendations/symptoms (модель SymptomTag), отображение только первых maxVisible, правильные иконки, переход по linkToCategory.",
+    "estimate": 4,
+    "testRepositoryPath": "vladTest/4_1/section_symptoms",
+    "testCaseType": "component",
+    "steps": [
+      {
+        "action": "Загрузить главную форму, получить список тэгов симптомов через GET /recommendations/symptoms.",
+        "data": "",
+        "result": "Секция отображает только первые maxVisible тэгов, порядок сохранён, иконки корректны."
+      },
+      {
+        "action": "Тапнуть по тэгу симптома.",
+        "data": "",
+        "result": "Выполняется переход в соответствующую категорию каталога по ссылке linkToCategory."
+      }
+    ]
+  },
+  {
+    "testCaseIdentifier": null,
+    "labels": [
+      "Functional",
+      "Regression",
+      "ErrorGuessing"
+    ],
+    "summary": "Проверить поведение section_symptoms при ошибке загрузки массива тэгов.",
+    "description": "Требование: section_symptoms (Главная форма). Ошибка загрузки массива тэгов через GET /recommendations/symptoms (network error, 500) — секция не отображается.",
+    "estimate": 2,
+    "testRepositoryPath": "vladTest/4_1/section_symptoms",
+    "testCaseType": "component",
+    "steps": [
+      {
+        "action": "Вызвать ошибку при получении тэгов симптомов (отключить сеть/500).",
+        "data": "",
+        "result": "Секция симптомов не отображается на главной форме."
+      }
+    ]
+  },
+  {
+    "testCaseIdentifier": null,
+    "labels": [
+      "Functional",
+      "Regression"
+    ],
+    "summary": "Проверить отображение section_collection при наличии категорий.",
+    "description": "Требование: section_collection (Главная форма). Получение списка категорий через GET /recommendations/categories (модель Category), отображение maxVisible, корректные иконки, название не более двух строк.",
+    "estimate": 4,
+    "testRepositoryPath": "vladTest/4_1/section_collection",
+    "testCaseType": "component",
+    "steps": [
+      {
+        "action": "Загрузить категории через GET /recommendations/categories.",
+        "data": "",
+        "result": "Секция отображает активные категории, корректные иконки, фоновые цвета, названия максимум в две строки."
+      },
+      {
+        "action": "Тапнуть по категории без подкатегорий.",
+        "data": "",
+        "result": "Происходит переход в категорию."
+      },
+      {
+        "action": "Тапнуть по категории с подкатегориями.",
+        "data": "",
+        "result": "Происходит переход в список подкатегорий."
+      }
+    ]
+  },
+  {
+    "testCaseIdentifier": null,
+    "labels": [
+      "Functional",
+      "Regression",
+      "ErrorGuessing"
+    ],
+    "summary": "Проверить отсутствие section_collection при отсутствии входных данных.",
+    "description": "Требование: section_collection (Главная форма). Отсутствие входных данных — секция не отображается.",
+    "estimate": 2,
+    "testRepositoryPath": "vladTest/4_1/section_collection",
+    "testCaseType": "component",
+    "steps": [
+      {
+        "action": "Не передавать данные для категорий.",
+        "data": "",
+        "result": "Секция не отображается на главном экране."
+      }
+    ]
+  }
+]

@@ -1,3 +1,55 @@
+This file is a merged representation of a subset of the codebase, containing specifically included files, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Only files matching these patterns are included: create_final_tests/artifacts/final_promt.txt
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+create_final_tests/
+  artifacts/
+    final_promt.txt
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="create_final_tests/artifacts/final_promt.txt">
 Пожалуйста, на основании следующих артефактов:
 
 ### 1. Бизнес-требования (req\_showcase):
@@ -555,111 +607,61 @@ SURFQA-2807,365084,screen: Showcase - компоновка,"*Figma:* [screen: Sh
 * Обязательно сохрани наименования файлов, которые прикреплены к тестам
 * Обязательно сохрани ссылки на figma, которые прикреплены к тестам
 
-Сгенерируй единый JSON-файл с массивом объектов.
-Каждый объект обязан соответствовать схеме TestCase (см. ниже) и описывать один тест.
-Порядок полей внутри объекта не важен, но все поля из секции required должны присутствовать.
-Не оборачивай результат в Markdown, выводи чистый JSON.
-
-```yaml
-openapi: 3.0.0
-info:
-  title: Test Case API
-  version: 1.0.0
-  description: Schema for encapsulating information about a single test case.
-
-components:
-  schemas:
-    TestCase:
-      type: object
-      description: Represents a single test case with its details and steps.
-      required: # Properties that MUST be present
-        - labels
-        - summary
-        - estimate
-        - testRepositoryPath
-        - testCaseType
-        - steps
-      properties:
-        testCaseIdentifier:
-          type: string
-          description: An ID of Jira test from design tests when test is derived from it
-          nullable: true
-          example: "SURFQA-2807"
-        labels:
-          type: array
-          description: A list of tags or categories for the test case. Use empty list of none
-          items:
-            type: string
-          example: [ "authentication", "critical", "regression" ]
-        summary:
-          type: string
-          description: A concise, one-line summary of the test case's purpose.
-          example: "Verify successful user login with valid credentials."
-        description:
-          type: string
-          description: Detailed explanation of the test case's scope and context.
-          nullable: true # Indicates that this field can be null or omitted
-          example: "This test validates user login via standard credentials."
-        estimate:
-          type: integer
-          format: int32 # Common integer format (e.g., for minutes)
-          description: Estimated time to execute the test case, in minutes.
-          minimum: 0 # An estimate can be 0 or more
-          example: 5
-        testRepositoryPath:
-          type: string
-          description: The hierarchical path where this test case is stored in a test management system (e.g., folder structure). Has to use lowercase
-          example: "authentication/login"
-        testCaseType:
-          type: string
-          description: The classification of the test case, based on its scope.
-          enum:
-            - component # Tests a specific isolated component or unit
-            - scenario  # Tests an end-to-end user flow or a larger business scenario
-          example: scenario # Example value conforming to the enum
-        steps:
-          type: array
-          description: An ordered list of individual steps required to execute the test case.
-          minItems: 1 # A test case should have at least one step
-          items:
-            type: object
-            description: A single step within the test case, detailing action, data, and expected result.
-            required:
-              - action
-              - data
-              - result
-            properties:
-              action:
-                type: string
-                description: The action to be performed in this step.
-                example: "Navigate to the application's login page."
-              data:
-                type: string
-                description: Any specific data or inputs required for the action (e.g., input values, URLs). Use "" if none.
-                example: "URL: https://example.com/login"
-              result:
-                type: string
-                description: The expected outcome or observation after performing the action.
-                example: "The login page is displayed correctly."
-```
+Сгенерируй единый CSV (UTF-8, разделитель ‘;’) со следующими колонками:
+TestCaseIdentifier;Summary;Description;Priority;Labels;ManualTestSteps;Board;testRepositoryPath;testCaseType
 
 Общие правила:
 
-* summary ≤100 символов, императивно.
-* testCaseIdentifier используй только из тестов из Figma (для маппинга), иначе оставь null
-* description: контекст, ID требований, часть требований, которые покрываются данной проверкой, ссылка на Figma, наименование файла из tests\_from\_figma
-* priority: Blocker|Critical|Normal|Minor.
-* labels: (Functional, Regression, Performance, StatePath, Boundary, DecisionTable, ErrorGuessing и т.д.).
-* steps: action и result должны быть непустыми строками
-* estimate — integer, минуты.
-* testCaseType: component
-* testRepositoryPath: имя фичи в нижнем регистре
+* Ровно 9 колонок на каждую строку и для ВСЕХ тестов
+* Внутри значений каждой колонки не должно быть символа ; т.к. он является разделителем CSV
+* Summary ≤100 символов, императивно.
+* TestCaseIdentifier используй только из тестов из Figma (для маппинга), иначе оставь пустым
+* Description: контекст, ID требований, часть требований, которые покрываются данной проверкой, ссылка на Figma, наименование файла из tests\_from\_figma
+* Priority: Blocker|Critical|Normal|Minor.
+* Labels: (Functional, Regression, Performance, StatePath, Boundary, DecisionTable, ErrorGuessing и т.д.).
+* ManualTestSteps: JSON‑массив шагов, где каждый элемент содержит поля Action, Data, Expected Result. Пример:
 
+Схема json
+```yaml
+type: array
+items:
+  type: object
+  properties:
+    fields:
+      type: object
+      properties:
+        Action:
+          type: string
+        Data:
+          type: string
+        Expected Result:
+          type: string
+      required:
+        - Action
+        - Data
+        - Expected Result
+      additionalProperties: false
+  required:
+    - fields
+```
+
+```json
+[{"fields":{"Action":"Navigate to the application's login page.","Data":"URL: https://example.com/login","Expected Result":"The login page with username and password fields, and a 'Login' button, is displayed."}}]
+```
+Пример: [{"fields":{"Action":"Авторизоваться. На главном экране тапнуть по аватару в {{section_header}}.","Data":"","Expected Result":"Происходит действие 'Открыть хедер' (например, переход на экран профиля или открытие деталей хедера)."}}]"
 ВАЖНО:
-* Внимательно следи за синтаксисом, результатом должен быть валидный массив json объектов в соответствии со схемой
-* Если внутри json нужны кавычки (например название кнопки), используй одиночные кавычки (')
-* Для monospace вместо `` используй {{<text>}}, но будь внимателен с дальнейшими фигурными скобками
-* Для блоков кода (если нужны) используй {code}<code>{code} конструкцию, но будь внимателен с дальнейшими фигурными скобками
+* Внимательно следи за количеством кавычек и синтаксисом, строка должна быть валидным JSON
+* Если внутри json строки нужны кавычки (например название кнопки), используй одиночные кавычки (')
+* Для monospace вместо `` используй {{}} (как в примере), но будь внимателен с дальнейшими фигурными скобками
+* Для блоков кода (если нужны) используй {code}Код внутри{code} конструкцию, но будь внимателен с дальнейшими фигурными скобками
+* Board: QA.
+* testRepositoryPath: "название фичи" (с маленькой буквы)
+* testCaseType: component
+
+Пример полной CSV строки
+```csv
+;Showcase. section_header - Тап по 'Войти / Зарегистрироваться';Контекст: Взаимодействие с CTA для неавторизованного пользователя. Требование: req_showcase.md#section_header. Покрытие: Тап по кнопке 'Войти / Зарегистрироваться' → `Авторизоваться`. Figma: [Figma](https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=170-3706&t=49dFYTLraNZ5W90k-4);Critical;Functional,Regression,UI;"[{""id"":1,""index"":1,""fields"":{""Action"":""Не авторизовываться. На главном экране тапнуть по кнопке 'Войти / Зарегистрироваться' в section_header."",""Data"":"""",""Expected Result"":""Происходит действие {{Авторизоваться}} (например, открывается экран/форма авторизации).""},""attachments"":[]}]";QA;фича;component
+```
 
 1. Отправка запроса:
 
@@ -727,3 +729,6 @@ components:
 * Точки входа фич покрываются переходами в других фичах, не дублируй.
 * Не тестировать “логика работы” поля отдельно, если она уже покрыта позитивным тестом.
 * Без “инициализации” и “действия с ошибкой” в названиях — используй конкретные названия операций (напр. “запрос на верификацию”, “вход по номеру телефона”).
+</file>
+
+</files>
