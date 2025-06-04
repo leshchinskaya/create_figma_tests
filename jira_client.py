@@ -1,5 +1,7 @@
 import requests
 import base64
+
+import config
 from logger_setup import setup_logger # Import the setup function
 import pathlib
 
@@ -53,6 +55,9 @@ class JiraClient:
         
         if custom_field_test_case_type_id and test_case_type_value is not None:
             fields[custom_field_test_case_type_id] = {"value": test_case_type_value}
+
+        if (board_field_id := getattr(config, "CUSTOMFIELD_TEST_BOARD", None)) is not None:
+            fields[board_field_id] = {"value": "QA"}
             
         response = self._request("POST", "/rest/api/2/issue", json_data={"fields": fields})
         return response.json()
