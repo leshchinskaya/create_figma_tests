@@ -553,29 +553,63 @@ SURFQA-2807,365084,screen: Showcase - компоновка,"*Figma:* [screen: Sh
 Правила:
 
 * Обязательно сохрани наименования файлов, которые прикреплены к тестам
-* Обязательно сохрани ссылки на figma, которые прикрпелены к тестам
+* Обязательно сохрани ссылки на figma, которые прикреплены к тестам
 
 Сгенерируй единый CSV (UTF-8, разделитель ‘;’) со следующими колонками:
 TestCaseIdentifier;Summary;Description;Priority;Labels;ManualTestSteps;Board;testRepositoryPath;testCaseType
 
 Общие правила:
 
-* Ровно 9 колонок на каждую строку.
+* Ровно 9 колонок на каждую строку и для ВСЕХ тестов
+* Внутри значений каждой колонки не должно быть символа ; т.к. он является разделителем CSV
 * Summary ≤100 символов, императивно.
+* TestCaseIdentifier используй только из тестов из Figma (для маппинга), иначе оставь пустым
 * Description: контекст, ID требований, часть требований, которые покрываются данной проверкой, ссылка на Figma, наименование файла из tests\_from\_figma
 * Priority: Blocker|Critical|Normal|Minor.
 * Labels: (Functional, Regression, Performance, StatePath, Boundary, DecisionTable, ErrorGuessing и т.д.).
-* ManualTestSteps: строка JSON‑массива шагов, где каждый элемент содержит поля Action, Data, Expected Result. Пример:
+* ManualTestSteps: JSON‑массив шагов, где каждый элемент содержит поля Action, Data, Expected Result. Пример:
+
+Схема json
+```yaml
+type: array
+items:
+  type: object
+  properties:
+    fields:
+      type: object
+      properties:
+        Action:
+          type: string
+        Data:
+          type: string
+        Expected Result:
+          type: string
+      required:
+        - Action
+        - Data
+        - Expected Result
+      additionalProperties: false
+  required:
+    - fields
+```
 
 ```json
-[{"id":397766,"index":1,"fields":{"Action":"Navigate to the application's login page.","Data":"URL: https://example.com/login","Expected Result":"The login page with username and password fields, and a 'Login' button, is displayed."}}]
+[{"fields":{"Action":"Navigate to the application's login page.","Data":"URL: https://example.com/login","Expected Result":"The login page with username and password fields, and a 'Login' button, is displayed."}}]
 ```
-заключается в двойные кавычки: "[{""id"":…}]"
-Пример: "[{""id"":1,""index"":1,""fields"":{""Action"":""Авторизоваться. На главном экране тапнуть по аватару в section_header."",""Data"":"""",""Expected Result"":""Происходит действие `Открыть хедер` (например, переход на экран профиля или открытие деталей хедера).""}}]"
-
+Пример: [{"fields":{"Action":"Авторизоваться. На главном экране тапнуть по аватару в {{section_header}}.","Data":"","Expected Result":"Происходит действие 'Открыть хедер' (например, переход на экран профиля или открытие деталей хедера)."}}]"
+ВАЖНО:
+* Внимательно следи за количеством кавычек и синтаксисом, строка должна быть валидным JSON
+* Если внутри json строки нужны кавычки (например название кнопки), используй одиночные кавычки (')
+* Для monospace вместо `` используй {{}} (как в примере), но будь внимателен с дальнейшими фигурными скобками
+* Для блоков кода (если нужны) используй {code}Код внутри{code} конструкцию, но будь внимателен с дальнейшими фигурными скобками
 * Board: QA.
 * testRepositoryPath: "название фичи" (с маленькой буквы)
 * testCaseType: component
+
+Пример полной CSV строки
+```csv
+;Showcase. section_header - Тап по 'Войти / Зарегистрироваться';Контекст: Взаимодействие с CTA для неавторизованного пользователя. Требование: req_showcase.md#section_header. Покрытие: Тап по кнопке 'Войти / Зарегистрироваться' → `Авторизоваться`. Figma: [Figma](https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=170-3706&t=49dFYTLraNZ5W90k-4);Critical;Functional,Regression,UI;"[{""id"":1,""index"":1,""fields"":{""Action"":""Не авторизовываться. На главном экране тапнуть по кнопке 'Войти / Зарегистрироваться' в section_header."",""Data"":"""",""Expected Result"":""Происходит действие {{Авторизоваться}} (например, открывается экран/форма авторизации).""},""attachments"":[]}]";QA;фича;component
+```
 
 1. Отправка запроса:
 
