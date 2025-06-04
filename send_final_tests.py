@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
 import csv
+import json  # Added for parsing ManualTestSteps
 import pathlib
 import sys
-import logging # For type hinting
-import urllib.parse # Added for JQL link generation
-import uuid # Add this import
-import json # Added for parsing ManualTestSteps
+import urllib.parse  # Added for JQL link generation
+import uuid  # Add this import
 
 # Attempt to import config and handle if not found
 try:
@@ -19,8 +18,8 @@ except ImportError:
     )
     sys.exit(1)
 
-from jira_client import JiraClient # Assuming jira_client.py is in the same directory or PYTHONPATH
-from logger_setup import setup_logger # Assuming logger_setup.py is available
+from jira_client import JiraClient  # Assuming jira_client.py is in the same directory or PYTHONPATH
+from logger_setup import setup_logger  # Assuming logger_setup.py is available
 
 # Setup logger for this script
 logger = setup_logger(__name__, log_file="send_final_tests.log")
@@ -33,8 +32,8 @@ COL_TEST_CASE_IDENTIFIER = "TestCaseIdentifier"
 COL_SUMMARY = "Summary"
 COL_DESCRIPTION = "Description"
 COL_PRIORITY = "Priority"
-COL_LABELS_FILE = "Labels" # Renamed to avoid conflict with 'labels' variable
-COL_MANUAL_TEST_STEPS = "ManualTestSteps" # New field for test steps
+COL_LABELS_FILE = "Labels"  # Renamed to avoid conflict with 'labels' variable
+COL_MANUAL_TEST_STEPS = "ManualTestSteps"  # New field for test steps
 COL_BOARD = "Board"
 COL_TEST_REPOSITORY_PATH = "testRepositoryPath"
 COL_TEST_CASE_TYPE = "testCaseType"
@@ -46,6 +45,7 @@ FINAL_TESTS_FILE_PATH = pathlib.Path("create_final_tests/artifacts/final_tests.t
 CUSTOMFIELD_TEST_REPOSITORY_PATH = getattr(config, "CUSTOMFIELD_TEST_REPOSITORY_PATH", None)
 CUSTOMFIELD_TEST_CASE_TYPE = getattr(config, "CUSTOMFIELD_TEST_CASE_TYPE", None)
 
+
 def check_core_config_settings() -> bool:
     """Validates that essential Jira connection settings are present in config.py."""
     required_configs = [
@@ -56,7 +56,7 @@ def check_core_config_settings() -> bool:
     for attr in required_configs:
         if not hasattr(config, attr) or not getattr(config, attr):
             missing_configs.append(attr)
-    
+
     if missing_configs:
         logger.error(
             f"❌ Missing or empty required configurations in config.py: {', '.join(missing_configs)}. "
@@ -64,6 +64,7 @@ def check_core_config_settings() -> bool:
         )
         return False
     return True
+
 
 def parse_test_cases(file_path: pathlib.Path) -> list[dict]:
     """Parses test cases from the CSV file."""
@@ -77,8 +78,8 @@ def parse_test_cases(file_path: pathlib.Path) -> list[dict]:
         # newline='' is important for csv module to handle line endings correctly
         with file_path.open(mode='r', encoding='utf-8-sig', newline='') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=';')
-            
-            if not reader.fieldnames: # Check if the file is empty or has no header
+
+            if not reader.fieldnames:  # Check if the file is empty or has no header
                 logger.warning(f"⚠️ File {file_path} is empty or contains no header row.")
                 return []
 
@@ -86,12 +87,12 @@ def parse_test_cases(file_path: pathlib.Path) -> list[dict]:
                 # Basic validation: ensure essential fields like summary are present
                 if not row.get(COL_SUMMARY, "").strip():
                     logger.warning(
-                        f"Skipping row {i+2} in {file_path} (1-based index, including header): "
+                        f"Skipping row {i + 2} in {file_path} (1-based index, including header): "
                         f"{COL_SUMMARY} is empty or missing."
                     )
                     continue
                 test_cases.append(row)
-        
+
         if test_cases:
             logger.info(f"✅ Successfully parsed {len(test_cases)} test cases from {file_path}.")
         else:
@@ -99,8 +100,9 @@ def parse_test_cases(file_path: pathlib.Path) -> list[dict]:
 
     except Exception as e:
         logger.error(f"❌ Failed to read or parse CSV file {file_path}: {e}")
-        return [] 
+        return []
     return test_cases
+
 
 def create_jira_issues_from_final_tests():
     """Main function to read test cases and create Jira issues."""
@@ -136,12 +138,12 @@ def create_jira_issues_from_final_tests():
 
     created_issue_count = 0
     failed_issue_count = 0
-    created_issue_keys = [] # To store keys of created issues
+    created_issue_keys = []  # To store keys of created issues
 
     for tc_data in test_cases:
         summary = tc_data.get(COL_SUMMARY, "No Summary Provided").strip()
         description_original = tc_data.get(COL_DESCRIPTION, "").strip()
-        
+
         tc_identifier_from_file = tc_data.get(COL_TEST_CASE_IDENTIFIER, "N/A").strip()
         description_final = f"{description_original}\n\n--- Source Test Case Details ---\n{COL_TEST_CASE_IDENTIFIER}: {tc_identifier_from_file}"
 
@@ -150,21 +152,21 @@ def create_jira_issues_from_final_tests():
 
         labels_from_file_str = tc_data.get(COL_LABELS_FILE, "").strip()
         labels_from_file_list = [label.strip() for label in labels_from_file_str.split(',') if label.strip()]
-        
+
         board_label = tc_data.get(COL_BOARD, "").strip()
-        
+
         priority_val = tc_data.get(COL_PRIORITY, "").strip()
         priority_label = f"Priority_{priority_val.replace(' ', '_')}" if priority_val else ""
 
-        all_labels_set = set(jira_labels_from_config) # Start with labels from config
-        all_labels_set.update(labels_from_file_list) # Add labels from file
+        all_labels_set = set(jira_labels_from_config)  # Start with labels from config
+        all_labels_set.update(labels_from_file_list)  # Add labels from file
         if board_label:
-            all_labels_set.add(board_label) # Add board as a label
+            all_labels_set.add(board_label)  # Add board as a label
         if priority_label:
-            all_labels_set.add(priority_label) # Add priority as a label
-        all_labels_set.add(f"runid_{RUN_ID}") # Add runid label
-        
-        final_labels = [str(lbl) for lbl in all_labels_set if lbl] # Ensure all are non-empty strings
+            all_labels_set.add(priority_label)  # Add priority as a label
+        all_labels_set.add(f"runid_{RUN_ID}")  # Add runid label
+
+        final_labels = [str(lbl) for lbl in all_labels_set if lbl]  # Ensure all are non-empty strings
 
         # --- Updated logic for processing ManualTestSteps ---
         manual_test_steps_str = tc_data.get(COL_MANUAL_TEST_STEPS, "").strip()
@@ -188,22 +190,58 @@ def create_jira_issues_from_final_tests():
                             })
                         else:
                             logger.warning(f"Skipping malformed step item in ManualTestSteps for '{summary}': {item}")
-                    
-                    if not steps_data and parsed_json_list: # JSON was a list but all items were malformed
-                        logger.warning(f"ManualTestSteps for '{summary}' contained a list but no valid step structures. Raw: '{manual_test_steps_str}'. Creating a placeholder step.")
-                        steps_data = [{"fields": {"Action": "Malformed steps data in list", "Data": "Review ManualTestSteps field", "Expected Result": "No valid steps extracted"}}]
-                
-                else: # Parsed JSON is not a list
-                    logger.warning(f"ManualTestSteps for '{summary}' is not a JSON list. Raw: '{manual_test_steps_str}'. Creating a placeholder step.")
-                    steps_data = [{"fields": {"Action": "ManualTestSteps not a JSON list", "Data": "Review ManualTestSteps field", "Expected Result": "Format error"}}]
-            
+
+                    if not steps_data and parsed_json_list:  # JSON was a list but all items were malformed
+                        logger.warning(
+                            f"ManualTestSteps for '{summary}' contained a list but no valid step structures. Raw: '{manual_test_steps_str}'. Creating a placeholder step.")
+                        steps_data = [
+                            {
+                                "fields": {
+                                    "Action": "Malformed steps data in list",
+                                    "Data": f"{{code:json}}{manual_test_steps_str}{{code}}",
+                                    "Expected Result": "No valid steps extracted"
+                                }
+                            }
+                        ]
+
+                else:  # Parsed JSON is not a list
+                    logger.warning(
+                        f"ManualTestSteps for '{summary}' is not a JSON list. Raw: '{manual_test_steps_str}'. Creating a placeholder step.")
+                    steps_data = [
+                        {
+                            "fields": {
+                                "Action": "ManualTestSteps not a JSON list",
+                                "Data": f"{{code:json}}{manual_test_steps_str}{{code}}",
+                                "Expected Result": "Format error"
+                            }
+                        }
+                    ]
+
             except json.JSONDecodeError as e:
-                logger.error(f"Failed to parse ManualTestSteps JSON for '{summary}': {e}. Raw data: '{manual_test_steps_str}'. Creating a placeholder step.")
-                steps_data = [{"fields": {"Action": "Invalid JSON in ManualTestSteps", "Data": "Review ManualTestSteps field", "Expected Result": "JSON parse error"}}]
-        
-        if not steps_data: # If ManualTestSteps was empty, or parsing failed to produce any steps
-            logger.info(f"No ManualTestSteps provided or parsed for '{summary}'. Creating with a default placeholder step.")
-            steps_data = [{"fields": {"Action": "No steps defined", "Data": "", "Expected Result": ""}}]
+                logger.error(
+                    f"Failed to parse ManualTestSteps JSON for '{summary}': {e}. Raw data: '{manual_test_steps_str}'. Creating a placeholder step.")
+                steps_data = [
+                    {
+                        "fields": {
+                            "Action": "Invalid JSON in ManualTestSteps",
+                            "Data": f"{{code:json}}{manual_test_steps_str}{{code}}",
+                            "Expected Result": "JSON parse error"
+                        }
+                    }
+                ]
+
+        if not steps_data:  # If ManualTestSteps was empty, or parsing failed to produce any steps
+            logger.info(
+                f"No ManualTestSteps provided or parsed for '{summary}'. Creating with a default placeholder step.")
+            steps_data = [
+                {
+                    "fields": {
+                        "Action": "No steps defined",
+                        "Data": f"{{code:json}}{manual_test_steps_str}{{code}}",
+                        "Expected Result": ""
+                    }
+                }
+            ]
         # --- End of updated logic for processing ManualTestSteps ---
 
         logger.info(f"Attempting to create Jira issue for: '{summary}' (ID from file: {tc_identifier_from_file})")
@@ -223,12 +261,13 @@ def create_jira_issues_from_final_tests():
             )
             logger.success(f"✅ Successfully created Jira issue {issue.get('key', 'UNKNOWN_KEY')} for: '{summary}'")
             created_issue_count += 1
-            if issue_key := issue.get('key'): # Store the key if present
+            if issue_key := issue.get('key'):  # Store the key if present
                 created_issue_keys.append(issue_key)
         except Exception as e:
-            logger.error(f"❌ Failed to create Jira issue for summary '{summary}' (ID: {tc_identifier_from_file}). Error: {e}")
+            logger.error(
+                f"❌ Failed to create Jira issue for summary '{summary}' (ID: {tc_identifier_from_file}). Error: {e}")
             failed_issue_count += 1
-            
+
     logger.info("--- Script Finished ---")
     logger.info(f"✅ Successfully created issues: {created_issue_count}")
     logger.info(f"❌ Failed to create issues: {failed_issue_count}")
@@ -240,10 +279,11 @@ def create_jira_issues_from_final_tests():
         jira_link = f"{jira_url_base}/issues/?jql={encoded_jql}"
         logger.info("🔗 Link to created Jira issues:")
         logger.info(jira_link)
-    elif created_issue_count > 0: # Should not happen if keys were captured correctly
+    elif created_issue_count > 0:  # Should not happen if keys were captured correctly
         logger.warning("Issues were created, but their keys could not be retrieved for the JQL link.")
     else:
         logger.info("No Jira issues were created in this run.")
 
+
 if __name__ == "__main__":
-    create_jira_issues_from_final_tests() 
+    create_jira_issues_from_final_tests()
