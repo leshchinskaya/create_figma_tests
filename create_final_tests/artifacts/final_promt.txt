@@ -1,10 +1,8 @@
 Пожалуйста, на основании следующих артефактов:
 
-### 1. Бизнес-требования (req\_showcase):
-
+### 1. Бизнес-требования (req_showcase)
 Описание логики с точными названиями фич, секций и экранов из Figma.
 Содержимое файла `req_showcase.md`:
-
 ```markdown
 # Главная форма
 
@@ -260,11 +258,9 @@ activeTab: number \- код активного таба
 
 ```
 
-### 2. Swagger-спецификация (swagger):
-
+### 2. Swagger-спецификация (swagger)
 Описание API, моделей и параметров запросов.
 Содержимое файла `swagger.yaml`:
-
 ```yaml
 openapi: 3.1.0
 info:
@@ -532,11 +528,9 @@ components:
         previewImageUrl: { type: string }
 ```
 
-### 3. Тесты на дизайн (tests\_from\_figma):
-
+### 3. Тесты на дизайн (tests_from_figma)
 Краткие сценарии с Summary, содержащие названия секций/экранов из Figma.
 Содержимое файла `tests_from_figma.csv`:
-
 ```csv
 Issue key,Issue id,Summary,Description,Custom field (Manual Test Steps)
 SURFQA-2814,365091,screen: Showcase. section__tab-bar - логика работы,"*Figma:* [section__tab-bar|https://www.figma.com/design/nLDpIUh4gksHkJxWpdx5Jq/AI-Boost?node-id=1-1117&t=VpIXRrqDHxZ0FLwp-4&node-id=1:20696]","[{""id"":397489,""index"":1,""fields"":{""Action"":""screen: Showcase. section__tab-bar - логика работы"",""Data"":"""",""Expected Result"":""!screen_showcase__section__tab_bar.png|width\u003d600!""},""attachments"":[],""testVersionId"":92826}]"
@@ -551,7 +545,6 @@ SURFQA-2807,365084,screen: Showcase - компоновка,"*Figma:* [screen: Sh
 ```
 
 Правила:
-
 * Обязательно сохрани наименования файлов, которые прикреплены к тестам
 * Обязательно сохрани ссылки на figma, которые прикреплены к тестам
 
@@ -561,7 +554,7 @@ SURFQA-2807,365084,screen: Showcase - компоновка,"*Figma:* [screen: Sh
 Не оборачивай результат в Markdown, выводи чистый JSON.
 
 ```yaml
-openapi: 3.0.0
+openapi: 3.1.0
 info:
   title: Test Case API
   version: 1.0.0
@@ -581,7 +574,7 @@ components:
         - steps
       properties:
         testCaseIdentifier:
-          type: string
+          type: ['string', 'null']
           description: An ID of Jira test from design tests when test is derived from it
           nullable: true
           example: "SURFQA-2807"
@@ -592,7 +585,7 @@ components:
             type: string
           example: [ "authentication", "critical", "regression" ]
         summary:
-          type: string
+          type: ['string', 'null']
           description: A concise, one-line summary of the test case's purpose.
           example: "Verify successful user login with valid credentials."
         description:
@@ -644,10 +637,9 @@ components:
 ```
 
 Общие правила:
-
 * summary ≤100 символов, императивно.
 * testCaseIdentifier используй только из тестов из Figma (для маппинга), иначе оставь null
-* description: контекст, ID требований, часть требований, которые покрываются данной проверкой, ссылка на Figma, наименование файла из tests\_from\_figma
+* description: контекст, ID требований, часть требований, которые покрываются данной проверкой, ссылка на Figma, наименование файла из tests_from_figma
 * priority: Blocker|Critical|Normal|Minor.
 * labels: (Functional, Regression, Performance, StatePath, Boundary, DecisionTable, ErrorGuessing и т.д.).
 * steps: action и result должны быть непустыми строками
@@ -662,49 +654,38 @@ components:
 * Для блоков кода (если нужны) используй {code}<code>{code} конструкцию, но будь внимателен с дальнейшими фигурными скобками
 
 1. Отправка запроса:
-
-   * Позитивные проверки (корректный запрос - успешный ответ - отображение данных согласно TЗ). Добавляй наименование запроса и моделей из Swagger 
+   * Позитивные проверки (корректный запрос - успешный ответ - отображение данных согласно ТЗ). Добавляй наименование запроса и моделей из Swagger
    * Ошибка/таймаут/offline в одном сценарии (негативные проверки + отсутствие сети). Добавляй наименование запроса и моделей из Swagger
    * Примеры названий:
-
      * Фича. Экран/шторка/TUP - запрос
      * Фича – запрос (для одноэкранных фич)
 
 2. Пагинация:
-
    * Два сценария: успешная догрузка и ошибка/offline. Добавляй наименование запроса и моделей из Swagger
    * Названия:
-
      * Фича. Название экрана – пагинированный запрос
      * Фича. Название экрана – пагинированный запрос, ошибка
 
 3. PTR:
-
    * Два сценария: PTR и PTR, ошибка. Добавляй наименование запроса и моделей из Swagger
    * Названия аналогично пагинации.
 
 4. SPEC Кэш:
-
    * Несколько сценариев: с кэшем, без кэша, с кэшем ошибка, без кэша ошибка.
    * Названия:
-
      * Фича. Экран – запрос, с/без кэша
      * Фича. Экран – запрос, с/без кэша, ошибка
 
 5. Логика стеков экранов:
-
    * Сохранение/очистка данных при переходе/возврате.
    * Сворачивание приложения - сохранение состояния.
    * Название:
-
      * Фича – логика работы в стеке экранов
 
 6. Компоновка:
-
    * Проверка layout в состояниях: заполненное, Empty State, Error State, No Connection.
    * Отдельно для каждого экрана/шторки/TUP.
    * Названия:
-
      * Фича. Экран – компоновка
      * Фича. Экран. Error State – компоновка
      * Фича. Экран. Empty State – компоновка
@@ -712,7 +693,6 @@ components:
 
 7. Элемент (поле, чек-бокс, радиобаттон, карусель и т.п.). Используй техники тест-дизайна:
    a) Позитивные проверки + логика работы:
-
    * Фича. Элемент – позитивные проверки
    * Фича. Экран/шторка. Элемент – позитивные
      b) Логика работы (например, маска, валидация, автоскролл):
@@ -722,7 +702,6 @@ components:
    * Фича. Экран/шторка. Элемент – негативные
 
 Дополнительно:
-
 * Для каждого бизнес-требования ≥1 позитивный и ≥1 негативный тест.
 * Точки входа фич покрываются переходами в других фичах, не дублируй.
 * Не тестировать “логика работы” поля отдельно, если она уже покрыта позитивным тестом.
