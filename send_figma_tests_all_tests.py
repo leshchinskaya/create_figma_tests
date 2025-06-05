@@ -40,8 +40,8 @@ CUSTOMFIELD_TEST_CASE_TYPE = getattr(config, "CUSTOMFIELD_TEST_CASE_TYPE", None)
 FRAME_LIMIT = config.FRAME_LIMIT # Default to 1 if not in config, or set here
 ELEMENT_BANNED = config.ELEMENT_BANNED
 ELEMENT_INCLUDE = config.ELEMENT_INCLUDE
-FRAME_BANNED = config.FRAME_BANNED
-FRAME_INCLUDE = config.FRAME_INCLUDE
+FRAME_BANNED = [x.lower() for x in config.FRAME_BANNED]
+FRAME_INCLUDE = [x.lower() for x in config.FRAME_INCLUDE]
 
 # ---------- Output Directory ----------------------------------------------- #
 RUN_ID = uuid.uuid4().hex[:8] # Generate a unique ID for this run
