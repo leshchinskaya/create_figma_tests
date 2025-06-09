@@ -94,6 +94,8 @@ def generate_file_structure_md(base_dir_relative_to_workspace, dirs_in_base_to_s
             return
 
         for i, item_name in enumerate(items):
+            if item_name == ".DS_Store":
+                continue
             item_abs_path = os.path.join(current_dir_abs, item_name)
             is_last_item = (i == len(items) - 1)
             connector = "└── " if is_last_item else "├── "
