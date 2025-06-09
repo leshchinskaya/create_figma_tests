@@ -1,5 +1,6 @@
 import json
 import os
+import config
 
 
 def main():
@@ -67,6 +68,9 @@ def main():
         except Exception as e:
             print(f"❌ Ошибка при чтении файла артефакта '{artifact_path}': {e}")
             return
+
+    swagger_url = getattr(config, 'SWAGGER_URL', '')
+    prompt_content = prompt_content.replace('{{SWAGGER_URL}}', swagger_url)
 
     try:
         with open(output_prompt_path, 'w', encoding='utf-8') as f:
