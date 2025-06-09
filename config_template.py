@@ -14,6 +14,8 @@ CUSTOMFIELD_TEST_BOARD = "customfield_10703"
 FIGMA_TOKEN = "YOUR_FIGMA_PERSONAL_ACCESS_TOKEN"
 FIGMA_FILE_URL = "YOUR_FIGMA_FILE_URL"  # Пример: "https://www.figma.com/file/your-file-id/file-name"
 FIGMA_SCALE = 1  # Отрегулируйте по мере необходимости, обычно 1 или 2 для retina
+# Ссылка на swagger файл
+SWAGGER_URL = "YOUR_SWAGGER_URL"  # Пример: "https://example.com/swagger.yaml"
 
 # Фильтры фреймов (для _collect_top_frames)
 # Эти настройки помогают фильтровать, какие фреймы из Figma обрабатываются.
