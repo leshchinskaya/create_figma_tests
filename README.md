@@ -93,7 +93,7 @@ python3 send_figma_tests_all_tests.py
 2.  Убедитесь, что ваш файл-шаблон и все файлы-артефакты существуют по указанным путям.
 3.  Выполните скрипт:
     ```bash
-    python3 create_final_tests/create_final_promt.py
+    python3 create_final_tests/create_final_prompt.py
     ```
 
 **Результаты Выполнения:**

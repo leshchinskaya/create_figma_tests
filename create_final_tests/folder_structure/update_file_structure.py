@@ -5,11 +5,12 @@ import re # For parsing the config file
 CONFIG_FILE_PATH = "task_list_configuration.md" # Path to the central configuration file
 OUTPUT_MD_FILE = "file_structure.md" # The output markdown file
 
+# todo ignore .DS_Store
 def load_config_from_md(config_path):
     """Loads SCAN_BASE_DIR and ROOT_DIRS_TO_SCAN from the markdown configuration file."""
     scan_base_dir = None
     root_dirs_to_scan = []
-    
+
     # Default values in case the config file is missing or parsing fails
     default_scan_base_dir = "../../../../../../"
     default_root_dirs_to_scan = ["docs", "lib"]
@@ -40,7 +41,7 @@ def load_config_from_md(config_path):
         else:
             print(f"Warning: ROOT_DIRS_TO_SCAN section not found or malformed in {config_path}. Using defaults.")
             root_dirs_to_scan = default_root_dirs_to_scan
-            
+
     except FileNotFoundError:
         print(f"Error: Configuration file '{config_path}' not found.")
         print(f"Using default SCAN_BASE_DIR: '{default_scan_base_dir}' and ROOT_DIRS_TO_SCAN: {default_root_dirs_to_scan}")
@@ -59,7 +60,7 @@ def load_config_from_md(config_path):
     if not root_dirs_to_scan: # Check if list is empty
         print(f"ROOT_DIRS_TO_SCAN is empty or could not be determined. Using defaults: {default_root_dirs_to_scan}")
         root_dirs_to_scan = default_root_dirs_to_scan
-        
+
     return scan_base_dir, root_dirs_to_scan
 
 SCAN_BASE_DIR, ROOT_DIRS_TO_SCAN = load_config_from_md(CONFIG_FILE_PATH)
@@ -96,7 +97,7 @@ def generate_file_structure_md(base_dir_relative_to_workspace, dirs_in_base_to_s
             item_abs_path = os.path.join(current_dir_abs, item_name)
             is_last_item = (i == len(items) - 1)
             connector = "└── " if is_last_item else "├── "
-            
+
             if os.path.isdir(item_abs_path):
                 lines_for_this_tree_segment.append(current_prefix + connector + item_name + "/")
                 new_prefix_for_children = current_prefix + ("    " if is_last_item else "│   ")
@@ -104,8 +105,8 @@ def generate_file_structure_md(base_dir_relative_to_workspace, dirs_in_base_to_s
                     item_abs_path,
                     new_prefix_for_children,
                     lines_for_this_tree_segment,
-                    _abs_scan_root_for_this_iteration, 
-                    _relative_scan_root_path_to_workspace 
+                    _abs_scan_root_for_this_iteration,
+                    _relative_scan_root_path_to_workspace
                 )
             else:  # It's a file
                 lines_for_this_tree_segment.append(current_prefix + connector + item_name)
@@ -129,17 +130,17 @@ def generate_file_structure_md(base_dir_relative_to_workspace, dirs_in_base_to_s
 
         current_segment_lines = []
         _generate_tree_recursive_for_single_root(
-            current_scan_root_abs_path, 
+            current_scan_root_abs_path,
             "", # Initial prefix for items directly under this root
-            current_segment_lines,      
-            current_scan_root_abs_path, 
+            current_segment_lines,
+            current_scan_root_abs_path,
             current_target_root_relative_to_workspace # Pass the full relative path for display
         )
-        
+
         if current_segment_lines:
             all_structure_segments.append("\n".join(current_segment_lines))
             first_valid_root_processed_and_yielded_content = True
-    
+
     content_blocks = []
     collected_md_files_for_content.sort(key=lambda x: x[0])
 
@@ -150,7 +151,7 @@ def generate_file_structure_md(base_dir_relative_to_workspace, dirs_in_base_to_s
             content_blocks.append(f'<file path="{tag_path}">\n{file_content}\n</file>')
         except Exception as e:
             content_blocks.append(f'<file path="{tag_path}">\nError reading file: {e}\n</file>')
-    
+
     tree_string = "".join(all_structure_segments)
 
     if not tree_string.strip() and not content_blocks:
@@ -165,11 +166,11 @@ def generate_file_structure_md(base_dir_relative_to_workspace, dirs_in_base_to_s
             components.append(tree_string)
             if not tree_string.endswith("\n"):
                 components.append("\n")
-            components.append("\n\n\n") 
-        
+            components.append("\n\n\n")
+
         files_section_string = "\n\n\n".join(content_blocks)
         components.append(files_section_string)
-        
+
         final_output_string = "".join(components)
         final_output_string = final_output_string.rstrip('\n') + '\n'
 
@@ -183,4 +184,4 @@ def generate_file_structure_md(base_dir_relative_to_workspace, dirs_in_base_to_s
         print(f"Error writing to '{output_md_file}': {e}")
 
 if __name__ == "__main__":
-    generate_file_structure_md(SCAN_BASE_DIR, ROOT_DIRS_TO_SCAN, OUTPUT_MD_FILE) 
+    generate_file_structure_md(SCAN_BASE_DIR, ROOT_DIRS_TO_SCAN, OUTPUT_MD_FILE)

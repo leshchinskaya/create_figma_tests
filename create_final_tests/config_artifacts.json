@@ -1,6 +1,6 @@
 {
-  "prompt_template_path": "artifacts/promt.txt",
-  "output_prompt_path": "artifacts/final_promt.txt",
+  "prompt_template_path": "artifacts/prompt.md",
+  "output_prompt_path": "artifacts/final_prompt.txt",
   "artifacts": {
     "req_showcase": "artifacts/req_showcase.md",
     "swagger": "artifacts/swagger.yaml",
