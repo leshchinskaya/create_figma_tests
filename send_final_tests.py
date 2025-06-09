@@ -127,13 +127,7 @@ def create_jira_issues_from_final_tests():
     for tc_data in test_cases:
         summary = tc_data.get("summary", "No Summary Provided").strip()
 
-        description_original = tc_data.get("description", "")
-        tc_identifier_from_file = tc_data.get("testCaseIdentifier", "N/A")
-        # todo use only if present
-        description_final = (
-            f"{description_original}\n\n--- Source Test Case Details ---\n"
-            f"TestCaseIdentifier: {tc_identifier_from_file}"
-        )
+        description = tc_data.get("description", "")
 
         test_repo_path_val = tc_data.get("testRepositoryPath", "").strip()
         test_case_type_val = tc_data.get("testCaseType", "").strip()
@@ -170,12 +164,12 @@ def create_jira_issues_from_final_tests():
                 }
             ]
 
-        logger.info(f"Attempting to create Jira issue for: '{summary}' (ID from file: {tc_identifier_from_file})")
+        logger.info(f"Attempting to create Jira issue for: '{summary}'")
         try:
             issue = jira_client.create_issue(
                 project_key=config.JIRA_PROJECT_KEY,
                 summary=summary,
-                description=description_final,
+                description=description,
                 issue_type=config.ISSUE_TYPE,
                 xray_steps_field=config.XRAY_STEPS_FIELD,
                 steps_data=steps_data,
@@ -191,7 +185,7 @@ def create_jira_issues_from_final_tests():
                 created_issue_keys.append(issue_key)
         except Exception as e:
             logger.error(
-                f"❌ Failed to create Jira issue for summary '{summary}' (ID: {tc_identifier_from_file}). Error: {e}"
+                f"❌ Failed to create Jira issue for summary '{summary}'. Error: {e}"
             )
             failed_issue_count += 1
 

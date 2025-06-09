@@ -17,11 +17,6 @@ components:
         - testCaseType
         - steps
       properties:
-        testCaseIdentifier:
-          type: ['string', 'null']
-          description: An ID of Jira test from design tests when test is derived from it
-          nullable: true
-          example: "SURFQA-2807"
         labels:
           type: array
           description: A list of tags or categories for the test case. Use empty list of none

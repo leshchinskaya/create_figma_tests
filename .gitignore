@@ -6,3 +6,4 @@ __pycache__/
 # figma_screens/
 # create_final_tests/artifacts/tests_from_figma_runid_*.txt
 # send_final_tests.log
+.idea/codeStyles/codeStyleConfig.xml

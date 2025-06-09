@@ -51,7 +51,7 @@ OUT_DIR.mkdir(parents=True, exist_ok=True) # Ensure parent directories are creat
 # ---------- Operational Mode & File Export Config ------------------------- #
 OPERATIONAL_MODE = getattr(config, "OPERATIONAL_MODE", "JIRA_EXPORT")
 TEXT_EXPORT_PATH = getattr(config, "TEXT_EXPORT_PATH", "create_final_tests/artifacts")
-TEXT_EXPORT_FILENAME_TEMPLATE = getattr(config, "TEXT_EXPORT_FILENAME_TEMPLATE", "tests_from_figma_runid_{RUN_ID}.txt")
+TEXT_EXPORT_FILENAME_TEMPLATE = getattr(config, "TEXT_EXPORT_FILENAME_TEMPLATE", "tests_from_figma_runid_{RUN_ID}.csv")
 TEXT_EXPORT_DEFAULT_PRIORITY = getattr(config, "TEXT_EXPORT_DEFAULT_PRIORITY", "Medium")
 TEXT_EXPORT_DEFAULT_BOARD = getattr(config, "TEXT_EXPORT_DEFAULT_BOARD", "Default Board")
 TEXT_EXPORT_CSV_DELIMITER = getattr(config, "TEXT_EXPORT_CSV_DELIMITER", ";")
@@ -263,7 +263,7 @@ def main():
         logger.info(f"⚙️ Operational mode: JIRA_EXPORT. Connecting to Jira instance: {JIRA_URL}")
         jira_client = JiraClient(base_url=JIRA_URL, username=JIRA_USERNAME, password=JIRA_PASSWORD)
     elif OPERATIONAL_MODE == "FILE_EXPORT":
-        logger.info(f"⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a TXT file.")
+        logger.info(f"⚙️ Operational mode: FILE_EXPORT. Test cases will be saved to a CSV file.")
     else:
         logger.critical(f"❌ Invalid OPERATIONAL_MODE: '{OPERATIONAL_MODE}'. Must be 'JIRA_EXPORT' or 'FILE_EXPORT'. Exiting.")
         return
