@@ -3,3 +3,4 @@ pathlib==1.0.1
 urllib3==1.26.17
 jsonschema
 pyyaml
+dearpygui
