@@ -215,6 +215,8 @@ class FileSelectorGUI:
 
         # Ensure geometry is calculated so the UI is responsive on start
         self.root.update_idletasks()
+        # On some systems the window stays blank until an initial update
+        self.root.update()
 
         self.root.mainloop()
 
