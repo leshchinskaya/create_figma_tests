@@ -176,6 +176,7 @@ class FileSelectorGUI:
 
         self.root = tk.Tk()
         self.root.title("Select files to include")
+        self.root.geometry("1024x720")
         self.root.after(100, lambda: (self.root.lift(), self.root.focus_force()))
 
         canvas = tk.Canvas(self.root, borderwidth=0)
