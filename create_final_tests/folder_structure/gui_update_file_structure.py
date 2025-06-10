@@ -82,7 +82,7 @@ class TreeItem:
                 width=2,
                 text="+",
                 command=self.toggle,
-                padding=(0, 0, 8, 0),
+                padding=(2, 0, 2, 0),
             )
             self.toggle_btn.pack(side="left")
         else:
@@ -101,7 +101,10 @@ class TreeItem:
         self.children_frame = ttk.Frame(parent_frame)
         if self.is_dir:
             try:
-                for entry in sorted(os.listdir(abs_path)):
+                entries = os.listdir(abs_path)
+                files = sorted([e for e in entries if os.path.isfile(os.path.join(abs_path, e))])
+                dirs = sorted([e for e in entries if os.path.isdir(os.path.join(abs_path, e))])
+                for entry in files + dirs:
                     if entry == ".DS_Store":
                         continue
                     child_path = os.path.join(abs_path, entry)
@@ -121,6 +124,8 @@ class TreeItem:
             self.children_frame.pack(fill="x", anchor="w", padx=20, after=self.frame)
             self.toggle_btn.config(text="-")
             self.expanded = True
+        # force layout update to avoid stale display on some systems
+        self.gui.root.update_idletasks()
 
     def on_check(self):
         state = self.var.get()
