@@ -189,7 +189,6 @@ class FileSelectorGUI:
         dpg.setup_dearpygui()
         dpg.show_viewport()
         dpg.set_primary_window(self.window, True)
-        dpg.focus_viewport()
         dpg.start_dearpygui()
         dpg.destroy_context()
 
@@ -202,7 +201,7 @@ class FileSelectorGUI:
 
     def _set_open_recursive(self, node, open_flag):
         if node.tree_id is not None:
-            dpg.set_tree_node_open(node.tree_id, open_flag)
+            dpg.set_item_open(node.tree_id, open_flag)
         for ch in node.children:
             self._set_open_recursive(ch, open_flag)
 
