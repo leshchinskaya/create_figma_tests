@@ -16,6 +16,8 @@ FIGMA_FILE_URL = "YOUR_FIGMA_FILE_URL"  # Пример: "https://www.figma.com/f
 FIGMA_SCALE = 1  # Отрегулируйте по мере необходимости, обычно 1 или 2 для retina
 # Ссылка на swagger файл
 SWAGGER_URL = "YOUR_SWAGGER_URL"  # Пример: "https://example.com/swagger.yaml"
+# Локальный путь к swagger файлу (можно указывать относительный путь к репозиторию)
+SWAGGER_LOCAL_PATH = ""  # Например: "../external_repo/swagger.yaml"
 
 # Фильтры фреймов (для _collect_top_frames)
 # Эти настройки помогают фильтровать, какие фреймы из Figma обрабатываются.

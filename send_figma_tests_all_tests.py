@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import pathlib
+import shutil
 import requests # Keep for requests.exceptions used in some places
 from collections import defaultdict
 import urllib.parse
@@ -415,6 +416,14 @@ def main():
                     writer.writerows(txt_export_data)
                 logger.success(f"✅ Successfully generated TXT file: {file_path.resolve()}")
                 logger.info(f"📄 TXT file contains {len(txt_export_data)} test cases.")
+
+                # Copy result to a generic file for downstream scripts
+                final_csv = output_dir / "tests_from_figma.csv"
+                try:
+                    shutil.copyfile(file_path, final_csv)
+                    logger.info(f"📄 Copied results to {final_csv.resolve()}")
+                except IOError as e:
+                    logger.error(f"❌ Failed to copy file to {final_csv}: {e}")
             except IOError as e:
                 logger.error(f"❌ Failed to write TXT file to {file_path}: {e}")
         else:

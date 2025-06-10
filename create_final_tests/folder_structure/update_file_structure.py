@@ -1,9 +1,12 @@
+from pathlib import Path
 import os
-import re # For parsing the config file
+import re  # For parsing the config file
+import shutil
 
 # --- Configuration ---
-CONFIG_FILE_PATH = "task_list_configuration.md" # Path to the central configuration file
-OUTPUT_MD_FILE = "file_structure.md" # The output markdown file
+CONFIG_FILE_PATH = Path("task_list_configuration.md")  # Path to the central configuration file
+OUTPUT_MD_FILE = Path("file_structure.md")  # The output markdown file
+REQ_PATH = Path("..") / "artifacts" / "req.md"
 
 # todo ignore .DS_Store
 def load_config_from_md(config_path):
@@ -73,7 +76,7 @@ def generate_file_structure_md(base_dir_relative_to_workspace, dirs_in_base_to_s
     """
     all_structure_segments = [] # Holds strings for each root's tree and separators
     collected_md_files_for_content = []  # Stores (path_for_tag, absolute_path_for_reading) for all roots
-    abs_workspace_root = os.getcwd()
+    abs_workspace_root = Path.cwd()
 
     # Nested helper function to generate tree for a single root directory
     def _generate_tree_recursive_for_single_root(
@@ -88,7 +91,7 @@ def generate_file_structure_md(base_dir_relative_to_workspace, dirs_in_base_to_s
             lines_for_this_tree_segment.append(_relative_scan_root_path_to_workspace + "/") # Display full relative path
 
         try:
-            items = sorted(os.listdir(current_dir_abs))
+            items = sorted(Path(current_dir_abs).iterdir())
         except OSError as e:
             print(f"Warning: Could not list directory {current_dir_abs}: {e}")
             return
@@ -96,11 +99,11 @@ def generate_file_structure_md(base_dir_relative_to_workspace, dirs_in_base_to_s
         for i, item_name in enumerate(items):
             if item_name == ".DS_Store":
                 continue
-            item_abs_path = os.path.join(current_dir_abs, item_name)
+            item_abs_path = current_dir_abs / item_name
             is_last_item = (i == len(items) - 1)
             connector = "└── " if is_last_item else "├── "
 
-            if os.path.isdir(item_abs_path):
+            if item_abs_path.is_dir():
                 lines_for_this_tree_segment.append(current_prefix + connector + item_name + "/")
                 new_prefix_for_children = current_prefix + ("    " if is_last_item else "│   ")
                 _generate_tree_recursive_for_single_root(
@@ -113,17 +116,17 @@ def generate_file_structure_md(base_dir_relative_to_workspace, dirs_in_base_to_s
             else:  # It's a file
                 lines_for_this_tree_segment.append(current_prefix + connector + item_name)
                 if item_name.endswith(".md"):
-                    tag_path = os.path.relpath(item_abs_path, abs_workspace_root)
-                    normalized_tag_path = tag_path.replace(os.sep, '/')
-                    collected_md_files_for_content.append((normalized_tag_path, item_abs_path))
+                    tag_path = item_abs_path.relative_to(abs_workspace_root)
+                    normalized_tag_path = str(tag_path).replace(os.sep, '/')
+                    collected_md_files_for_content.append((normalized_tag_path, str(item_abs_path)))
 
     first_valid_root_processed_and_yielded_content = False
     for dir_name_in_base in dirs_in_base_to_scan:
         # Construct the full relative path from workspace to the current target subdirectory
-        current_target_root_relative_to_workspace = os.path.join(base_dir_relative_to_workspace, dir_name_in_base)
-        current_scan_root_abs_path = os.path.join(abs_workspace_root, current_target_root_relative_to_workspace)
+        current_target_root_relative_to_workspace = Path(base_dir_relative_to_workspace) / dir_name_in_base
+        current_scan_root_abs_path = abs_workspace_root / current_target_root_relative_to_workspace
 
-        if not os.path.isdir(current_scan_root_abs_path):
+        if not current_scan_root_abs_path.is_dir():
             print(f"Error: Target directory '{current_target_root_relative_to_workspace}' not found at '{current_scan_root_abs_path}'.")
             continue
 
@@ -177,11 +180,18 @@ def generate_file_structure_md(base_dir_relative_to_workspace, dirs_in_base_to_s
         final_output_string = final_output_string.rstrip('\n') + '\n'
 
     try:
-        output_abs_path = os.path.join(abs_workspace_root, output_md_file)
+        output_abs_path = abs_workspace_root / output_md_file
         with open(output_abs_path, 'w', encoding='utf-8') as f:
             f.write(final_output_string)
         print(f"Successfully updated '{output_md_file}' based on subdirectories {dirs_in_base_to_scan} within '{base_dir_relative_to_workspace}'.")
         print(f"Output written to: {output_abs_path}")
+
+        req_abs = Path(__file__).resolve().parent / REQ_PATH
+        try:
+            shutil.copyfile(output_abs_path, req_abs)
+            print(f"Also copied result to: {req_abs}")
+        except Exception as e:
+            print(f"Error copying to '{req_abs}': {e}")
     except Exception as e:
         print(f"Error writing to '{output_md_file}': {e}")
 
