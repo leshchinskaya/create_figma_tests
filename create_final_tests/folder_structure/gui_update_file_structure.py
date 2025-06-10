@@ -98,10 +98,23 @@ class Node:
             return
         if self.state == 2:
             dpg.set_value(self.checkbox_id, True)
-            dpg.set_item_label(self.checkbox_id, "mixed")
         else:
-            dpg.set_item_label(self.checkbox_id, "")
             dpg.set_value(self.checkbox_id, bool(self.state))
+        dpg.set_item_label(self.checkbox_id, "")
+
+        base_name = os.path.basename(self.path)
+        if self.state == 1:
+            prefix = "[+]"
+        elif self.state == 0:
+            prefix = "[_]"
+        else:
+            prefix = "[-]"
+        new_label = f"{prefix} {base_name}"
+
+        if self.is_dir and self.tree_id:
+            dpg.configure_item(self.tree_id, label=new_label)
+        elif self.text_id:
+            dpg.set_value(self.text_id, new_label)
 
     def set_state(self, state):
         self.state = state
@@ -138,12 +151,13 @@ class Node:
         with dpg.group(parent=parent_id):
             self.checkbox_id = dpg.add_checkbox(label="", callback=self.on_check, user_data=self)
             dpg.add_same_line()
+            placeholder = f"[_] {os.path.basename(self.path)}"
             if self.is_dir:
-                self.tree_id = dpg.add_tree_node(label=os.path.basename(self.path))
+                self.tree_id = dpg.add_tree_node(label=placeholder)
                 for ch in self.children:
                     ch.build_gui(self.tree_id)
             else:
-                self.text_id = dpg.add_text(os.path.basename(self.path))
+                self.text_id = dpg.add_text(placeholder)
         self.update_display()
 
     def collect_selected_files(self):
@@ -176,6 +190,16 @@ class FileSelectorGUI:
             self.root_nodes.append(node)
 
         dpg.create_context()
+        # --- Add custom font for proper Cyrillic rendering ---
+        font_path = "GoogleSans-Regular.ttf"
+        try:
+            with dpg.font_registry():
+                default_font = dpg.add_font(font_path, 15)
+                dpg.add_font_range_hint(dpg.mvFontRangeHint_Cyrillic)
+            dpg.bind_font(default_font)
+        except Exception as e:
+            print(f"Could not load font '{font_path}': {e}")
+
         dpg.create_viewport(title="Select files to include", width=1024, height=720)
 
         with dpg.window(label="File Selector", width=1024, height=720) as self.window:
@@ -201,7 +225,7 @@ class FileSelectorGUI:
 
     def _set_open_recursive(self, node, open_flag):
         if node.tree_id is not None:
-            dpg.set_item_open(node.tree_id, open_flag)
+            dpg.configure_item(node.tree_id, open=open_flag)
         for ch in node.children:
             self._set_open_recursive(ch, open_flag)
 
