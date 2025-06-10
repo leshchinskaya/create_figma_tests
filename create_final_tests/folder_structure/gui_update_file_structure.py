@@ -59,8 +59,6 @@ def load_config_from_md(config_path):
 
 
 class FileSelectorGUI:
-    SYMBOLS = {0: '\u2610', 1: '\u25EA', 2: '\u2611'}  # unchecked, partial, checked
-
     def __init__(self, base_dir, root_dirs):
         self.base_dir = os.path.abspath(base_dir)
         self.root_dirs = root_dirs
@@ -68,8 +66,10 @@ class FileSelectorGUI:
         self.root.title("Select files to include")
 
         style = ttk.Style(self.root)
-        style.configure('Treeview', rowheight=26, font=('TkDefaultFont', 12))
+        style.configure('Treeview', rowheight=26, font=('TkDefaultFont', 12), padding=(4, 2))
         self.root.option_add('*Treeview.Font', ('TkDefaultFont', 12))
+
+        self.checkbox_images = self._create_checkbox_images()
 
         self.tree = ttk.Treeview(self.root, show='tree')
         yscroll = ttk.Scrollbar(self.root, orient='vertical', command=self.tree.yview)
@@ -86,17 +86,38 @@ class FileSelectorGUI:
 
         self.tree.bind('<Button-1>', self._on_click)
 
+        self.all_expanded = False
+        self.expand_btn = ttk.Button(self.root, text="Expand All", command=self.toggle_expand_collapse_all)
+        self.expand_btn.pack(fill='x')
         btn = ttk.Button(self.root, text="Generate", command=self.generate)
         btn.pack(fill='x')
 
         self.root.mainloop()
 
-    def _format_text(self, name, state):
-        return f"{self.SYMBOLS[state]} {name}"
+    def _create_checkbox_images(self, size=16):
+        images = {}
+        for state in ('unchecked', 'partial', 'checked'):
+            img = tk.PhotoImage(width=size, height=size)
+            img.put('white', to=(0, 0, size, size))
+            for i in range(size):
+                img.put('black', to=(i, 0))
+                img.put('black', to=(i, size-1))
+                img.put('black', to=(0, i))
+                img.put('black', to=(size-1, i))
+            if state == 'checked':
+                for i in range(3, size-3):
+                    img.put('black', to=(i, size - i - 3))
+                for i in range(3, size-3):
+                    img.put('black', to=(i, size//2 + i - 3))
+            elif state == 'partial':
+                for i in range(3, size-3):
+                    img.put('black', to=(i, size//2))
+            images[state] = img
+        return {0: images['unchecked'], 1: images['partial'], 2: images['checked']}
 
     def _add_item(self, parent, abs_path, display_name):
         state = 0
-        item_id = self.tree.insert(parent, 'end', text=self._format_text(display_name, state), open=False)
+        item_id = self.tree.insert(parent, 'end', text=display_name, image=self.checkbox_images[state], open=False)
         self.item_state[item_id] = state
         self.item_path[item_id] = abs_path
         return item_id
@@ -121,8 +142,8 @@ class FileSelectorGUI:
         if not item:
             return
         element = self.tree.identify('element', event.x, event.y)
-        if element == 'indicator':
-            return  # allow normal expand/collapse
+        if element != 'image':
+            return  # only toggle when clicking the checkbox
         state = self.item_state.get(item, 0)
         new_state = 0 if state == 2 else 2
         self._set_state_recursive(item, new_state)
@@ -133,10 +154,8 @@ class FileSelectorGUI:
 
     def _set_state_recursive(self, item, state):
         self.item_state[item] = state
-        name = os.path.basename(self.item_path[item]) if '/' in self.item_path[item] else self.item_path[item]
-        display = self.tree.item(item, 'text').split(' ', 1)[-1]
-        # Use existing display text without symbol
-        self.tree.item(item, text=self._format_text(display, state))
+        display = self.tree.item(item, 'text')
+        self.tree.item(item, image=self.checkbox_images[state], text=display)
         for child in self.tree.get_children(item):
             self._set_state_recursive(child, state)
 
@@ -151,8 +170,8 @@ class FileSelectorGUI:
         else:
             state = 1
         self.item_state[item] = state
-        display = self.tree.item(item, 'text').split(' ', 1)[-1]
-        self.tree.item(item, text=self._format_text(display, state))
+        display = self.tree.item(item, 'text')
+        self.tree.item(item, image=self.checkbox_images[state], text=display)
 
     def _collect_files(self, item):
         path = self.item_path[item]
@@ -178,6 +197,28 @@ class FileSelectorGUI:
         for root_item in self.tree.get_children(''):
             files.extend(self._collect_files(root_item))
         return sorted(set(files))
+
+    def _expand_recursive(self, item):
+        self.tree.item(item, open=True)
+        for child in self.tree.get_children(item):
+            self._expand_recursive(child)
+
+    def _collapse_recursive(self, item):
+        self.tree.item(item, open=False)
+        for child in self.tree.get_children(item):
+            self._collapse_recursive(child)
+
+    def toggle_expand_collapse_all(self):
+        if self.all_expanded:
+            for item in self.tree.get_children(''):
+                self._collapse_recursive(item)
+            self.expand_btn.config(text='Expand All')
+            self.all_expanded = False
+        else:
+            for item in self.tree.get_children(''):
+                self._expand_recursive(item)
+            self.expand_btn.config(text='Collapse All')
+            self.all_expanded = True
 
     def generate(self):
         selected_files = self.get_selected_files()
