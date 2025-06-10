@@ -1,15 +1,16 @@
 import json
+from pathlib import Path
 import os
-import config
+import config as config_module
 
 
 def main():
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(script_dir, 'config_artifacts.json')
+    script_dir = Path(__file__).resolve().parent
+    config_path = script_dir / 'config_artifacts.json'
 
     try:
         with open(config_path, 'r', encoding='utf-8') as f:
-            config = json.load(f)
+            config_data = json.load(f)
     except FileNotFoundError:
         print(f"❌ Ошибка: Конфигурационный файл '{config_path}' не найден.")
         return
@@ -20,10 +21,18 @@ def main():
         print(f"❌ Ошибка при чтении конфигурационного файла '{config_path}': {e}")
         return
 
-    prompt_template_path = config.get('prompt_template_path')
-    output_prompt_path = config.get('output_prompt_path')
-    artifacts_paths = config.get('artifacts', {})
-    placeholders = config.get('placeholders', {})
+    prompt_template_path = config_data.get('prompt_template_path')
+    output_prompt_path = config_data.get('output_prompt_path')
+    artifacts_paths = config_data.get('artifacts', {})
+    placeholders = config_data.get('placeholders', {})
+
+    swagger_override = getattr(config_module, 'SWAGGER_LOCAL_PATH', '').strip()
+    if swagger_override:
+        swagger_path = Path(swagger_override)
+        config_dir = Path(config_module.__file__).resolve().parent
+        if not swagger_path.is_absolute():
+            swagger_path = config_dir / swagger_path
+        artifacts_paths['swagger'] = str(swagger_path)
 
     if not prompt_template_path:
         print("❌ Ошибка: 'prompt_template_path' не указан в конфигурации.")
@@ -32,10 +41,16 @@ def main():
         print("❌ Ошибка: 'output_prompt_path' не указан в конфигурации.")
         return
 
-    if prompt_template_path and not os.path.isabs(prompt_template_path):
-        prompt_template_path = os.path.join(script_dir, prompt_template_path)
-    if output_prompt_path and not os.path.isabs(output_prompt_path):
-        output_prompt_path = os.path.join(script_dir, output_prompt_path)
+    if prompt_template_path:
+        path_obj = Path(prompt_template_path)
+        if not path_obj.is_absolute():
+            path_obj = script_dir / path_obj
+        prompt_template_path = path_obj
+    if output_prompt_path:
+        path_obj = Path(output_prompt_path)
+        if not path_obj.is_absolute():
+            path_obj = script_dir / path_obj
+        output_prompt_path = path_obj
 
     try:
         with open(prompt_template_path, 'r', encoding='utf-8') as f:
@@ -54,8 +69,11 @@ def main():
                 f"⚠️ Предупреждение: Плейсхолдер для артефакта '{artifact_key}' не найден в конфигурации. Пропуск."
             )
             continue
-        if artifact_path and not os.path.isabs(artifact_path):
-            artifact_path = os.path.join(script_dir, artifact_path)
+        if artifact_path:
+            path_obj = Path(artifact_path)
+            if not path_obj.is_absolute():
+                path_obj = script_dir / path_obj
+            artifact_path = path_obj
         try:
             with open(artifact_path, 'r', encoding='utf-8') as f:
                 artifact_content = f.read()
@@ -69,7 +87,7 @@ def main():
             print(f"❌ Ошибка при чтении файла артефакта '{artifact_path}': {e}")
             return
 
-    swagger_url = getattr(config, 'SWAGGER_URL', '')
+    swagger_url = getattr(config_module, 'SWAGGER_URL', '')
     prompt_content = prompt_content.replace('{{SWAGGER_URL}}', swagger_url)
 
     try:

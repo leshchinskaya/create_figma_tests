@@ -2,13 +2,13 @@
   "prompt_template_path": "artifacts/prompt.md",
   "output_prompt_path": "artifacts/final_prompt.txt",
   "artifacts": {
-    "req_showcase": "artifacts/req_showcase.md",
+    "req": "artifacts/req.md",
     "swagger": "artifacts/swagger.yaml",
     "tests_from_figma": "artifacts/tests_from_figma.csv",
     "json_scheme": "artifacts/json_scheme.yml"
   },
   "placeholders": {
-    "req_showcase": "{{REQ_SHOWCASE_CONTENT}}",
+    "req": "{{REQ_CONTENT}}",
     "swagger": "{{SWAGGER_CONTENT}}",
     "tests_from_figma": "{{TESTS_FROM_FIGMA_CONTENT}}",
     "json_scheme": "{{JSON_SCHEME_CONTENT}}"

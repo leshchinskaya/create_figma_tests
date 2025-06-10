@@ -19,17 +19,15 @@
     1. В `config.py` укажите `FRAME_INCLUDE` и `OPERATIONAL_MODE = "FILE_EXPORT"`.
     2. Настройте ссылку на Figma и токен в том же файле.
     3. Запустите `send_figma_tests_all_tests.py`.
-    4. Перейдите в папку `create_final_tests/artifacts`
-    5. Перенесите содержимое `tests_from_figma_runid_{RUN_ID}.csv` в `tests_from_figma.csv`
+    4. Перейдите в папку `create_final_tests/artifacts` – файл `tests_from_figma.csv` будет создан автоматически.
 3. Генерация единого файла ТЗ
     1. Склонируйте репозиторий с требованиями на одном уровне с этим репозиторием (например обе папки в ~).
     2. Перейдите в папку `create_final_tests/folder_structure`
     3. В `task_list_configuration.md` перечислите нужные папки с ТЗ.
         1. Если нужно - удалите ненужные файлы из этих папок (локально, пушить нельзя!)
-    4. Затем выполните `update_file_structure.py` и скопируйте содержимое `file_structure.md` в
-       `artifacts/req_showcase.md`.
+    4. Затем выполните `update_file_structure.py`. Файл `req.md` будет обновлён автоматически.
 4. Актуализация сваггера
-    1. Обновите `create_final_tests/artifacts/swagger.yaml`, скопировав свежий файл из репозитория со swagger схемой.
+    1. Укажите путь к актуальному swagger в `SWAGGER_LOCAL_PATH` внутри `config.py`. Файл копировать не нужно.
     2. Если сваггер станет в несколько файлов - используйте генератор file_structure для объединения в один файл.
 5. Генерация промпта для AI
     1. Перейдите в `create_final_tests/artifacts`.
