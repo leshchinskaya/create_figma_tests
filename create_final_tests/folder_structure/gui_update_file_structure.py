@@ -92,6 +92,7 @@ class TreeItem:
             self.frame,
             variable=self.var,
             command=self.on_check,
+            tristatevalue=-1,
         )
         self.chk.pack(side="left")
 
@@ -118,7 +119,7 @@ class TreeItem:
             self.toggle_btn.config(text="+")
             self.expanded = False
         else:
-            self.children_frame.pack(fill="x", anchor="w", padx=20)
+            self.children_frame.pack(fill="x", anchor="w", padx=20, after=self.frame)
             self.toggle_btn.config(text="-")
             self.expanded = True
 
@@ -146,7 +147,7 @@ class TreeItem:
             self.var.set(0)
             self.chk.state(["!alternate"])
         else:
-            self.var.set(1)
+            self.var.set(-1)
             self.chk.state(["alternate"])
         if self.parent:
             self.parent.refresh_state_from_children()
@@ -207,6 +208,9 @@ class FileSelectorGUI:
         self.expand_btn.pack(side="left", fill="x", expand=True)
         btn = ttk.Button(controls, text="Generate", command=self.generate)
         btn.pack(side="left", fill="x", expand=True)
+
+        # Ensure geometry is calculated so the UI is responsive on start
+        self.root.update_idletasks()
 
         self.root.mainloop()
 
