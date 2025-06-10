@@ -12,3 +12,5 @@ create_final_tests/artifacts/tests_from_figma_runid_*.*
 figma_screens
 repomix-output.xml
 .idea/dictionaries/project.xml
+*.log
+create_final_tests/folder_structure/file_structure.md
