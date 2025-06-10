@@ -2,7 +2,7 @@ import os
 import re
 import shutil
 import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
+from tkinter import ttk, messagebox
 from pathlib import Path
 
 # --- Configuration ---
@@ -20,7 +20,7 @@ def load_config_from_md(config_path):
     default_root_dirs_to_scan = ["docs", "lib"]
 
     try:
-        with open(config_path, 'r', encoding='utf-8') as f:
+        with open(config_path, "r", encoding="utf-8") as f:
             content = f.read()
 
         match_base_dir = re.search(r"### SCAN_BASE_DIR\s*\n`([^`]+)`", content)
@@ -30,8 +30,11 @@ def load_config_from_md(config_path):
             print(f"Warning: SCAN_BASE_DIR not found in {config_path}. Using default.")
             scan_base_dir = default_scan_base_dir
 
-        match_root_section = re.search(r"### ROOT_DIRS_TO_SCAN\s*\n((?:-\s*`[^`]+`\s*\n?)+)",
-                                        content, re.MULTILINE)
+        match_root_section = re.search(
+            r"### ROOT_DIRS_TO_SCAN\s*\n((?:-\s*`[^`]+`\s*\n?)+)",
+            content,
+            re.MULTILINE,
+        )
         if match_root_section:
             items_block = match_root_section.group(1)
             root_dirs_to_scan = [item.strip() for item in re.findall(r"`([^`]+)`", items_block)]
@@ -58,167 +61,174 @@ def load_config_from_md(config_path):
     return scan_base_dir, root_dirs_to_scan
 
 
+class TreeItem:
+    """Represents a file or directory in the GUI tree."""
+
+    def __init__(self, gui, parent_frame, abs_path, parent=None):
+        self.gui = gui
+        self.parent = parent
+        self.abs_path = abs_path
+        self.is_dir = os.path.isdir(abs_path)
+        self.children = []
+        self.var = tk.IntVar(value=0)
+
+        self.frame = ttk.Frame(parent_frame)
+        self.frame.pack(fill="x", anchor="w")
+
+        if self.is_dir:
+            self.expanded = False
+            self.toggle_btn = ttk.Button(
+                self.frame,
+                width=2,
+                text="+",
+                command=self.toggle,
+                padding=(0, 0, 8, 0),
+            )
+            self.toggle_btn.pack(side="left")
+        else:
+            ttk.Label(self.frame, width=2).pack(side="left")
+
+        self.chk = ttk.Checkbutton(
+            self.frame,
+            variable=self.var,
+            command=self.on_check,
+        )
+        self.chk.pack(side="left")
+
+        name = os.path.basename(abs_path)
+        ttk.Label(self.frame, text=name, font=("TkDefaultFont", 14)).pack(side="left", anchor="w")
+
+        self.children_frame = ttk.Frame(parent_frame)
+        if self.is_dir:
+            try:
+                for entry in sorted(os.listdir(abs_path)):
+                    if entry == ".DS_Store":
+                        continue
+                    child_path = os.path.join(abs_path, entry)
+                    child = TreeItem(gui, self.children_frame, child_path, parent=self)
+                    self.children.append(child)
+            except Exception as e:
+                print(f"Cannot access {abs_path}: {e}")
+
+    def toggle(self):
+        if not self.is_dir:
+            return
+        if self.expanded:
+            self.children_frame.pack_forget()
+            self.toggle_btn.config(text="+")
+            self.expanded = False
+        else:
+            self.children_frame.pack(fill="x", anchor="w", padx=20)
+            self.toggle_btn.config(text="-")
+            self.expanded = True
+
+    def on_check(self):
+        state = self.var.get()
+        self.set_state(state)
+        if self.parent:
+            self.parent.refresh_state_from_children()
+
+    def set_state(self, state):
+        self.var.set(state)
+        self.chk.state(["!alternate"])
+        if self.is_dir:
+            for child in self.children:
+                child.set_state(state)
+
+    def refresh_state_from_children(self):
+        if not self.is_dir:
+            return
+        child_states = [child.var.get() for child in self.children]
+        if all(s == 1 for s in child_states):
+            self.var.set(1)
+            self.chk.state(["!alternate"])
+        elif all(s == 0 for s in child_states):
+            self.var.set(0)
+            self.chk.state(["!alternate"])
+        else:
+            self.var.set(1)
+            self.chk.state(["alternate"])
+        if self.parent:
+            self.parent.refresh_state_from_children()
+
+    def collect_selected_files(self):
+        selected = []
+        if os.path.isfile(self.abs_path):
+            if self.var.get() == 1:
+                selected.append(self.abs_path)
+        else:
+            if self.var.get() == 1 and not self.chk.instate(["alternate"]):
+                for root, _, files in os.walk(self.abs_path):
+                    for f in files:
+                        if f == ".DS_Store":
+                            continue
+                        selected.append(os.path.join(root, f))
+            else:
+                for ch in self.children:
+                    selected.extend(ch.collect_selected_files())
+        return selected
+
+
 class FileSelectorGUI:
     def __init__(self, base_dir, root_dirs):
         self.base_dir = os.path.abspath(base_dir)
         self.root_dirs = root_dirs
+
         self.root = tk.Tk()
         self.root.title("Select files to include")
+        self.root.after(100, lambda: (self.root.lift(), self.root.focus_force()))
 
-        style = ttk.Style(self.root)
-        style.configure('Treeview', rowheight=26, font=('TkDefaultFont', 12), padding=(4, 2))
-        self.root.option_add('*Treeview.Font', ('TkDefaultFont', 12))
+        canvas = tk.Canvas(self.root, borderwidth=0)
+        yscroll = ttk.Scrollbar(self.root, orient="vertical", command=canvas.yview)
+        self.container = ttk.Frame(canvas)
 
-        self.checkbox_images = self._create_checkbox_images()
+        self.container.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all")),
+        )
 
-        self.tree = ttk.Treeview(self.root, show='tree')
-        yscroll = ttk.Scrollbar(self.root, orient='vertical', command=self.tree.yview)
-        self.tree.configure(yscrollcommand=yscroll.set)
-        self.tree.pack(side='left', fill='both', expand=True)
-        yscroll.pack(side='right', fill='y')
+        canvas.create_window((0, 0), window=self.container, anchor="nw")
+        canvas.configure(yscrollcommand=yscroll.set)
 
-        self.item_state = {}
-        self.item_path = {}
+        canvas.pack(side="left", fill="both", expand=True)
+        yscroll.pack(side="right", fill="y")
 
+        self.items = []
         for rd in self.root_dirs:
             abs_root = os.path.join(self.base_dir, rd)
-            self._add_path_recursive('', abs_root, rd)
+            item = TreeItem(self, self.container, abs_root)
+            self.items.append(item)
 
-        self.tree.bind('<Button-1>', self._on_click)
-
+        controls = ttk.Frame(self.root)
+        controls.pack(fill="x")
         self.all_expanded = False
-        self.expand_btn = ttk.Button(self.root, text="Expand All", command=self.toggle_expand_collapse_all)
-        self.expand_btn.pack(fill='x')
-        btn = ttk.Button(self.root, text="Generate", command=self.generate)
-        btn.pack(fill='x')
+        self.expand_btn = ttk.Button(controls, text="Expand All", command=self.toggle_expand_collapse_all)
+        self.expand_btn.pack(side="left", fill="x", expand=True)
+        btn = ttk.Button(controls, text="Generate", command=self.generate)
+        btn.pack(side="left", fill="x", expand=True)
 
         self.root.mainloop()
 
-    def _create_checkbox_images(self, size=16):
-        images = {}
-        for state in ('unchecked', 'partial', 'checked'):
-            img = tk.PhotoImage(width=size, height=size)
-            img.put('white', to=(0, 0, size, size))
-            for i in range(size):
-                img.put('black', to=(i, 0))
-                img.put('black', to=(i, size-1))
-                img.put('black', to=(0, i))
-                img.put('black', to=(size-1, i))
-            if state == 'checked':
-                for i in range(3, size-3):
-                    img.put('black', to=(i, size - i - 3))
-                for i in range(3, size-3):
-                    img.put('black', to=(i, size//2 + i - 3))
-            elif state == 'partial':
-                for i in range(3, size-3):
-                    img.put('black', to=(i, size//2))
-            images[state] = img
-        return {0: images['unchecked'], 1: images['partial'], 2: images['checked']}
+    def toggle_expand_collapse_all(self):
+        for item in self.items:
+            self._toggle_item_recursive(item, not self.all_expanded)
+        self.all_expanded = not self.all_expanded
+        self.expand_btn.config(text="Collapse All" if self.all_expanded else "Expand All")
 
-    def _add_item(self, parent, abs_path, display_name):
-        state = 0
-        item_id = self.tree.insert(parent, 'end', text=display_name, image=self.checkbox_images[state], open=False)
-        self.item_state[item_id] = state
-        self.item_path[item_id] = abs_path
-        return item_id
-
-    def _add_path_recursive(self, parent, abs_path, display_name=None):
-        name = display_name if display_name is not None else os.path.basename(abs_path)
-        item_id = self._add_item(parent, abs_path, name)
-        if os.path.isdir(abs_path):
-            try:
-                entries = sorted(os.listdir(abs_path))
-            except Exception as e:
-                print(f"Cannot access {abs_path}: {e}")
-                return
-            for entry in entries:
-                if entry == '.DS_Store':
-                    continue
-                self._add_path_recursive(item_id, os.path.join(abs_path, entry))
-        return item_id
-
-    def _on_click(self, event):
-        item = self.tree.identify_row(event.y)
-        if not item:
-            return
-        element = self.tree.identify('element', event.x, event.y)
-        if element != 'image':
-            return  # only toggle when clicking the checkbox
-        state = self.item_state.get(item, 0)
-        new_state = 0 if state == 2 else 2
-        self._set_state_recursive(item, new_state)
-        parent = self.tree.parent(item)
-        while parent:
-            self._update_parent_state(parent)
-            parent = self.tree.parent(parent)
-
-    def _set_state_recursive(self, item, state):
-        self.item_state[item] = state
-        display = self.tree.item(item, 'text')
-        self.tree.item(item, image=self.checkbox_images[state], text=display)
-        for child in self.tree.get_children(item):
-            self._set_state_recursive(child, state)
-
-    def _update_parent_state(self, item):
-        child_states = [self.item_state.get(ch, 0) for ch in self.tree.get_children(item)]
-        if not child_states:
-            return
-        if all(st == 2 for st in child_states):
-            state = 2
-        elif all(st == 0 for st in child_states):
-            state = 0
-        else:
-            state = 1
-        self.item_state[item] = state
-        display = self.tree.item(item, 'text')
-        self.tree.item(item, image=self.checkbox_images[state], text=display)
-
-    def _collect_files(self, item):
-        path = self.item_path[item]
-        state = self.item_state.get(item, 0)
-        selected = []
-        if os.path.isfile(path):
-            if state == 2:
-                selected.append(path)
-        else:
-            if state == 2:
-                for root, _, files in os.walk(path):
-                    for f in files:
-                        if f == '.DS_Store':
-                            continue
-                        selected.append(os.path.join(root, f))
-            else:
-                for ch in self.tree.get_children(item):
-                    selected.extend(self._collect_files(ch))
-        return selected
+    def _toggle_item_recursive(self, item, expand):
+        if item.is_dir:
+            if expand and not item.expanded:
+                item.toggle()
+            elif not expand and item.expanded:
+                item.toggle()
+            for ch in item.children:
+                self._toggle_item_recursive(ch, expand)
 
     def get_selected_files(self):
         files = []
-        for root_item in self.tree.get_children(''):
-            files.extend(self._collect_files(root_item))
+        for item in self.items:
+            files.extend(item.collect_selected_files())
         return sorted(set(files))
-
-    def _expand_recursive(self, item):
-        self.tree.item(item, open=True)
-        for child in self.tree.get_children(item):
-            self._expand_recursive(child)
-
-    def _collapse_recursive(self, item):
-        self.tree.item(item, open=False)
-        for child in self.tree.get_children(item):
-            self._collapse_recursive(child)
-
-    def toggle_expand_collapse_all(self):
-        if self.all_expanded:
-            for item in self.tree.get_children(''):
-                self._collapse_recursive(item)
-            self.expand_btn.config(text='Expand All')
-            self.all_expanded = False
-        else:
-            for item in self.tree.get_children(''):
-                self._expand_recursive(item)
-            self.expand_btn.config(text='Collapse All')
-            self.all_expanded = True
 
     def generate(self):
         selected_files = self.get_selected_files()
@@ -228,7 +238,7 @@ class FileSelectorGUI:
         try:
             final_output = build_output(selected_files, self.base_dir)
             output_abs = os.path.join(os.getcwd(), OUTPUT_MD_FILE)
-            with open(output_abs, 'w', encoding='utf-8') as f:
+            with open(output_abs, "w", encoding="utf-8") as f:
                 f.write(final_output)
             req_abs = Path(__file__).resolve().parent / REQ_PATH
             try:
@@ -252,67 +262,68 @@ def build_tree_dict(selected_files_abs, base_dir):
         node = tree
         for part in parts[:-1]:
             node = node.setdefault(part, {})
-        node.setdefault('__files__', []).append(parts[-1])
+        node.setdefault("__files__", []).append(parts[-1])
     return tree
 
 
 def _build_md_lines(node, indent, lines):
-    dirs = sorted([k for k in node.keys() if k != '__files__'])
-    files = sorted(node.get('__files__', []))
+    dirs = sorted([k for k in node.keys() if k != "__files__"])
+    files = sorted(node.get("__files__", []))
     for d in dirs:
-        lines.append(' ' * indent + f"- {d}/")
+        lines.append(" " * indent + f"- {d}/")
         _build_md_lines(node[d], indent + 2, lines)
     for f in files:
-        lines.append(' ' * indent + f"- {f}")
+        lines.append(" " * indent + f"- {f}")
 
 
 def build_output(selected_files_abs, base_dir):
     tree = build_tree_dict(selected_files_abs, base_dir)
     lines = []
-    for root_idx, root_name in enumerate(sorted(tree.keys())):
+    for idx, root_name in enumerate(sorted(tree.keys())):
         lines.append(f"- {root_name}/")
         _build_md_lines(tree[root_name], 2, lines)
-        if root_idx < len(tree) - 1:
-            lines.append('')
-    tree_string = '\n'.join(lines)
+        if idx < len(tree) - 1:
+            lines.append("")
+    tree_string = "\n".join(lines)
 
     content_blocks = []
     tagged_paths = []
     for file_path in selected_files_abs:
-        rel = os.path.relpath(file_path, base_dir).replace(os.sep, '/')
+        rel = os.path.relpath(file_path, base_dir).replace(os.sep, "/")
         tagged_paths.append((rel, file_path))
     tagged_paths.sort(key=lambda x: x[0])
     for tag, abs_path in tagged_paths:
         try:
-            with open(abs_path, 'r', encoding='utf-8') as f:
+            with open(abs_path, "r", encoding="utf-8") as f:
                 content = f.read().strip()
-            if abs_path.endswith('.md'):
+            if abs_path.endswith(".md"):
                 content_blocks.append(f'<file path="{tag}">\n{content}\n</file>')
         except Exception as e:
             content_blocks.append(f'<file path="{tag}">\nError reading file: {e}\n</file>')
 
     if not tree_string.strip() and not content_blocks:
-        final_output_string = '\n'
+        final_output_string = "\n"
     elif not content_blocks:
         final_output_string = tree_string
-        if not final_output_string.endswith('\n'):
-            final_output_string += '\n'
+        if not final_output_string.endswith("\n"):
+            final_output_string += "\n"
     else:
         components = []
         if tree_string.strip():
             components.append(tree_string)
-            if not tree_string.endswith('\n'):
-                components.append('\n')
-            components.append('\n\n\n')
-        files_section_string = '\n\n\n'.join(content_blocks)
+            if not tree_string.endswith("\n"):
+                components.append("\n")
+            components.append("\n\n\n")
+        files_section_string = "\n\n\n".join(content_blocks)
         components.append(files_section_string)
-        final_output_string = ''.join(components)
-        final_output_string = final_output_string.rstrip('\n') + '\n'
+        final_output_string = "".join(components)
+        final_output_string = final_output_string.rstrip("\n") + "\n"
 
     return final_output_string
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     scan_base_dir, root_dirs = load_config_from_md(CONFIG_FILE_PATH)
     base_dir_abs = os.path.abspath(os.path.join(os.getcwd(), scan_base_dir))
     FileSelectorGUI(base_dir_abs, root_dirs)
+
