@@ -67,6 +67,10 @@ class FileSelectorGUI:
         self.root = tk.Tk()
         self.root.title("Select files to include")
 
+        style = ttk.Style(self.root)
+        style.configure('Treeview', rowheight=26, font=('TkDefaultFont', 12))
+        self.root.option_add('*Treeview.Font', ('TkDefaultFont', 12))
+
         self.tree = ttk.Treeview(self.root, show='tree')
         yscroll = ttk.Scrollbar(self.root, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=yscroll.set)
@@ -80,7 +84,7 @@ class FileSelectorGUI:
             abs_root = os.path.join(self.base_dir, rd)
             self._add_path_recursive('', abs_root, rd)
 
-        self.tree.bind('<Double-1>', self._on_double_click)
+        self.tree.bind('<Button-1>', self._on_click)
 
         btn = ttk.Button(self.root, text="Generate", command=self.generate)
         btn.pack(fill='x')
@@ -112,10 +116,13 @@ class FileSelectorGUI:
                 self._add_path_recursive(item_id, os.path.join(abs_path, entry))
         return item_id
 
-    def _on_double_click(self, event):
-        item = self.tree.identify('item', event.x, event.y)
+    def _on_click(self, event):
+        item = self.tree.identify_row(event.y)
         if not item:
             return
+        element = self.tree.identify('element', event.x, event.y)
+        if element == 'indicator':
+            return  # allow normal expand/collapse
         state = self.item_state.get(item, 0)
         new_state = 0 if state == 2 else 2
         self._set_state_recursive(item, new_state)
@@ -178,7 +185,7 @@ class FileSelectorGUI:
             messagebox.showinfo("Nothing selected", "No files selected for processing")
             return
         try:
-            final_output = build_output(selected_files)
+            final_output = build_output(selected_files, self.base_dir)
             output_abs = os.path.join(os.getcwd(), OUTPUT_MD_FILE)
             with open(output_abs, 'w', encoding='utf-8') as f:
                 f.write(final_output)
@@ -193,13 +200,12 @@ class FileSelectorGUI:
             messagebox.showerror("Error", str(e))
 
 
-def build_tree_dict(selected_files_abs, workspace_root):
+def build_tree_dict(selected_files_abs, base_dir):
     tree = {}
     for file_path in selected_files_abs:
         try:
-            rel = os.path.relpath(file_path, workspace_root)
+            rel = os.path.relpath(file_path, base_dir)
         except ValueError:
-            # If path is on different drive etc.
             continue
         parts = rel.split(os.sep)
         node = tree
@@ -209,36 +215,30 @@ def build_tree_dict(selected_files_abs, workspace_root):
     return tree
 
 
-def _build_lines(node, prefix, lines):
+def _build_md_lines(node, indent, lines):
     dirs = sorted([k for k in node.keys() if k != '__files__'])
     files = sorted(node.get('__files__', []))
-    entries = [(d, True) for d in dirs] + [(f, False) for f in files]
-    for idx, (name, is_dir) in enumerate(entries):
-        last = idx == len(entries) - 1
-        connector = '└── ' if last else '├── '
-        if is_dir:
-            lines.append(prefix + connector + name + '/')
-            new_prefix = prefix + ('    ' if last else '│   ')
-            _build_lines(node[name], new_prefix, lines)
-        else:
-            lines.append(prefix + connector + name)
+    for d in dirs:
+        lines.append(' ' * indent + f"- {d}/")
+        _build_md_lines(node[d], indent + 2, lines)
+    for f in files:
+        lines.append(' ' * indent + f"- {f}")
 
 
-def build_output(selected_files_abs):
-    workspace_root = os.getcwd()
-    tree = build_tree_dict(selected_files_abs, workspace_root)
+def build_output(selected_files_abs, base_dir):
+    tree = build_tree_dict(selected_files_abs, base_dir)
     lines = []
-    for idx, root_name in enumerate(sorted(tree.keys())):
-        lines.append(root_name + '/')
-        _build_lines(tree[root_name], '', lines)
-        if idx < len(tree) - 1:
+    for root_idx, root_name in enumerate(sorted(tree.keys())):
+        lines.append(f"- {root_name}/")
+        _build_md_lines(tree[root_name], 2, lines)
+        if root_idx < len(tree) - 1:
             lines.append('')
     tree_string = '\n'.join(lines)
 
     content_blocks = []
     tagged_paths = []
     for file_path in selected_files_abs:
-        rel = os.path.relpath(file_path, workspace_root).replace(os.sep, '/')
+        rel = os.path.relpath(file_path, base_dir).replace(os.sep, '/')
         tagged_paths.append((rel, file_path))
     tagged_paths.sort(key=lambda x: x[0])
     for tag, abs_path in tagged_paths:
