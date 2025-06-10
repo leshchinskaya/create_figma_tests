@@ -92,7 +92,6 @@ class TreeItem:
             self.frame,
             variable=self.var,
             command=self.on_check,
-            tristatevalue=-1,
         )
         self.chk.pack(side="left")
 
