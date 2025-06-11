@@ -17,5 +17,4 @@ Refer to [architecture](../../../01-project/architecture) for established archit
 `../../../`
 
 ### ROOT_DIRS_TO_SCAN
-- `rigla-demo-specification/00 — ОБЩЕЕ`
-- `rigla-demo-specification/01 — ГЛАВНАЯ`
+- `rigla-demo-specification`
