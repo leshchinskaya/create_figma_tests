@@ -47,6 +47,7 @@ class JiraClient:
             "description": description,
             "issuetype": {"name": issue_type},
             "labels": labels,
+            "assignee": {"name": None},
             xray_steps_field: {"steps": steps_data}
         }
 
