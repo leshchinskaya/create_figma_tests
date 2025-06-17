@@ -6,18 +6,19 @@ from pathlib import Path
 
 import dearpygui.dearpygui as dpg
 
+
 # --- Configuration ---
-REQ_PATH = Path("..") / "artifacts" / "req.md"
-CONFIG_FILE_PATH = "task_list_configuration.md"
-OUTPUT_MD_FILE = "file_structure.md"
+SCRIPT_DIR = Path(__file__).resolve().parent
+REQ_PATH = SCRIPT_DIR.parent / "artifacts" / "req.md"
+CONFIG_FILE_PATH = SCRIPT_DIR / "task_list_configuration.md"
+OUTPUT_MD_FILE = SCRIPT_DIR / "file_structure.md"
 
 # --- Font Configuration ---
-# Using the corrected font name as provided by you.
-FONT_REGULAR = "OpenSans-Regular.ttf"
-FONT_SYMBOLS = "NotoSansSymbols2-Regular.ttf"
+FONT_REGULAR = SCRIPT_DIR / "OpenSans-Regular.ttf"
+FONT_SYMBOLS = SCRIPT_DIR / "NotoSansSymbols2-Regular.ttf"
 
 
-def load_config_from_md(config_path):
+def load_config_from_md(config_path: Path):
     """Load SCAN_BASE_DIR and ROOT_DIRS_TO_SCAN from a markdown configuration file."""
     scan_base_dir = None
     root_dirs_to_scan = []
@@ -132,9 +133,11 @@ class Node:
         selected = []
         if self.is_dir:
             if self.state == 1:
-                for root, _, files in os.walk(self.path):
+                for root, dirs, files in os.walk(self.path):
+                    dirs[:] = [d for d in dirs if not d.startswith(".") and d != "__pycache__"]
                     for f in files:
-                        if f.startswith("."): continue
+                        if f.startswith("."):
+                            continue
                         selected.append(os.path.join(root, f))
             elif self.state == 2:
                 for ch in self.children:
@@ -159,11 +162,11 @@ class FileSelectorGUI:
                 print(f"Warning: Root directory not found: {abs_root}")
         self.all_expanded = False
         for font_file in [FONT_REGULAR, FONT_SYMBOLS]:
-            if not os.path.exists(font_file):
+            if not Path(font_file).exists():
                 raise FileNotFoundError(f"Required font not found: {font_file}")
         dpg.create_context()
         with dpg.font_registry():
-            with dpg.font(FONT_REGULAR, 16) as default_font:
+            with dpg.font(str(FONT_REGULAR), 16) as default_font:
                 dpg.add_font_range_hint(dpg.mvFontRangeHint_Cyrillic)
         dpg.bind_font(default_font)
         dpg.create_viewport(title="Select Files", width=1024, height=768)
@@ -228,10 +231,10 @@ class FileSelectorGUI:
             return
         try:
             final_output = build_output(selected_files, self.base_dir)
-            output_abs = os.path.abspath(OUTPUT_MD_FILE)
+            output_abs = OUTPUT_MD_FILE.resolve()
             with open(output_abs, "w", encoding="utf-8") as f:
                 f.write(final_output)
-            req_abs_path = Path(__file__).resolve().parent / REQ_PATH
+            req_abs_path = REQ_PATH
             copy_message = ""
             try:
                 req_abs_path.parent.mkdir(parents=True, exist_ok=True)
@@ -297,8 +300,7 @@ def build_output(selected_files_abs, base_dir):
 
 if __name__ == "__main__":
     scan_base, root_dirs_to_scan = load_config_from_md(CONFIG_FILE_PATH)
-    script_dir_path = os.path.dirname(os.path.abspath(__file__))
-    base_dir_path = os.path.abspath(os.path.join(script_dir_path, scan_base))
+    base_dir_path = (SCRIPT_DIR / scan_base).resolve()
     print(f"Base directory: {base_dir_path}")
     print(f"Root folders: {root_dirs_to_scan}")
     FileSelectorGUI(base_dir_path, root_dirs_to_scan)

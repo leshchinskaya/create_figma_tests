@@ -49,3 +49,6 @@ TEXT_EXPORT_DEFAULT_PRIORITY = "Normal"
 TEXT_EXPORT_DEFAULT_BOARD = "QA"
 # Разделитель для TXT/CSV-файла.
 TEXT_EXPORT_CSV_DELIMITER = ";"
+
+# Автоматически открывать созданные файлы промптов и JSON при генерации
+AUTOLAUNCH_FILES = False
