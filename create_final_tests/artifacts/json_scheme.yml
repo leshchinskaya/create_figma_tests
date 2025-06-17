@@ -32,6 +32,15 @@ components:
           description: Detailed explanation of the test case's scope and context.
           nullable: true # Indicates that this field can be null or omitted
           example: "This test validates user login via standard credentials."
+        priority:
+          type: string
+          description: Severity level of the test case.
+          enum:
+            - Blocker
+            - Critical
+            - Normal
+            - Minor
+          example: Normal
         estimate:
           type: integer
           format: int32 # Common integer format (e.g., for minutes)
