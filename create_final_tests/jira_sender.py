@@ -74,8 +74,14 @@ def parse_test_cases(file_path: Path) -> list[dict]:
     return valid_tests
 
 
-def send_tests_from_json(json_file_path: str) -> bool:
-    """Parse test cases from json_file_path and create Jira issues."""
+def send_tests_from_json(json_file_path: str, download_csv: bool = False) -> bool:
+    """Parse test cases from json_file_path and create Jira issues.
+
+    Args:
+        json_file_path: Path to JSON file with test cases.
+        download_csv: If True, export created issues as CSV to
+            ``create_final_tests/artifacts/component_tests.csv``.
+    """
     logger.info("🚀 Starting script to send final tests to Jira...")
 
     if not check_core_config_settings():
@@ -184,6 +190,9 @@ def send_tests_from_json(json_file_path: str) -> bool:
         jira_link = f"{jira_url_base}/issues/?jql={encoded_jql}"
         logger.info("🔗 Link to created Jira issues:")
         logger.info(jira_link)
+        if download_csv:
+            logger.info("-" * 20)
+            jira_client.download_issues_csv(jql=jql, output_path=CSV_OUTPUT_PATH)
     elif created_issue_count > 0:
         logger.warning("Issues were created, but their keys could not be retrieved for the JQL link.")
     else:
@@ -203,9 +212,14 @@ if __name__ == "__main__":
         required=True,
         help="Path to the JSON file containing test cases"
     )
+    parser.add_argument(
+        "--download-csv",
+        action="store_true",
+        help="Download created issues as CSV to artifacts/component_tests.csv",
+    )
     args = parser.parse_args()
 
-    if send_tests_from_json(args.input):
+    if send_tests_from_json(args.input, download_csv=args.download_csv):
         print("✅ Tests successfully sent to Jira")
     else:
         print("❌ Failed to send tests to Jira")

@@ -29,17 +29,18 @@
     ./generate_component_prompt.sh
     ```
 *   **Результат:** Будет создан файл `create_final_tests/artifacts/prompt_component.txt`.
+*   Если в `config.py` установлено `AUTOLAUNCH_FILES = True`, файл промпта и `component_tests.json` откроются автоматически.
 
 **Шаг 4: Работа с AI и получение JSON**
 1.  Скопируйте всё содержимое файла `prompt_component.txt` и передайте его AI.
 2.  Полученный от AI ответ в формате JSON сохраните в файл: `create_final_tests/artifacts/component_tests.json`.
 
 **Шаг 5: Отправка в Jira и/или конвертация в CSV**
-*   Запустите скрипт, чтобы отправить созданные компонентные тесты в Jira.
+*   Запустите скрипт, чтобы отправить созданные компонентные тесты в Jira и сохранить CSV с созданными задачами.
     ```bash
-    python3 -m create_final_tests.jira_sender --input create_final_tests/artifacts/component_tests.json
+    python3 -m create_final_tests.jira_sender --input create_final_tests/artifacts/component_tests.json --download-csv
     ```
-*   *Примечание: Чтобы использовать эти тесты в следующем workflow, необходимо будет вручную или с помощью скрипта конвертировать `component_tests.json` в формат `component_tests.csv`.*
+*   **Результат:** В каталоге `create_final_tests/artifacts/` появится файл `component_tests.csv`.
 
 ---
 
@@ -55,6 +56,7 @@
     ./generate_scenario_prompt.sh
     ```
 *   **Результат:** Будет создан файл `create_final_tests/artifacts/prompt_scenario.txt`.
+*   Если в `config.py` установлено `AUTOLAUNCH_FILES = True`, файл промпта и `final_tests.json` откроются автоматически.
 
 **Шаг 2 (опционально): Сбор требований через GUI**
 *   Если требуется уточнить требования отдельно от компонентных тестов,

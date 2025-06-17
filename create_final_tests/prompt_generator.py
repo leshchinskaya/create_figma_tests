@@ -1,9 +1,15 @@
 import json
+import os
+import platform
+import subprocess
 from pathlib import Path
+
 import config as config_module
 
 
-def generate_prompt_from_config(config_path: str, output_path: str) -> bool:
+def generate_prompt_from_config(
+    config_path: str, output_path: str, json_path: str | None = None
+) -> bool:
     """Generate a prompt file based on a JSON config of artifacts."""
     script_dir = Path(__file__).resolve().parent
     try:
@@ -86,6 +92,31 @@ def generate_prompt_from_config(config_path: str, output_path: str) -> bool:
         with open(output_prompt_path, 'w', encoding='utf-8') as f:
             f.write(prompt_content)
         print(f"✅ Файл '{output_prompt_path}' успешно сгенерирован.")
+
+        if getattr(config_module, "AUTOLAUNCH_FILES", False):
+            def _open(path: Path):
+                try:
+                    if platform.system() == "Darwin":
+                        subprocess.Popen(["open", str(path)])
+                    elif platform.system() == "Windows":
+                        os.startfile(path)
+                    else:
+                        subprocess.Popen(["xdg-open", str(path)])
+                except Exception as open_err:
+                    print(f"⚠️ Не удалось открыть файл {path}: {open_err}")
+
+            _open(output_prompt_path)
+            if json_path:
+                json_target = Path(json_path)
+                if not json_target.is_absolute():
+                    json_target = output_prompt_path.parent / json_target
+                if not json_target.exists():
+                    try:
+                        json_target.touch()
+                    except Exception as touch_err:
+                        print(f"⚠️ Не удалось создать файл {json_target}: {touch_err}")
+                _open(json_target)
+
         return True
     except Exception as e:
         print(f"❌ Ошибка при записи в файл '{output_prompt_path}': {e}")
@@ -97,9 +128,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Generate a final prompt from a template and artifacts.")
     parser.add_argument("--config", required=True, help="Path to the JSON config file for artifacts.")
     parser.add_argument("--output", required=True, help="Path to the output prompt file.")
+    parser.add_argument("--json", help="Path to the JSON file that will store AI response.")
     args = parser.parse_args()
 
-    if generate_prompt_from_config(args.config, args.output):
+    if generate_prompt_from_config(args.config, args.output, args.json):
         print(f"✅ Prompt successfully generated at: {args.output}")
     else:
         print(f"❌ Failed to generate prompt.")
