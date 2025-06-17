@@ -12,6 +12,7 @@ components:
       required: # Properties that MUST be present
         - labels
         - summary
+        - priority
         - estimate
         - testRepositoryPath
         - testCaseType
