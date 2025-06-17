@@ -133,9 +133,11 @@ class Node:
         selected = []
         if self.is_dir:
             if self.state == 1:
-                for root, _, files in os.walk(self.path):
+                for root, dirs, files in os.walk(self.path):
+                    dirs[:] = [d for d in dirs if not d.startswith(".") and d != "__pycache__"]
                     for f in files:
-                        if f.startswith("."): continue
+                        if f.startswith("."):
+                            continue
                         selected.append(os.path.join(root, f))
             elif self.state == 2:
                 for ch in self.children:
