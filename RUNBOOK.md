@@ -16,18 +16,25 @@
     ```
 *   **Результат:** В папке `create_final_tests/artifacts/` будет создан или обновлен файл `tests_from_figma.csv`.
 
-**Шаг 2: Генерация промпта для AI**
+**Шаг 2: Сбор требований через GUI**
+*   Запустите графический интерфейс, чтобы выбрать нужные разделы ТЗ и обновить файл `req.md`:
+    ```bash
+    python3 create_final_tests/folder_structure/gui_update_file_structure.py
+    ```
+*   **Результат:** Файл `create_final_tests/artifacts/req.md` будет создан или обновлён.
+
+**Шаг 3: Генерация промпта для AI**
 *   Запустите скрипт, который соберет все артефакты (требования, swagger, тесты из Figma) в один промпт.
     ```bash
     ./generate_component_prompt.sh
     ```
 *   **Результат:** Будет создан файл `create_final_tests/artifacts/prompt_component.txt`.
 
-**Шаг 3: Работа с AI и получение JSON**
+**Шаг 4: Работа с AI и получение JSON**
 1.  Скопируйте всё содержимое файла `prompt_component.txt` и передайте его AI.
 2.  Полученный от AI ответ в формате JSON сохраните в файл: `create_final_tests/artifacts/component_tests.json`.
 
-**Шаг 4: Отправка в Jira и/или конвертация в CSV**
+**Шаг 5: Отправка в Jira и/или конвертация в CSV**
 *   Запустите скрипт, чтобы отправить созданные компонентные тесты в Jira.
     ```bash
     python3 create_final_tests/jira_sender.py --input create_final_tests/artifacts/component_tests.json
