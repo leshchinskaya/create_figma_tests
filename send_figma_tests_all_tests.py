@@ -179,6 +179,7 @@ def _download_png(figma_client: FigmaClient, file_key: str, node_id: str, name: 
 def _create_test_issue(jira_client: JiraClient, summary: str, description: str,
                        png_path: pathlib.Path, project_key: str, issue_type_name: str, xray_custom_field: str,
                        labels: list[str],
+                       priority: str = TEXT_EXPORT_DEFAULT_PRIORITY,
                        test_repository_path: str | None = None,
                        test_case_type: str | None = None) -> str | None:
     steps = [{
@@ -199,6 +200,7 @@ def _create_test_issue(jira_client: JiraClient, summary: str, description: str,
             xray_steps_field=xray_custom_field,
             steps_data=steps,
             labels=labels,
+            priority=priority,
             custom_field_test_repository_path_id=CUSTOMFIELD_TEST_REPOSITORY_PATH,
             test_repository_path_value=test_repository_path,
             custom_field_test_case_type_id=CUSTOMFIELD_TEST_CASE_TYPE,
@@ -231,6 +233,7 @@ def _create_screen_test_issue(jira_client: JiraClient, screen_raw_name: str, nod
     return _create_test_issue(
         jira_client, summary, description, png_path,
         JIRA_PROJECT_KEY, ISSUE_TYPE, XRAY_STEPS_FIELD, final_labels,
+        priority=TEXT_EXPORT_DEFAULT_PRIORITY,
         test_repository_path=test_repo_path_val, test_case_type=test_case_type_val
     )
 
@@ -247,6 +250,7 @@ def _create_element_test_issue(jira_client: JiraClient, screen_raw_name: str, el
     return _create_test_issue(
         jira_client, summary, description, png_path,
         JIRA_PROJECT_KEY, ISSUE_TYPE, XRAY_STEPS_FIELD, final_labels,
+        priority=TEXT_EXPORT_DEFAULT_PRIORITY,
         test_repository_path=test_repo_path_val, test_case_type=test_case_type_val
     )
 

@@ -37,11 +37,12 @@ class JiraClient:
                 logger.error(f"Jira response: {e.response.status_code} - {e.response.text}")
             raise
 
-    def create_issue(self, project_key: str, summary: str, description: str, 
+    def create_issue(self, project_key: str, summary: str, description: str,
                      issue_type: str, xray_steps_field: str, steps_data: list, labels: list[str],
-                     custom_field_test_repository_path_id: str | None = None, 
+                     priority: str = "Normal",
+                     custom_field_test_repository_path_id: str | None = None,
                      test_repository_path_value: str | None = None,
-                     custom_field_test_case_type_id: str | None = None, 
+                     custom_field_test_case_type_id: str | None = None,
                      test_case_type_value: str | None = None) -> dict:
         fields = {
             "project": {"key": project_key},
@@ -50,7 +51,7 @@ class JiraClient:
             "issuetype": {"name": issue_type},
             "labels": labels,
             "assignee": {"name": None},
-            "priority": {"name": "Critical"},
+            "priority": {"name": priority},
             xray_steps_field: {"steps": steps_data}
         }
 

@@ -175,6 +175,7 @@ def create_jira_issues_from_final_tests():
                 xray_steps_field=config.XRAY_STEPS_FIELD,
                 steps_data=steps_data,
                 labels=final_labels,
+                priority=tc_data.get("priority", "Normal"),
                 custom_field_test_repository_path_id=CUSTOMFIELD_TEST_REPOSITORY_PATH,
                 test_repository_path_value=test_repo_path_val,
                 custom_field_test_case_type_id=CUSTOMFIELD_TEST_CASE_TYPE,
