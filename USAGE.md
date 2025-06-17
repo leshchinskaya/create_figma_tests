@@ -14,7 +14,11 @@
 
 1. Изначальная настройка:
     1. Выполните `sh setup.sh`. Он установит python (если нужно), создаст venv и установит зависимости
-    2. Скопируйте файл `config_template.py` с названием `config.py`
+    2. Сделайте исполняемыми скрипты генерации промптов:
+        ```bash
+        chmod +x generate_component_prompt.sh generate_scenario_prompt.sh
+        ```
+    3. Скопируйте файл `config_template.py` с названием `config.py`
 2. Генерация тестов по фигме:
     1. В `config.py` укажите `FRAME_INCLUDE` и `OPERATIONAL_MODE = "FILE_EXPORT"`.
     2. Настройте ссылку на Figma и токен в том же файле.

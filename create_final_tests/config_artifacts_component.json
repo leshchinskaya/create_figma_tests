@@ -1,5 +1,5 @@
 {
-  "prompt_template_path": "artifacts/prompt.md",
+  "prompt_template_path": "artifacts/prompt_component.md",
   "output_prompt_path": "artifacts/final_prompt.txt",
   "artifacts": {
     "req": "artifacts/req.md",

@@ -30,7 +30,8 @@ PIP="$VENV_DIR/bin/pip"
 
 # Make the main scripts executable
 chmod +x "$ROOT_DIR/send_figma_tests_all_tests.py" \
-        "$ROOT_DIR/create_final_tests/create_final_promt.py" \
-        "$ROOT_DIR/send_final_tests.py"
+        "$ROOT_DIR/send_final_tests.py" \
+        "$ROOT_DIR/generate_component_prompt.sh" \
+        "$ROOT_DIR/generate_scenario_prompt.sh"
 
 echo "✅ Environment setup complete."
