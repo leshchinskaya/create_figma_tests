@@ -32,6 +32,7 @@ RUN_ID = uuid.uuid4().hex[:8]
 # Path to the input file
 FINAL_TESTS_FILE_PATH = Path("create_final_tests/artifacts/final_tests.json")
 SCHEMA_PATH = Path("create_final_tests/artifacts/json_scheme.yml")
+CSV_OUTPUT_PATH = Path("create_final_tests/artifacts/component_tests.csv")
 
 # Custom Field IDs from config (optional, will be None if not set)
 CUSTOMFIELD_TEST_REPOSITORY_PATH = getattr(config, "CUSTOMFIELD_TEST_REPOSITORY_PATH", None)
@@ -200,6 +201,11 @@ def create_jira_issues_from_final_tests():
         jira_link = f"{jira_url_base}/issues/?jql={encoded_jql}"
         logger.info("🔗 Link to created Jira issues:")
         logger.info(jira_link)
+        # logger.info("-" * 20)
+        # jira_client.download_issues_csv(
+        #     jql=jql,
+        #     output_path=CSV_OUTPUT_PATH
+        # )
     elif created_issue_count > 0:
         logger.warning("Issues were created, but their keys could not be retrieved for the JQL link.")
     else:

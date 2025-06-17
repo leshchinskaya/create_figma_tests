@@ -1,3 +1,5 @@
+import urllib.parse
+
 import requests
 import base64
 
@@ -48,6 +50,7 @@ class JiraClient:
             "issuetype": {"name": issue_type},
             "labels": labels,
             "assignee": {"name": None},
+            "priority": {"name": "Critical"},
             xray_steps_field: {"steps": steps_data}
         }
 
@@ -66,4 +69,48 @@ class JiraClient:
     def attach_file(self, issue_key: str, file_path: pathlib.Path) -> None:
         with file_path.open("rb") as fh:
             files_data = {"file": (file_path.name, fh, "image/png")}
-            self._request("POST", f"/rest/api/2/issue/{issue_key}/attachments", files=files_data) 
+            self._request("POST", f"/rest/api/2/issue/{issue_key}/attachments", files=files_data)
+
+    def download_issues_csv(self, jql: str, output_path: pathlib.Path) -> None:
+        """
+        Downloads issues from Jira as a CSV file based on a JQL query.
+
+        Args:
+            jql: The JQL query string for the issues to export.
+            output_path: The local path (including filename) to save the CSV.
+        """
+        logger.info(f"Attempting to download issues as CSV for JQL: '{jql}'")
+
+        try:
+            # This is the specific, non-standard API endpoint for CSV export in Jira
+            csv_export_path = "/sr/jira.issueviews:searchrequest-csv-current-fields/temp/SearchRequest.csv"
+
+            encoded_jql = urllib.parse.quote(jql)
+
+            # Construct the full download URL with a semicolon delimiter
+            download_url = f"{self.base_url}{csv_export_path}?jqlQuery={encoded_jql}&delimiter=;"
+
+            logger.info(f"Requesting CSV from URL: {download_url}")
+
+            # Make the GET request using the authenticated session
+            # No need to call _request as this is a simple GET with no special headers
+            response = self.session.get(download_url, timeout=30)
+
+            response.raise_for_status()
+
+            # Ensure the parent directory exists
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+
+            # Write the content to the file in binary mode
+            with output_path.open("wb") as f:
+                f.write(response.content)
+
+            logger.success(f"✅ Successfully downloaded and saved issues to: {output_path}")
+
+        except requests.exceptions.HTTPError as e:
+            logger.error(f"❌ HTTP Error downloading CSV: {e.response.status_code} {e.response.reason}")
+            logger.error(f"Response Body: {e.response.text}")
+        except requests.exceptions.RequestException as e:
+            logger.error(f"❌ Failed to download CSV from Jira. A network error occurred: {e}")
+        except Exception as e:
+            logger.error(f"❌ An unexpected error occurred during CSV download: {e}")

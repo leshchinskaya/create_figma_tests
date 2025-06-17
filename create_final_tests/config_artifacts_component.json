@@ -4,13 +4,13 @@
   "artifacts": {
     "req": "artifacts/req.md",
     "swagger": "artifacts/swagger.yaml",
-    "component_tests": "artifacts/component_tests.csv",
+    "tests_from_figma": "artifacts/tests_from_figma.csv",
     "json_scheme": "artifacts/json_scheme.yml"
   },
   "placeholders": {
     "req": "{{REQ_CONTENT}}",
     "swagger": "{{SWAGGER_CONTENT}}",
-    "component_tests": "{{COMPONENT_TESTS_CONTENT}}",
+    "tests_from_figma": "{{TESTS_FROM_FIGMA_CONTENT}}",
     "json_scheme": "{{JSON_SCHEME_CONTENT}}"
   }
 }
