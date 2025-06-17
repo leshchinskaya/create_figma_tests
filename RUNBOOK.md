@@ -37,7 +37,7 @@
 **Шаг 5: Отправка в Jira и/или конвертация в CSV**
 *   Запустите скрипт, чтобы отправить созданные компонентные тесты в Jira.
     ```bash
-    python3 create_final_tests/jira_sender.py --input create_final_tests/artifacts/component_tests.json
+    python3 -m create_final_tests.jira_sender --input create_final_tests/artifacts/component_tests.json
     ```
 *   *Примечание: Чтобы использовать эти тесты в следующем workflow, необходимо будет вручную или с помощью скрипта конвертировать `component_tests.json` в формат `component_tests.csv`.*
 

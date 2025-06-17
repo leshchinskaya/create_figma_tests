@@ -190,3 +190,23 @@ def send_tests_from_json(json_file_path: str) -> bool:
         logger.info("No Jira issues were created in this run.")
 
     return failed_issue_count == 0
+
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Send test cases from a JSON file to Jira"
+    )
+    parser.add_argument(
+        "--input",
+        required=True,
+        help="Path to the JSON file containing test cases"
+    )
+    args = parser.parse_args()
+
+    if send_tests_from_json(args.input):
+        print("✅ Tests successfully sent to Jira")
+    else:
+        print("❌ Failed to send tests to Jira")
+        exit(1)
