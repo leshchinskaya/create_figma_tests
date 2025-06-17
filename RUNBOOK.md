@@ -6,41 +6,48 @@
 
 ## Workflow 1: Генерация Компонентных Тестов
 
-**Цель:** Создать детальные компонентные тесты на основе дизайна в Figma, требований и Swagger. Результат этого воркфлоу (`component_tests.csv`) является входными данными для генерации сценарных тестов.
+**Цель:** Создать детальные компонентные тесты на основе дизайна в Figma, требований и Swagger. Результат этого
+воркфлоу (`component_tests.csv`) является входными данными для генерации сценарных тестов.
 
 **Шаг 1: Получение тестов из Figma (если требуется обновление)**
-*   Убедитесь, что в `config.py` установлен `OPERATIONAL_MODE = "FILE_EXPORT"`.
-*   Запустите скрипт для анализа Figma:
-    ```bash
-    python3 send_figma_tests_all_tests.py
-    ```
-*   **Результат:** В папке `create_final_tests/artifacts/` будет создан или обновлен файл `tests_from_figma.csv`.
+
+* Убедитесь, что в `config.py` установлен `OPERATIONAL_MODE = "FILE_EXPORT"`.
+* Запустите скрипт для анализа Figma:
+  ```bash
+  python3 send_figma_tests_all_tests.py
+  ```
+* **Результат:** В папке `create_final_tests/artifacts/` будет создан или обновлен файл `tests_from_figma.csv`.
 
 **Шаг 2: Сбор требований через GUI**
-*   Запустите графический интерфейс, чтобы выбрать нужные разделы ТЗ и обновить файл `req.md`:
-    ```bash
-    python3 create_final_tests/folder_structure/gui_update_file_structure.py
-    ```
-*   **Результат:** Файл `create_final_tests/artifacts/req.md` будет создан или обновлён.
+
+* Запустите графический интерфейс, чтобы выбрать нужные разделы ТЗ и обновить файл `req.md`:
+  ```bash
+  python3 create_final_tests/folder_structure/gui_update_file_structure.py
+  ```
+* **Результат:** Файл `create_final_tests/artifacts/req.md` будет создан или обновлён.
 
 **Шаг 3: Генерация промпта для AI**
-*   Запустите скрипт, который соберет все артефакты (требования, swagger, тесты из Figma) в один промпт.
-    ```bash
-    ./generate_component_prompt.sh
-    ```
-*   **Результат:** Будет создан файл `create_final_tests/artifacts/prompt_component.txt`.
-*   Если в `config.py` установлено `AUTOLAUNCH_FILES = True`, файл промпта и `component_tests.json` откроются автоматически.
+
+* Запустите скрипт, который соберет все артефакты (требования, swagger, тесты из Figma) в один промпт.
+  ```bash
+  ./generate_component_prompt.sh
+  ```
+* **Результат:** Будет создан файл `create_final_tests/artifacts/final_prompt_component.txt`.
+* Если в `config.py` установлено `AUTOLAUNCH_FILES = True`, файл промпта и `component_tests.json` откроются
+  автоматически.
 
 **Шаг 4: Работа с AI и получение JSON**
-1.  Скопируйте всё содержимое файла `prompt_component.txt` и передайте его AI.
-2.  Полученный от AI ответ в формате JSON сохраните в файл: `create_final_tests/artifacts/component_tests.json`.
+
+1. Скопируйте всё содержимое файла `final_prompt_component.txt` и передайте его AI.
+2. Полученный от AI ответ в формате JSON сохраните в файл: `create_final_tests/artifacts/component_tests.json`.
 
 **Шаг 5: Отправка в Jira и/или конвертация в CSV**
-*   Запустите скрипт, чтобы отправить созданные компонентные тесты в Jira и сохранить CSV с созданными задачами.
-    ```bash
-    python3 -m create_final_tests.jira_sender --input create_final_tests/artifacts/component_tests.json --download-csv
-    ```
-*   **Результат:** В каталоге `create_final_tests/artifacts/` появится файл `component_tests.csv`.
+
+* Запустите скрипт, чтобы отправить созданные компонентные тесты в Jira и сохранить CSV с созданными задачами.
+  ```bash
+  python3 -m create_final_tests.jira_sender --input create_final_tests/artifacts/component_tests.json --download-csv
+  ```
+* **Результат:** В каталоге `create_final_tests/artifacts/` появится файл `component_tests.csv`.
 
 ---
 
@@ -48,32 +55,38 @@
 
 **Цель:** Создать высокоуровневые end-to-end сценарии на основе уже готовых компонентных тестов, требований и Swagger.
 
-**Обязательное условие:** У вас должен быть актуальный файл `create_final_tests/artifacts/component_tests.csv`. Он создается на предыдущем этапе.
+**Обязательное условие:** У вас должен быть актуальный файл `create_final_tests/artifacts/component_tests.csv`. Он
+создается на предыдущем этапе.
 
 **Шаг 1: Генерация промпта для AI**
-*   Запустите скрипт, который соберет все необходимые артефакты.
-    ```bash
-    ./generate_scenario_prompt.sh
-    ```
-*   **Результат:** Будет создан файл `create_final_tests/artifacts/prompt_scenario.txt`.
-*   Если в `config.py` установлено `AUTOLAUNCH_FILES = True`, файл промпта и `final_tests.json` откроются автоматически.
+
+* Запустите скрипт, который соберет все необходимые артефакты.
+  ```bash
+  ./generate_scenario_prompt.sh
+  ```
+* **Результат:** Будет создан файл `create_final_tests/artifacts/final_prompt_scenario.txt`.
+* Если в `config.py` установлено `AUTOLAUNCH_FILES = True`, файл промпта и `scenario_tests.json` откроются
+  автоматически.
 
 **Шаг 2 (опционально): Сбор требований через GUI**
-*   Если требуется уточнить требования отдельно от компонентных тестов,
-    запустите графический интерфейс:
-    ```bash
-    python3 create_final_tests/folder_structure/gui_update_file_structure.py
-    ```
-*   Используйте его для выбора разделов ТЗ, которые следует включить в сценарные тесты.
-    Если требования такие же, как в компонентных тестах, этот шаг можно пропустить.
+
+* Если требуется уточнить требования отдельно от компонентных тестов,
+  запустите графический интерфейс:
+  ```bash
+  python3 create_final_tests/folder_structure/gui_update_file_structure.py
+  ```
+* Используйте его для выбора разделов ТЗ, которые следует включить в сценарные тесты.
+  Если требования такие же, как в компонентных тестах, этот шаг можно пропустить.
 
 **Шаг 3: Работа с AI и получение JSON**
-1.  Скопируйте всё содержимое файла `prompt_scenario.txt` и передайте его AI.
-2.  Полученный от AI ответ в формате JSON сохраните в файл: `create_final_tests/artifacts/final_tests.json`.
+
+1. Скопируйте всё содержимое файла `final_prompt_scenario.txt` и передайте его AI.
+2. Полученный от AI ответ в формате JSON сохраните в файл: `create_final_tests/artifacts/scenario_tests.json`.
 
 **Шаг 4: Отправка сценарных тестов в Jira**
-*   Запустите скрипт для отправки тестов.
-    ```bash
-    python3 send_final_tests.py
-    ```
-*   **Результат:** Сценарные тесты будут созданы в Jira. Ссылка на созданные задачи появится в консоли.
+
+* Запустите скрипт для отправки тестов.
+  ```bash
+  python3 send_final_tests.py
+  ```
+* **Результат:** Сценарные тесты будут созданы в Jira. Ссылка на созданные задачи появится в консоли.
