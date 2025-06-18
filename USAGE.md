@@ -31,9 +31,10 @@
     5. Если требования представлены в виде PDF, запустите:
        ```bash
        python3 convert_pdf_to_req.py /path/to/rigla-demo-specification/requirements.pdf
-       # либо передайте ссылку из Confluence
-       python3 convert_pdf_to_req.py https://confluence.example.com/download/requirements.pdf
+       # либо передайте ссылку на страницу Confluence
+       python3 convert_pdf_to_req.py https://wiki.example.com/pages/viewpage.action?pageId=12345
        ```
+       Перед использованием укажите `CONFLUENCE_BASE_URL`, `CONFLUENCE_USERNAME` и `CONFLUENCE_PASSWORD` в `config.py`.
        Полученный Markdown будет записан в `req.md`.
 4. Актуализация сваггера
     1. Укажите путь к актуальному swagger в `SWAGGER_LOCAL_PATH` внутри `config.py`. Файл копировать не нужно.

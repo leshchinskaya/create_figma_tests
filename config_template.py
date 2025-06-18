@@ -19,6 +19,11 @@ SWAGGER_URL = "YOUR_SWAGGER_URL"  # Пример: "https://example.com/swagger.y
 # Локальный путь к swagger файлу (можно указывать относительный путь к репозиторию)
 SWAGGER_LOCAL_PATH = ""  # Например: "../external_repo/swagger.yaml"
 
+# Настройки Confluence
+CONFLUENCE_BASE_URL = "https://your-confluence-instance.com"
+CONFLUENCE_USERNAME = "YOUR_CONFLUENCE_USERNAME"
+CONFLUENCE_PASSWORD = "YOUR_CONFLUENCE_PASSWORD"
+
 # Фильтры фреймов (для _collect_top_frames)
 # Эти настройки помогают фильтровать, какие фреймы из Figma обрабатываются.
 # Отрегулируйте их в зависимости от структуры ваших файлов Figma.
