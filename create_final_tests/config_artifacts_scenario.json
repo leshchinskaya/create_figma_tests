@@ -2,14 +2,10 @@
   "prompt_template_path": "artifacts/prompt_scenario.md",
   "output_prompt_path": "artifacts/final_prompt.txt",
   "artifacts": {
-    "req": "artifacts/req.md",
-    "swagger": "artifacts/swagger.yaml",
     "component_tests": "artifacts/component_tests.csv",
     "json_scheme": "artifacts/json_scheme.yml"
   },
   "placeholders": {
-    "req": "{{REQ_CONTENT}}",
-    "swagger": "{{SWAGGER_CONTENT}}",
     "component_tests": "{{COMPONENT_TESTS_CONTENT}}",
     "json_scheme": "{{JSON_SCHEME_CONTENT}}"
   }
