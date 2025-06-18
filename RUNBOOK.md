@@ -87,6 +87,6 @@
 
 * Запустите скрипт для отправки тестов.
   ```bash
-  python3 send_final_tests.py
+  python3 -m create_final_tests.jira_sender --input create_final_tests/artifacts/scenario_tests.json
   ```
 * **Результат:** Сценарные тесты будут созданы в Jira. Ссылка на созданные задачи появится в консоли.
