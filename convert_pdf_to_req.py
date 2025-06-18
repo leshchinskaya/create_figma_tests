@@ -1,80 +1,208 @@
 #!/usr/bin/env python3
-"""Convert requirement documents to Markdown and update req.md.
+"""Convert documents to a structured folder format with page-specific content.
 
 Usage:
     python3 convert_pdf_to_req.py <path_or_url_or_confluence_page>
 
 The script accepts:
- - a local PDF file path
- - a direct URL to a PDF file
- - a Confluence page URL (its child pages will be downloaded as well).
-Confluence credentials must be configured in `config.py`."""
+ - a local PDF file path: Text is extracted page by page.
+ - a direct URL to a PDF file: Text is extracted page by page.
+ - a Confluence page URL: Content is fetched and converted to Markdown.
+   (Child pages will be processed similarly if it's a parent Confluence page).
 
-from pathlib import Path
-from urllib.parse import urlparse, parse_qs
+Confluence credentials must be configured in `config.py`.
+The output will be saved in page-specific folders under:
+/Users/leshchinskaya/create_figma_tests/create_final_tests/folder_structure/
+Each Confluence page or PDF page becomes a 'page_N/content.md' file.
+"""
+
 import sys
 import tempfile
+import re
+import os
+from pathlib import Path
+from urllib.parse import urlparse, parse_qs, unquote
+
 import requests
 import config
 
-from pdfminer.high_level import extract_text
+try:
+    from pdfminer.high_level import extract_pages
+    from pdfminer.layout import LTTextContainer
+except ImportError:
+    print("pdfminer.six is not installed. Please install it by running: pip install pdfminer.six")
+    sys.exit(1)
 
-REQ_PATH = Path("create_final_tests") / "artifacts" / "req.md"
+try:
+    import markdownify
+except ImportError:
+    print("markdownify is not installed. Please install it by running: pip install markdownify")
+    sys.exit(1)
+
+BASE_OUTPUT_DIR = Path("./create_final_tests/folder_structure/confluence")
 
 
-def pdf_to_markdown(pdf_path: Path) -> str:
-    """Extract text from PDF and return it as Markdown-formatted string."""
-    text = extract_text(str(pdf_path))
-    text = text.replace("\r\n", "\n").strip()
-    return text + "\n"
+def extract_text_per_page(pdf_path: Path) -> list[str]:
+    """Extract text from each page of a PDF and return a list of strings."""
+    page_texts = []
+    for page_layout in extract_pages(pdf_path):
+        page_text = ""
+        for element in page_layout:
+            if isinstance(element, LTTextContainer):
+                page_text += element.get_text()
+        page_texts.append(page_text.strip())
+    return page_texts
+
+
+def generate_document_id(source_path_or_url: str, is_confluence: bool = False, confluence_pid: str | None = None) -> str:
+    """Generate a sanitized document ID for folder naming."""
+    if is_confluence and confluence_pid:
+        name = f"confluence_{confluence_pid}"
+    elif is_url(source_path_or_url):
+        parsed_url = urlparse(source_path_or_url)
+        path_part = unquote(parsed_url.path.strip('/'))
+        if path_part:
+            name = Path(path_part).stem
+        else:
+            name = parsed_url.netloc + "_" + parsed_url.path.replace('/', '_')
+        if not name:
+            name = "downloaded_pdf"
+    else:
+        name = Path(source_path_or_url).stem
+    
+    name = re.sub(r'[^a-zA-Z0-9_\-]', '_', name)
+    name = re.sub(r'_+', '_', name)
+    name = name.strip('_')
+    return name if name else "default_document_id"
+
+
+def process_pdf_to_page_folders(pdf_path: Path, document_id: str, base_output_dir: Path):
+    """Extract text per PDF page and save to base_output_dir/document_id/page_N/content.md."""
+    try:
+        page_texts = extract_text_per_page(pdf_path)
+    except Exception as e:
+        print(f"Error extracting text from {pdf_path.name}: {e}")
+        return
+
+    doc_output_dir = base_output_dir / document_id
+    
+    if not page_texts:
+        print(f"No text extracted from {pdf_path.name} (document: {document_id}). Skipping.")
+        return
+
+    for i, page_text in enumerate(page_texts):
+        page_num = i + 1
+        page_dir = doc_output_dir / f"page_{page_num}"
+        page_dir.mkdir(parents=True, exist_ok=True)
+        output_file = page_dir / "content.md"
+        try:
+            output_file.write_text(page_text, encoding="utf-8")
+        except Exception as e:
+            print(f"Error writing page {page_num} for {document_id} to {output_file}: {e}")
+            continue
+    print(f"Successfully processed PDF {pdf_path.name} into {doc_output_dir} ({len(page_texts)} pages)")
+
+
+def fetch_and_convert_confluence_to_markdown(page_id: str, session: requests.Session) -> str | None:
+    """Fetch Confluence page content as HTML and convert it to Markdown."""
+    if not hasattr(config, 'CONFLUENCE_BASE_URL') or not config.CONFLUENCE_BASE_URL:
+        print(f"Error: CONFLUENCE_BASE_URL not configured. Cannot fetch page {page_id}.")
+        return None
+
+    api_url = f"{config.CONFLUENCE_BASE_URL}/rest/api/content/{page_id}?expand=body.view"
+    try:
+        print(f"Fetching content for Confluence page ID {page_id} from {api_url}...")
+        resp = session.get(api_url)
+        resp.raise_for_status()
+        data = resp.json()
+        html_content = data.get('body', {}).get('view', {}).get('value')
+        if not html_content:
+            print(f"No HTML content found for Confluence page ID {page_id}.")
+            return None
+        
+        md_content = markdownify.markdownify(html_content, heading_style=markdownify.ATX)
+        print(f"Successfully converted Confluence page ID {page_id} to Markdown.")
+        return md_content
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching Confluence page ID {page_id}: {e}")
+        return None
+    except Exception as e:
+        print(f"Error converting HTML to Markdown for page ID {page_id}: {e}")
+        return None
+
+
+def save_markdown_content(markdown_text: str, document_id: str, base_output_dir: Path):
+    """Save the given markdown text to base_output_dir/document_id/page_1/content.md."""
+    doc_output_dir = base_output_dir / document_id
+    page_dir = doc_output_dir / "page_1" 
+    page_dir.mkdir(parents=True, exist_ok=True)
+    
+    output_file = page_dir / "content.md"
+    try:
+        output_file.write_text(markdown_text, encoding="utf-8")
+        print(f"Successfully saved Markdown for {document_id} to {output_file}")
+    except Exception as e:
+        print(f"Error writing Markdown for {document_id} to {output_file}: {e}")
 
 
 def is_url(path_or_url: str) -> bool:
-    """Return True if the argument looks like an HTTP(S) URL."""
     parsed = urlparse(path_or_url)
     return parsed.scheme in {"http", "https"}
 
 
 def is_confluence_page(url: str) -> bool:
-    """Check if the URL points to a Confluence page with a pageId query."""
+    if not hasattr(config, 'CONFLUENCE_BASE_URL') or not config.CONFLUENCE_BASE_URL:
+        return False
     base = urlparse(config.CONFLUENCE_BASE_URL).netloc
     parsed = urlparse(url)
     return parsed.netloc == base and "pageId" in parse_qs(parsed.query)
 
 
 def parse_page_id(value: str) -> str | None:
-    """Extract pageId from a URL or return the value if it looks like an ID."""
     if value.isdigit():
         return value
     parsed = urlparse(value)
     qs = parse_qs(parsed.query)
     if "pageId" in qs:
-        return qs["pageId"][0]
+        page_id_list = qs["pageId"]
+        if page_id_list:
+            return page_id_list[0]
     return None
 
 
 def fetch_descendants(page_id: str, session: requests.Session) -> list[str]:
-    """Return a list of page IDs including the given page and all descendants."""
     ids = [page_id]
+    if not hasattr(config, 'CONFLUENCE_BASE_URL') or not config.CONFLUENCE_BASE_URL:
+        print("Error: CONFLUENCE_BASE_URL not configured. Cannot fetch descendants.")
+        return ids
+
     api_url = f"{config.CONFLUENCE_BASE_URL}/rest/api/content/{page_id}/child/page?limit=100"
-    resp = session.get(api_url)
-    resp.raise_for_status()
-    data = resp.json()
-    for child in data.get("results", []):
-        child_id = child.get("id")
-        if child_id:
-            ids.extend(fetch_descendants(child_id, session))
+    try:
+        resp = session.get(api_url)
+        resp.raise_for_status()
+        data = resp.json()
+        for child in data.get("results", []):
+            child_id = child.get("id")
+            if child_id:
+                ids.extend(fetch_descendants(child_id, session))
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching descendants for page {page_id}: {e}")
     return ids
 
 
-def download_pdf(url: str, session: requests.Session | None = None) -> Path:
-    """Download PDF from URL using an optional session and return the local temporary path."""
-    sess = session or requests.Session()
-    response = sess.get(url)
-    response.raise_for_status()
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
-        tmp.write(response.content)
-        return Path(tmp.name)
+def download_pdf(url: str, session: requests.Session | None = None) -> Path | None:
+    effective_session = session or requests.Session()
+    try:
+        response = effective_session.get(url)
+        response.raise_for_status()
+        if 'application/pdf' not in response.headers.get('Content-Type', '').lower():
+            print(f"Warning: Content at {url} does not appear to be a PDF. Content-Type: {response.headers.get('Content-Type')}")
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
+            tmp.write(response.content)
+            return Path(tmp.name)
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to download PDF from {url}: {e}")
+        return None
 
 
 def main():
@@ -82,54 +210,68 @@ def main():
         print("Usage: python3 convert_pdf_to_req.py <path_or_url_or_confluence_page>")
         sys.exit(1)
 
-    source = sys.argv[1]
+    source = sys.argv[1].strip()
+    BASE_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    downloaded_files: list[Path] = []
+    downloaded_files_to_clean: list[Path] = []
     session = requests.Session()
-    session.auth = (config.CONFLUENCE_USERNAME, config.CONFLUENCE_PASSWORD)
-
-    if (page_id := parse_page_id(source)) and is_confluence_page(source):
-        page_ids = fetch_descendants(page_id, session)
-        md_parts = []
-        for pid in page_ids:
-            try:
-                pdf_path = download_pdf(
-                    f"{config.CONFLUENCE_BASE_URL}/spaces/flyingpdf/pdfpageexport.action?pageId={pid}",
-                    session=session,
-                )
-                downloaded_files.append(pdf_path)
-                md_parts.append(pdf_to_markdown(pdf_path))
-            except requests.exceptions.RequestException as e:
-                print(f"Failed to download page {pid}: {e}")
-                sys.exit(1)
-        md_content = "\n\n".join(md_parts)
-    else:
-        downloaded_temp: Path | None = None
-        if is_url(source):
-            try:
-                sess = session if source.startswith(config.CONFLUENCE_BASE_URL) else None
-                downloaded_temp = download_pdf(source, session=sess)
-                pdf_path = downloaded_temp
-            except requests.exceptions.RequestException as e:
-                print(f"Failed to download PDF: {e}")
-                sys.exit(1)
+    if hasattr(config, 'CONFLUENCE_USERNAME') and hasattr(config, 'CONFLUENCE_PASSWORD'):
+        if config.CONFLUENCE_USERNAME and config.CONFLUENCE_PASSWORD:
+            session.auth = (config.CONFLUENCE_USERNAME, config.CONFLUENCE_PASSWORD)
         else:
-            pdf_path = Path(source)
-            if not pdf_path.is_file():
-                print(f"File not found: {pdf_path}")
-                sys.exit(1)
-        md_content = pdf_to_markdown(pdf_path)
-        if downloaded_temp:
-            downloaded_files.append(downloaded_temp)
+            print("Warning: Confluence username or password missing. Confluence operations might fail.")
+    else:
+        print("Warning: CONFLUENCE_USERNAME or CONFLUENCE_PASSWORD not in config.py. Confluence operations might fail.")
 
-    REQ_PATH.parent.mkdir(parents=True, exist_ok=True)
-    REQ_PATH.write_text(md_content, encoding="utf-8")
-    print(f"Converted {source} to Markdown and saved to {REQ_PATH}")
+    parsed_source_page_id = parse_page_id(source)
+    is_conf_page_check = is_confluence_page(source)
 
-    for f in downloaded_files:
-        f.unlink(missing_ok=True)
+    if parsed_source_page_id and is_conf_page_check:
+        print(f"Processing Confluence source: {source} (Page ID: {parsed_source_page_id})")
+        if not hasattr(config, 'CONFLUENCE_BASE_URL') or not config.CONFLUENCE_BASE_URL:
+            print("Error: CONFLUENCE_BASE_URL not configured. Cannot process Confluence pages.")
+            sys.exit(1)
 
+        page_ids_to_process = fetch_descendants(parsed_source_page_id, session)
+        print(f"Found {len(page_ids_to_process)} Confluence pages to process (including descendants).")
+
+        for pid_to_process in page_ids_to_process:
+            markdown_content = fetch_and_convert_confluence_to_markdown(pid_to_process, session)
+            if markdown_content is not None:
+                doc_id = generate_document_id(source_path_or_url="", is_confluence=True, confluence_pid=pid_to_process)
+                save_markdown_content(markdown_content, doc_id, BASE_OUTPUT_DIR)
+            else:
+                print(f"Skipping Confluence page ID {pid_to_process} due to fetch/conversion failure.")
+    
+    elif is_url(source):
+        print(f"Processing URL source (expected PDF): {source}")
+        temp_pdf_path = download_pdf(source, session=session)
+        if temp_pdf_path:
+            downloaded_files_to_clean.append(temp_pdf_path)
+            doc_id = generate_document_id(source_path_or_url=source)
+            process_pdf_to_page_folders(temp_pdf_path, doc_id, BASE_OUTPUT_DIR)
+        else:
+            print(f"Failed to process URL {source} as PDF due to download failure or non-PDF content.")
+
+    else:
+        print(f"Processing local file source (expected PDF): {source}")
+        local_pdf_path = Path(source)
+        if local_pdf_path.is_file() and local_pdf_path.suffix.lower() == '.pdf':
+            doc_id = generate_document_id(source_path_or_url=str(local_pdf_path))
+            process_pdf_to_page_folders(local_pdf_path, doc_id, BASE_OUTPUT_DIR)
+        elif not local_pdf_path.is_file():
+            print(f"Error: File not found at {local_pdf_path}")
+        else:
+            print(f"Error: File {local_pdf_path} is not a PDF.")
+
+    if downloaded_files_to_clean:
+        print(f"Cleaning up {len(downloaded_files_to_clean)} temporary downloaded PDF files...")
+        for f_path in downloaded_files_to_clean:
+            try:
+                f_path.unlink(missing_ok=True)
+            except Exception as e:
+                print(f"Warning: Could not delete temporary file {f_path}: {e}")
+    print("Processing complete.")
 
 if __name__ == "__main__":
     main()
-

@@ -5,3 +5,4 @@ jsonschema
 pyyaml
 dearpygui
 pdfminer.six
+markdownify
