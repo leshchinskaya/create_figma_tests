@@ -103,7 +103,7 @@ def process_pdf_to_page_folders(pdf_path: Path, document_id: str, base_output_di
     print(f"Successfully processed PDF {pdf_path.name} into {doc_output_dir} ({len(page_texts)} pages)")
 
 
-def fetch_and_convert_confluence_to_markdown(page_id: str, session: requests.Session) -> str | None:
+def fetch_and_convert_confluence_to_markdown(page_id: str, session: requests.Session, document_id: str, base_output_dir: Path) -> str | None:
     """Fetch Confluence page content as HTML and convert it to Markdown."""
     if not hasattr(config, 'CONFLUENCE_BASE_URL') or not config.CONFLUENCE_BASE_URL:
         print(f"Error: CONFLUENCE_BASE_URL not configured. Cannot fetch page {page_id}.")
@@ -121,7 +121,59 @@ def fetch_and_convert_confluence_to_markdown(page_id: str, session: requests.Ses
             return None
         
         md_content = markdownify.markdownify(html_content, heading_style=markdownify.ATX)
-        print(f"Successfully converted Confluence page ID {page_id} to Markdown.")
+        if md_content is None:
+            print(f"Markdown conversion failed for page ID {page_id}.")
+            return None
+
+        # --- Attachment Handling ---
+        page_1_dir = base_output_dir / document_id / "page_1"
+        attachments_dir = page_1_dir / "attachments"
+
+        # Regex to find /download/attachments/... paths not followed by ')' and within parentheses
+        attachment_url_pattern = re.compile(r'/download/attachments/[^)]+(?=\))')
+        found_attachment_paths = sorted(list(set(attachment_url_pattern.findall(md_content))), key=len, reverse=True)
+
+        if found_attachment_paths:
+            attachments_dir.mkdir(parents=True, exist_ok=True)
+            print(f"Found {len(found_attachment_paths)} unique attachment paths to process for {document_id}.")
+
+            for original_path in found_attachment_paths:
+                try:
+                    if not original_path.startswith("http"):
+                        full_download_url = f"{config.CONFLUENCE_BASE_URL.rstrip('/')}{original_path}"
+                    else:
+                        full_download_url = original_path # Should ideally not happen for /download/attachments
+
+                    parsed_original_url = urlparse(original_path)
+                    filename = unquote(Path(parsed_original_url.path).name)
+                    if not filename:
+                        print(f"Warning: Could not determine filename for attachment {original_path} in {document_id}. Skipping.")
+                        continue
+                    
+                    local_save_path = attachments_dir / filename
+                    # Ensure relative path uses forward slashes for Markdown
+                    relative_markdown_path = (Path("attachments") / filename).as_posix()
+
+                    print(f"Downloading attachment: {full_download_url} to {local_save_path} for {document_id}")
+                    dl_resp = session.get(full_download_url, stream=True)
+                    dl_resp.raise_for_status()
+
+                    with open(local_save_path, 'wb') as f:
+                        for chunk in dl_resp.iter_content(chunk_size=8192):
+                            f.write(chunk)
+                    
+                    print(f"Successfully downloaded {filename}. Updating Markdown link.")
+                    md_content = md_content.replace(original_path, relative_markdown_path)
+
+                except requests.exceptions.RequestException as e_dl:
+                    print(f"Error downloading attachment {original_path} for {document_id}: {e_dl}. Original link will be kept.")
+                except IOError as e_io:
+                    print(f"Error saving attachment {filename} for {document_id}: {e_io}. Original link will be kept.")
+                except Exception as e_gen:
+                    print(f"An unexpected error occurred while processing attachment {original_path} for {document_id}: {e_gen}. Original link will be kept.")
+        # --- End Attachment Handling ---
+
+        print(f"Successfully converted Confluence page ID {page_id} to Markdown (attachments processed).")
         return md_content
     except requests.exceptions.RequestException as e:
         print(f"Error fetching Confluence page ID {page_id}: {e}")
@@ -236,9 +288,9 @@ def main():
         print(f"Found {len(page_ids_to_process)} Confluence pages to process (including descendants).")
 
         for pid_to_process in page_ids_to_process:
-            markdown_content = fetch_and_convert_confluence_to_markdown(pid_to_process, session)
+            doc_id = generate_document_id(source_path_or_url="", is_confluence=True, confluence_pid=pid_to_process) # Moved doc_id generation up
+            markdown_content = fetch_and_convert_confluence_to_markdown(pid_to_process, session, doc_id, BASE_OUTPUT_DIR)
             if markdown_content is not None:
-                doc_id = generate_document_id(source_path_or_url="", is_confluence=True, confluence_pid=pid_to_process)
                 save_markdown_content(markdown_content, doc_id, BASE_OUTPUT_DIR)
             else:
                 print(f"Skipping Confluence page ID {pid_to_process} due to fetch/conversion failure.")
