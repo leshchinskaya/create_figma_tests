@@ -12,7 +12,7 @@ The script accepts:
 
 Confluence credentials must be configured in `config.py`.
 The output will be saved in page-specific folders under:
-/Users/leshchinskaya/create_figma_tests/create_final_tests/folder_structure/
+./create_final_tests/folder_structure/confluence/
 Each Confluence page or PDF page becomes a 'page_N/content.md' file.
 """
 

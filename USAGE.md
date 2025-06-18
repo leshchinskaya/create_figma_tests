@@ -28,14 +28,25 @@
     3. В `task_list_configuration.md` перечислите нужные папки с ТЗ.
         1. Если нужно - удалите ненужные файлы из этих папок (локально, пушить нельзя!)
     4. Затем выполните `update_file_structure.py`. Файл `req.md` будет обновлён автоматически.
-    5. Если требования представлены в виде PDF, запустите:
+    5. Если требования представлены в виде PDF или на страницах Confluence, используйте `convert_pdf_to_req.py`
+       для их преобразования в локальную структуру папок с Markdown файлами:
        ```bash
-       python3 convert_pdf_to_req.py /path/to/rigla-demo-specification/requirements.pdf
-       # либо передайте ссылку на страницу Confluence
-       python3 convert_pdf_to_req.py https://wiki.example.com/pages/viewpage.action?pageId=12345
+       # Для локального PDF-файла:
+       python3 convert_pdf_to_req.py /путь/к/вашему/файлу.pdf
+
+       # Для PDF-файла по URL:
+       python3 convert_pdf_to_req.py https://example.com/документ.pdf
+
+       # Для страницы Confluence (включая дочерние страницы и вложения):
+       python3 convert_pdf_to_req.py "https://wiki.example.com/pages/viewpage.action?pageId=12345"
        ```
-       Перед использованием укажите `CONFLUENCE_BASE_URL`, `CONFLUENCE_USERNAME` и `CONFLUENCE_PASSWORD` в `config.py`.
-       Полученный Markdown будет записан в `req.md`.
+       **Важно:**
+       - Перед использованием для Confluence, убедитесь, что `CONFLUENCE_BASE_URL`, `CONFLUENCE_USERNAME` и `CONFLUENCE_PASSWORD` указаны в `config.py`.
+       - Скрипт создаст структуру папок в `create_final_tests/folder_structure/имя_документа/`.
+         - Для PDF: `page_N/content.md` для каждой страницы.
+         - Для Confluence: `page_1/content.md` (содержащий всю страницу) и `page_1/attachments/` для всех вложений (изображения и т.д.). Ссылки на вложения в Markdown будут обновлены.
+       - Этот скрипт не создает единый `req.md`, а предоставляет детализированную структуру для дальнейшей работы или ручной консолидации.
+       - Убедитесь, что установлены зависимости: `pip install pdfminer.six markdownify requests` (обычно через `setup.sh` и `requirements.txt`).
 4. Актуализация сваггера
     1. Укажите путь к актуальному swagger в `SWAGGER_LOCAL_PATH` внутри `config.py`. Файл копировать не нужно.
     2. Если сваггер станет в несколько файлов - используйте генератор file_structure для объединения в один файл.

@@ -18,13 +18,26 @@
   ```
 * **Результат:** В папке `create_final_tests/artifacts/` будет создан или обновлен файл `tests_from_figma.csv`.
 
-**Шаг 2: Сбор требований через GUI**
+**Шаг 2: Сбор требований через GUI (или подготовка из PDF/Confluence)**
 
-* Запустите графический интерфейс, чтобы выбрать нужные разделы ТЗ и обновить файл `req.md`:
-  ```bash
-  python3 create_final_tests/folder_structure/gui_update_file_structure.py
-  ```
-* **Результат:** Файл `create_final_tests/artifacts/req.md` будет создан или обновлён.
+*   **Основной метод (через GUI для `req.md`):**
+    Запустите графический интерфейс, чтобы выбрать нужные разделы ТЗ из структурированных текстовых файлов и обновить единый файл `req.md`:
+    ```bash
+    python3 create_final_tests/folder_structure/gui_update_file_structure.py
+    ```
+    *   **Результат:** Файл `create_final_tests/artifacts/req.md` будет создан или обновлён. Этот файл используется на последующих шагах.
+
+*   **Альтернативный метод (подготовка из PDF/Confluence):**
+    Если ваши требования находятся в PDF-документах или на страницах Confluence, вы можете использовать скрипт `convert_pdf_to_req.py` для их извлечения в локальную структуру папок с Markdown файлами и вложениями.
+    ```bash
+    # Пример для Confluence (скачает страницу, дочерние страницы и вложения):
+    python3 convert_pdf_to_req.py "https://wiki.example.com/pages/viewpage.action?pageId=12345"
+    # Пример для локального PDF:
+    python3 convert_pdf_to_req.py /путь/к/вашему/файлу.pdf
+    ```
+    *   **Результат:** Будет создана структура папок в `create_final_tests/folder_structure/имя_документа/` с файлами `content.md` (и `attachments/` для Confluence).
+    *   **Важно:** Этот скрипт *не создает* напрямую файл `req.md`. Полученные Markdown файлы из этой структуры необходимо будет **вручную проанализировать и консолидировать** в основной файл `req.md` (или использовать для обновления `task_list_configuration.md` и последующего запуска `gui_update_file_structure.py`, если это применимо к вашему процессу).
+    *   Для деталей по `convert_pdf_to_req.py` (настройка Confluence, все возможности) см. `README.md` или `USAGE.md`.
 
 **Шаг 3: Генерация промпта для AI**
 
