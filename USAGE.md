@@ -31,6 +31,8 @@
     5. Если требования представлены в виде PDF, запустите:
        ```bash
        python3 convert_pdf_to_req.py /path/to/rigla-demo-specification/requirements.pdf
+       # либо передайте ссылку из Confluence
+       python3 convert_pdf_to_req.py https://confluence.example.com/download/requirements.pdf
        ```
        Полученный Markdown будет записан в `req.md`.
 4. Актуализация сваггера
