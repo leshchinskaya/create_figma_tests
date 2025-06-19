@@ -76,6 +76,35 @@ def generate_document_id(source_path_or_url: str, is_confluence: bool = False, c
     return name if name else "default_document_id"
 
 
+def sanitize_for_path(name: str, max_length: int = 50) -> str:
+    """Sanitize a string to be used as a valid and safe directory or file name."""
+    if not name:
+        return "untitled_page"
+    
+    # Replace spaces and common problematic characters
+    name = name.replace(" ", "_")
+    name = re.sub(r'[:/\\]', '_', name) # Replace colons, slashes, backslashes with underscore
+
+    # Remove any characters not in a whitelist (alphanumeric, underscore, hyphen, period)
+    name = re.sub(r'[^\w\-\.]', '', name) # \w is [a-zA-Z0-9_]
+    
+    # Collapse multiple underscores or hyphens
+    name = re.sub(r'[_]+', '_', name)
+    name = re.sub(r'[-]+', '-', name)
+    
+    # Truncate to max_length
+    if len(name) > max_length:
+        name = name[:max_length]
+    
+    # Remove leading/trailing underscores or hyphens that might result from truncation or initial state
+    name = name.strip('_-')
+
+    if not name: # If all characters were stripped or name became empty after truncation
+        return "sanitized_page" # Fallback for empty string after sanitization
+        
+    return name
+
+
 def process_pdf_to_page_folders(pdf_path: Path, document_id: str, base_output_dir: Path):
     """Extract text per PDF page and save to base_output_dir/document_id/page_N/content.md."""
     try:
@@ -103,58 +132,66 @@ def process_pdf_to_page_folders(pdf_path: Path, document_id: str, base_output_di
     print(f"Successfully processed PDF {pdf_path.name} into {doc_output_dir} ({len(page_texts)} pages)")
 
 
-def fetch_and_convert_confluence_to_markdown(page_id: str, session: requests.Session, document_id: str, base_output_dir: Path) -> str | None:
-    """Fetch Confluence page content as HTML and convert it to Markdown."""
+def fetch_and_convert_confluence_to_markdown(page_id: str, session: requests.Session, document_id: str, base_output_dir: Path) -> tuple[str | None, str | None]:
+    """Fetch Confluence page content as HTML, convert to Markdown, and get page title."""
     if not hasattr(config, 'CONFLUENCE_BASE_URL') or not config.CONFLUENCE_BASE_URL:
         print(f"Error: CONFLUENCE_BASE_URL not configured. Cannot fetch page {page_id}.")
-        return None
+        return None, None
 
     api_url = f"{config.CONFLUENCE_BASE_URL}/rest/api/content/{page_id}?expand=body.view"
+    page_title_from_api = None
     try:
         print(f"Fetching content for Confluence page ID {page_id} from {api_url}...")
         resp = session.get(api_url)
         resp.raise_for_status()
         data = resp.json()
+        
+        page_title_from_api = data.get('title')
         html_content = data.get('body', {}).get('view', {}).get('value')
+
         if not html_content:
-            print(f"No HTML content found for Confluence page ID {page_id}.")
-            return None
+            print(f"No HTML content found for Confluence page ID {page_id} (Title: {page_title_from_api}).")
+            return None, page_title_from_api
         
         md_content = markdownify.markdownify(html_content, heading_style=markdownify.ATX)
-        if md_content is None:
-            print(f"Markdown conversion failed for page ID {page_id}.")
-            return None
+        if md_content is None: 
+            print(f"Markdown conversion failed for page ID {page_id} (Title: {page_title_from_api}).")
+            return None, page_title_from_api
 
         # --- Attachment Handling ---
-        page_1_dir = base_output_dir / document_id / "page_1"
-        attachments_dir = page_1_dir / "attachments"
+        if not page_title_from_api:
+            sanitized_page_title_for_folder = "untitled_page" 
+            print(f"Warning: Page title not found for page ID {page_id}. Using folder '{sanitized_page_title_for_folder}'.")
+        else:
+            sanitized_page_title_for_folder = sanitize_for_path(page_title_from_api)
 
-        # Regex to find /download/attachments/... paths not followed by ')' and within parentheses
+        page_specific_dir = base_output_dir / document_id / sanitized_page_title_for_folder
+        attachments_dir = page_specific_dir / "attachments"
+
         attachment_url_pattern = re.compile(r'/download/attachments/[^)]+(?=\))')
         found_attachment_paths = sorted(list(set(attachment_url_pattern.findall(md_content))), key=len, reverse=True)
 
         if found_attachment_paths:
             attachments_dir.mkdir(parents=True, exist_ok=True)
-            print(f"Found {len(found_attachment_paths)} unique attachment paths to process for {document_id}.")
+            print(f"Found {len(found_attachment_paths)} unique attachment paths to process for {document_id} (Page: {page_title_from_api or 'N/A'}).")
 
             for original_path in found_attachment_paths:
                 try:
                     if not original_path.startswith("http"):
                         full_download_url = f"{config.CONFLUENCE_BASE_URL.rstrip('/')}{original_path}"
                     else:
-                        full_download_url = original_path # Should ideally not happen for /download/attachments
+                        full_download_url = original_path
 
                     parsed_original_url = urlparse(original_path)
                     filename = unquote(Path(parsed_original_url.path).name)
                     if not filename:
-                        print(f"Warning: Could not determine filename for attachment {original_path} in {document_id}. Skipping.")
+                        print(f"Warning: Could not determine filename for attachment {original_path} in {document_id} (Page: {page_title_from_api or 'N/A'}). Skipping.")
                         continue
                     
                     local_save_path = attachments_dir / filename
-                    # Ensure relative path uses forward slashes for Markdown
                     relative_markdown_path = (Path("attachments") / filename).as_posix()
 
-                    print(f"Downloading attachment: {full_download_url} to {local_save_path} for {document_id}")
+                    print(f"Downloading attachment: {full_download_url} to {local_save_path} for {document_id} (Page: {page_title_from_api or 'N/A'})")
                     dl_resp = session.get(full_download_url, stream=True)
                     dl_resp.raise_for_status()
 
@@ -166,35 +203,43 @@ def fetch_and_convert_confluence_to_markdown(page_id: str, session: requests.Ses
                     md_content = md_content.replace(original_path, relative_markdown_path)
 
                 except requests.exceptions.RequestException as e_dl:
-                    print(f"Error downloading attachment {original_path} for {document_id}: {e_dl}. Original link will be kept.")
+                    print(f"Error downloading attachment {original_path} for {document_id} (Page: {page_title_from_api or 'N/A'}): {e_dl}. Original link will be kept.")
                 except IOError as e_io:
-                    print(f"Error saving attachment {filename} for {document_id}: {e_io}. Original link will be kept.")
+                    print(f"Error saving attachment {filename} for {document_id} (Page: {page_title_from_api or 'N/A'}): {e_io}. Original link will be kept.")
                 except Exception as e_gen:
-                    print(f"An unexpected error occurred while processing attachment {original_path} for {document_id}: {e_gen}. Original link will be kept.")
+                    print(f"An unexpected error occurred while processing attachment {original_path} for {document_id} (Page: {page_title_from_api or 'N/A'}): {e_gen}. Original link will be kept.")
         # --- End Attachment Handling ---
 
-        print(f"Successfully converted Confluence page ID {page_id} to Markdown (attachments processed).")
-        return md_content
+        print(f"Successfully converted Confluence page ID {page_id} (Title: {page_title_from_api}) to Markdown.")
+        return md_content, page_title_from_api
+        
     except requests.exceptions.RequestException as e:
         print(f"Error fetching Confluence page ID {page_id}: {e}")
-        return None
+        return None, None
     except Exception as e:
-        print(f"Error converting HTML to Markdown for page ID {page_id}: {e}")
-        return None
+        print(f"Error processing content for Confluence page ID {page_id} (Title: {page_title_from_api if page_title_from_api else 'Unknown'}): {e}")
+        return None, page_title_from_api
 
 
-def save_markdown_content(markdown_text: str, document_id: str, base_output_dir: Path):
-    """Save the given markdown text to base_output_dir/document_id/page_1/content.md."""
+def save_markdown_content(markdown_text: str, document_id: str, page_title: str | None, base_output_dir: Path):
+    """Save the given markdown text to base_output_dir/document_id/<sanitized_page_title>/content.md."""
     doc_output_dir = base_output_dir / document_id
-    page_dir = doc_output_dir / "page_1" 
+    
+    if page_title:
+        folder_name = sanitize_for_path(page_title)
+    else:
+        folder_name = "page_1" # Fallback if no title provided
+        print(f"Warning: Page title not provided for document {document_id}. Using folder '{folder_name}'.")
+
+    page_dir = doc_output_dir / folder_name 
     page_dir.mkdir(parents=True, exist_ok=True)
     
     output_file = page_dir / "content.md"
     try:
         output_file.write_text(markdown_text, encoding="utf-8")
-        print(f"Successfully saved Markdown for {document_id} to {output_file}")
+        print(f"Successfully saved Markdown for {document_id} (Page: {page_title or 'N/A'}, Folder: {folder_name}) to {output_file}")
     except Exception as e:
-        print(f"Error writing Markdown for {document_id} to {output_file}: {e}")
+        print(f"Error writing Markdown for {document_id} (Page: {page_title or 'N/A'}, Folder: {folder_name}) to {output_file}: {e}")
 
 
 def is_url(path_or_url: str) -> bool:
@@ -220,6 +265,34 @@ def parse_page_id(value: str) -> str | None:
         if page_id_list:
             return page_id_list[0]
     return None
+
+
+def fetch_confluence_page_title(page_id: str, session: requests.Session) -> str | None:
+    """Fetch the title of a Confluence page."""
+    if not hasattr(config, 'CONFLUENCE_BASE_URL') or not config.CONFLUENCE_BASE_URL:
+        print(f"Error: CONFLUENCE_BASE_URL not configured. Cannot fetch title for page {page_id}.")
+        return None
+
+    # Using ?fields=title to fetch only the title for efficiency
+    api_url = f"{config.CONFLUENCE_BASE_URL}/rest/api/content/{page_id}?fields=title"
+    try:
+        print(f"Fetching title for Confluence page ID {page_id} from {api_url}...")
+        resp = session.get(api_url)
+        resp.raise_for_status()
+        data = resp.json()
+        title = data.get('title')
+        if title:
+            # print(f"Successfully fetched title for page ID {page_id}: '{title}'") # Optional: reduce verbosity
+            return title
+        else:
+            print(f"Warning: No title found in API response for page ID {page_id}.")
+            return None
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching title for Confluence page ID {page_id}: {e}")
+        return None
+    except Exception as e: # Catch other potential errors like JSON parsing
+        print(f"An unexpected error occurred while fetching title for page ID {page_id}: {e}")
+        return None
 
 
 def fetch_descendants(page_id: str, session: requests.Session) -> list[str]:
@@ -279,21 +352,34 @@ def main():
     is_conf_page_check = is_confluence_page(source)
 
     if parsed_source_page_id and is_conf_page_check:
-        print(f"Processing Confluence source: {source} (Page ID: {parsed_source_page_id})")
+        print(f"Processing Confluence source: {source} (Initial Page ID: {parsed_source_page_id})")
         if not hasattr(config, 'CONFLUENCE_BASE_URL') or not config.CONFLUENCE_BASE_URL:
             print("Error: CONFLUENCE_BASE_URL not configured. Cannot process Confluence pages.")
             sys.exit(1)
 
+        # Determine the root folder name based on the initial page's title
+        initial_page_actual_title = fetch_confluence_page_title(parsed_source_page_id, session)
+        if initial_page_actual_title:
+            root_document_id = sanitize_for_path(initial_page_actual_title)
+            print(f"Using initial page title for root folder: '{root_document_id}' (from title: '{initial_page_actual_title}')")
+        else:
+            # Fallback to using page ID if title cannot be fetched or is empty
+            root_document_id = generate_document_id(source_path_or_url="", is_confluence=True, confluence_pid=parsed_source_page_id)
+            print(f"Warning: Could not fetch title for initial page ID {parsed_source_page_id}. Using default root folder name: '{root_document_id}'")
+
         page_ids_to_process = fetch_descendants(parsed_source_page_id, session)
-        print(f"Found {len(page_ids_to_process)} Confluence pages to process (including descendants).")
+        print(f"Found {len(page_ids_to_process)} Confluence pages to process (initial page and its descendants).")
 
         for pid_to_process in page_ids_to_process:
-            doc_id = generate_document_id(source_path_or_url="", is_confluence=True, confluence_pid=pid_to_process) # Moved doc_id generation up
-            markdown_content = fetch_and_convert_confluence_to_markdown(pid_to_process, session, doc_id, BASE_OUTPUT_DIR)
+            # The 'root_document_id' is now the first-level directory name (derived from initial page title)
+            # 'page_title' returned by fetch_and_convert_confluence_to_markdown will be for the specific 'pid_to_process'
+            markdown_content, specific_page_title = fetch_and_convert_confluence_to_markdown(
+                pid_to_process, session, root_document_id, BASE_OUTPUT_DIR
+            )
             if markdown_content is not None:
-                save_markdown_content(markdown_content, doc_id, BASE_OUTPUT_DIR)
+                save_markdown_content(markdown_content, root_document_id, specific_page_title, BASE_OUTPUT_DIR)
             else:
-                print(f"Skipping Confluence page ID {pid_to_process} due to fetch/conversion failure.")
+                print(f"Skipping Confluence page ID {pid_to_process} (Title: {specific_page_title or 'Unknown'}) due to fetch/conversion failure.")
     
     elif is_url(source):
         print(f"Processing URL source (expected PDF): {source}")
