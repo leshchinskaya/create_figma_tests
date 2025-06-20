@@ -34,7 +34,7 @@
     *   `"FILE_EXPORT"`: Не создает задачи Jira. Вместо этого генерирует текстовый файл с данными тест-кейсов (название, описание, шаги и т.д.), разделенными точкой с запятой. Изображения все равно загружаются.
         *   `TEXT_EXPORT_PATH`: Директория, в которую будет сохранен текстовый файл (по умолчанию: `create_final_tests/artifacts`).
         *   `TEXT_EXPORT_FILENAME_TEMPLATE`: Шаблон имени файла для экспортированного текстового файла (по умолчанию: `tests_from_figma_runid_{RUN_ID}.txt`).
-        *   **Важно для режима `"FILE_EXPORT"`**: После генерации основного файла с тест-кейсами, скрипт автоматически запускает `create_final_tests/create_final_promt.py` и пытается открыть сгенерированный им файл `final_promt.txt` (ожидается в директории, указанной `TEXT_EXPORT_PATH`). **Убедитесь, что все необходимые артефакты для `create_final_promt.py` (например, шаблоны, исходные текстовые файлы) находятся в правильных местах (обычно в `create_final_tests/artifacts/` или согласно конфигурации `create_final_promt.py`), и что все конфигурационные файлы (`config.py`, `config_artifacts.json`) обновлены для корректной работы всего процесса.**
+        *   **Важно для режима `"FILE_EXPORT"`**: После генерации основного файла с тест-кейсами запустите скрипт `generate_component_prompt.sh`. Он сформирует итоговый промпт `final_prompt_component.txt` с командой по созданию файла `task-list.md`, который затем необходимо проревьюить и утвердить. Убедитесь, что все необходимые артефакты находятся в `create_final_tests/artifacts/` и что конфигурационные файлы (`config.py`, `config_artifacts_*.json`) актуальны.
 *   `JIRA_LABELS`: Необязательный список глобальных меток для добавления к задачам Jira.
 *   Опции фильтрации, такие как `FRAME_LIMIT`, `ELEMENT_BANNED`, `FRAME_BANNED` и т.д., для контроля над тем, какие элементы Figma обрабатываются.
 
@@ -54,20 +54,19 @@ python3 send_figma_tests_all_tests.py
     *   Текстовый файл (`figma_screens/<RUN_ID>/jira_issues_run_<RUN_ID>.txt`), содержащий прямые ссылки на созданные задачи Jira.
 *   **Если `OPERATIONAL_MODE` равен `"FILE_EXPORT"`:**
     *   Текстовый файл с данными тест-кейсов, разделенными точкой с запятой, сохраненный по пути, определенному `TEXT_EXPORT_PATH` и `TEXT_EXPORT_FILENAME_TEMPLATE`.
-    *   Автоматически запускается скрипт `create_final_tests/create_final_promt.py`.
-    *   Предпринимается попытка открыть сгенерированный файл `final_promt.txt` (путь к файлу зависит от `TEXT_EXPORT_PATH`, по умолчанию `create_final_tests/artifacts/final_promt.txt`).
+    *   После генерации используйте `generate_component_prompt.sh` для создания `final_prompt_component.txt`. В этом файле есть команда по формированию `task-list.md` – список задач необходимо проверить и утвердить.
 *   **Общее для обоих режимов:**
     *   Изображения экранов/элементов Figma, сохраненные в директории `figma_screens/<RUN_ID>/`.
     *   Логи выполнения записываются в `figma_to_jira.log`, а также выводятся в консоль.
 
-### 2. Генерация Промтов из Артефактов (`create_final_tests/create_final_promt.py`)
+### 2. Генерация Промтов из Артефактов (`generate_component_prompt.sh`)
 
 Этот вспомогательный скрипт генерирует текстовый файл (например, подробный промт для LLM или сложную конфигурацию), заполняя файл-шаблон содержимым из различных указанных файлов-артефактов.
 
 **Конфигурация (`config_artifacts.json`):**
 Этот скрипт требует отдельного конфигурационного файла JSON, обычно называемого `config_artifacts.json`, размещенного в корневой директории проекта. Этот файл определяет:
     *   `prompt_template_path`: Путь к файлу-шаблону.
-    *   `output_prompt_path`: Путь, по которому будет сохранен сгенерированный файл (например, `create_final_tests/artifacts/final_promt.txt`).
+    *   `output_prompt_path`: Путь, по которому будет сохранен сгенерированный файл (например, `create_final_tests/artifacts/final_prompt_component.txt`).
     *   `artifacts`: Словарь, сопоставляющий ключи с путями к файлам содержимого (артефактам).
     *   `placeholders`: Словарь, сопоставляющий те же ключи (из `artifacts`) со строками-заполнителями в файле-шаблоне, которые будут заменены содержимым соответствующего артефакта.
 
@@ -75,7 +74,7 @@ python3 send_figma_tests_all_tests.py
     ```json
     {
         "prompt_template_path": "create_final_tests/templates/my_template.txt",
-        "output_prompt_path": "create_final_tests/artifacts/final_promt.txt",
+        "output_prompt_path": "create_final_tests/artifacts/final_prompt_component.txt",
         "artifacts": {
             "section_one_content": "create_final_tests/source_material/section1_data.txt",
             "section_two_content": "create_final_tests/source_material/section2_data.md"
@@ -93,12 +92,13 @@ python3 send_figma_tests_all_tests.py
 2.  Убедитесь, что ваш файл-шаблон и все файлы-артефакты существуют по указанным путям.
 3.  Выполните скрипт:
     ```bash
-    python3 create_final_tests/create_final_prompt.py
+    ./generate_component_prompt.sh
     ```
 
 **Результаты Выполнения:**
-*   Сгенерированный текстовый файл по пути, указанному `output_prompt_path` в `config_artifacts.json`.
+*   Сгенерированный файл `final_prompt_component.txt` (его расположение определяется `output_prompt_path`). В конце промпта присутствует команда по формированию `task-list.md`; после генерации список задач необходимо проверить и утвердить.
 *   Информационные сообщения (об успехе или ошибке), выведенные в консоль.
+*   Для генерации сценарного промпта используйте аналогичный скрипт `generate_scenario_prompt.sh`, который создаст файл `final_prompt_scenario.txt`.
 
 ### 3. Отправка Тест-кейсов в Jira из Файла (`send_final_tests.py`)
 
@@ -114,11 +114,8 @@ python3 send_figma_tests_all_tests.py
 *   `XRAY_STEPS_FIELD` (ID пользовательского поля для шагов теста Xray, например, `customfield_10001`. Это крайне важно для интеграции с Xray.)
 *   Необязательно, `JIRA_LABELS`: Список меток по умолчанию, которые будут добавлены к каждой созданной задаче (например, `["q3-release", "smoke-test"]`).
 
-**Формат Входного Файла (`create_final_tests/artifacts/final_tests.txt`):**
-Скрипт ожидает текстовый файл по пути `create_final_tests/artifacts/final_tests.txt`. Этот файл должен:
-*   Быть разделен точкой с запятой (`;`).
-*   Включать строку заголовка в качестве первой строки.
-*   Содержать следующие столбцы (имена столбцов чувствительны к регистру, как они используются в скрипте):
+**Формат Входного Файла (по умолчанию `create_final_tests/artifacts/scenario_tests.json`):**
+По умолчанию `send_final_tests.py` читает файл `create_final_tests/artifacts/scenario_tests.json`. При необходимости путь можно изменить (в переменной `FINAL_TESTS_FILE_PATH` или при запуске `create_final_tests.jira_sender` через `--input`). Ожидается JSON-структура, соответствующая схеме из `json_scheme.yml`. В файле должны быть следующие поля:
     *   `TestCaseIdentifier`: Уникальный идентификатор тест-кейса (например, "TC-001").
     *   `Summary`: Заголовок задачи Jira (Обязательно для каждого тест-кейса).
     *   `Description`: Подробное описание для задачи Jira.
